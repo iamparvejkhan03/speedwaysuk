@@ -96,9 +96,6 @@ function Header() {
                                 </li>
                             ))
                         }
-                        <li onClick={() => setIsMenuOpen(false)} className="mx-5 py-2">
-                            <Link to={user ? '/seller/auctions/create' : '/register'}>Sell with Us</Link>
-                        </li>
                         <li>
                             {
                                 user

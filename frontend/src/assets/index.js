@@ -43,9 +43,9 @@ import truck from './truck.webp';
 import van from './van.webp';
 
 const otherData = {
-    phone: '+19428747458',
-    email: 'info@speedwaysuk.com',
-    address: 'United States of America'
+    phone: '1234567890',
+    email: 'info@speedways.uk',
+    address: 'United Kingdom'
 }
 
 export {

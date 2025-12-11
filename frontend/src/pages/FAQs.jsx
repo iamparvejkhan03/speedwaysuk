@@ -192,7 +192,7 @@ function FAQsPage() {
                                 Contact Support
                             </Link>
                             <a
-                                href="mailto:info@speedwaysuk.com"
+                                href="mailto:info@speedways.uk"
                                 className="inline-flex items-center justify-center gap-3 bg-transparent border-2 border-white text-white hover:bg-white/10 font-semibold py-3 px-8 rounded-lg transition-all duration-300"
                             >
                                 <Mail size={20} />

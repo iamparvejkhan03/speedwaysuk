@@ -354,7 +354,7 @@ function Home() {
                         {
                             trustedBrands.map(brand => (
                                 <div key={brand.alt} className="flex items-center justify-center border rounded-lg shadow hover:shadow-lg transition-all border-slate-200 p-4 md:p-5">
-                                    <img src={brand.src} alt={brand.alt} className="h-6 sm:h-7 md:h-8 lg:h-10 xl:h-12" />
+                                    <img src={brand.src} alt={brand.alt} className="h-7 sm:h-7 md:h-8 lg:h-10 xl:h-12" />
                                 </div>
                             ))
                         }

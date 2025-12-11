@@ -12,7 +12,7 @@ const PaymentRefundPolicy = () => {
                 <p className="mb-4">Last Updated: December 11, 2025</p>
 
                 <p className="mb-4">
-                    This Payment & Refund Policy explains how payments, refunds, and order processing work at Speed Ways UK. 
+                    This Payment & Refund Policy explains how payments, refunds, and order processing work at Speed Ways UK.
                     By making a purchase through our platform, you agree to the terms outlined below.
                 </p>
 
@@ -25,7 +25,7 @@ const PaymentRefundPolicy = () => {
 
                 <h2 className="text-2xl text-black font-semibold mt-6 mb-4">2. Order Confirmation</h2>
                 <ul className="mb-4">
-                    <li>- An order is considered confirmed only after Speed Ways UK sends a written confirmation via email or WhatsApp.</li>
+                    <li>- An order is considered confirmed only after Speed Ways UK sends a written confirmation via email.</li>
                     <li>- Once confirmed, the buyer must complete payment within the timeframe provided.</li>
                 </ul>
 
@@ -89,8 +89,12 @@ const PaymentRefundPolicy = () => {
                 <p className="mb-4">
                     Speed Ways UK <br />
                     {otherData.address} <br />
-                    <Link className="text-blue-600 underline" to={`mailto:${otherData.email}`}>{otherData.email}</Link> <br />
-                    <Link className="text-blue-600 underline" to={`tel:${otherData.phone}`}>{otherData.phone}</Link>
+                    <Link className="text-blue-600 underline" to="mailto:info@speedways.uk">
+                        info@speedways.uk
+                    </Link> <br />
+                    <Link className="text-blue-600 underline" to="tel:+441234567890">
+                        +441234567890
+                    </Link> <br />
                 </p>
             </Container>
         </section>

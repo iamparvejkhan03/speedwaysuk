@@ -396,7 +396,7 @@ const Register = () => {
                                     {...register('termsConditions', { required: 'Accepting terms of use is required for registration.' })}
                                 />
 
-                                <p className="text-sm text-gray-600">By registering, I agree to PlaneVault's <Link className='text-blue-600 underline' to={`/terms-of-use`}>Terms of Use</Link>. My information will be used as described in the <Link to={`/privacy-policy`} className='text-blue-600 underline'>Privacy Policy</Link>.</p>
+                                <p className="text-sm text-gray-600">By registering, I agree to Speed Ways UK's <Link className='text-blue-600 underline' to={`/terms-of-use`}>Terms of Use</Link>. My information will be used as described in the <Link to={`/privacy-policy`} className='text-blue-600 underline'>Privacy Policy</Link>.</p>
                             </label>
                             {errors.termsConditions && (
                                 <p className="text-red-500 text-sm mt-1">{errors.termsConditions.message}</p>

@@ -243,7 +243,7 @@ function Contact() {
                                 <h3 className="font-semibold text-gray-900 mb-1 text-lg">
                                     Phone
                                 </h3>
-                                <Link to={`tel:${otherData.phone}`} className="text-primary hover:underline">(942) 874-7458</Link>
+                                <Link to={`tel:+44${otherData.phone}`} className="text-primary hover:underline">+441234567890</Link>
                                 <p className="text-sm text-gray-500">
                                     We respond within 24 hours
                                 </p>
@@ -289,7 +289,7 @@ function Contact() {
                                     Business Hours
                                 </h3>
                                 <p className="text-primary">
-                                    Mon - Fri: 9:00 AM - 6:00 PM EST <br />
+                                    Mon - Fri: 9:00 AM - 6:00 PM GMT <br />
                                 </p>
                                 <p className="text-sm text-gray-500">
                                     Emergency Support Available

@@ -124,7 +124,7 @@ function CTA() {
                                 <CheckCircle className="h-5 w-5 text-[#edcd1f]" />
                                 <div className="text-left">
                                     <p className="text-2xl font-bold">98%</p>
-                                    <p className="text-sm text-white/70">User Satisfaction</p>
+                                    <p className="text-sm text-white/70">Satisfaction</p>
                                 </div>
                             </div>
                             <div className="hidden md:block w-px h-10 bg-white/20"></div>

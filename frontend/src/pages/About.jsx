@@ -143,7 +143,7 @@ function About() {
                             {/* Stats Grid */}
                             <div className="grid grid-cols-2 gap-6">
                                 <div className="bg-blue-50 rounded-xl p-6">
-                                    <div className="flex items-center gap-4">
+                                    <div className="flex flex-col justify-center sm:flex-row items-center sm:gap-4">
                                         <div className="p-3 bg-white rounded-lg">
                                             <Car className="h-6 w-6 text-blue-600" />
                                         </div>
@@ -155,7 +155,7 @@ function About() {
                                 </div>
 
                                 <div className="bg-green-50 rounded-xl p-6">
-                                    <div className="flex items-center gap-4">
+                                    <div className="flex flex-col justify-center sm:flex-row items-center sm:gap-4">
                                         <div className="p-3 bg-white rounded-lg">
                                             <Users className="h-6 w-6 text-green-600" />
                                         </div>
@@ -180,7 +180,7 @@ function About() {
             </div>
 
             {/* Our stats */}
-            <Container className="mb-14">
+            <Container className="mb-14 pt-8">
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
                     <div className="bg-white rounded-xl p-6 text-center shadow-sm hover:shadow-md transition-shadow">
                         <div className="flex justify-center mb-4">
@@ -239,37 +239,37 @@ function About() {
                         <img src={audi} alt="audi" className="h-10" />
                     </div> */}
                     <div className="flex items-center justify-center h-20 w-44 md:h-24 md:w-60 bg-slate-100/80 hover:bg-slate-100 transition-all duration-100">
-                        <img src={kia} alt="kia" className="h-10" />
+                        <img src={kia} alt="kia" className="h-10 mix-blend-multiply" />
                     </div>
                     <div className="flex items-center justify-center h-20 w-44 md:h-24 md:w-60 bg-slate-100/80 hover:bg-slate-100 transition-all duration-100">
-                        <img src={hyundai} alt="hyundai" className="h-10" />
+                        <img src={hyundai} alt="hyundai" className="h-10 mix-blend-multiply" />
                     </div>
                     {/* <div className="flex items-center justify-center h-20 w-44 md:h-24 md:w-60 bg-slate-100/80 hover:bg-slate-100 transition-all duration-100">
                         <img src={ford} alt="ford" className="h-10" />
                     </div> */}
                     <div className="flex items-center justify-center h-20 w-44 md:h-24 md:w-60 bg-slate-100/80 hover:bg-slate-100 transition-all duration-100">
-                        <img src={mercedes} alt="mercedes" className="h-12" />
+                        <img src={mercedes} alt="mercedes" className="h-12 mix-blend-multiply" />
                     </div>
                     <div className="flex items-center justify-center h-20 w-44 md:h-24 md:w-60 bg-slate-100/80 hover:bg-slate-100 transition-all duration-100">
-                        <img src={bmw} alt="bmw" className="h-12" />
+                        <img src={bmw} alt="bmw" className="h-12 mix-blend-multiply" />
                     </div>
                     <div className="flex items-center justify-center h-20 w-44 md:h-24 md:w-60 bg-slate-100/80 hover:bg-slate-100 transition-all duration-100">
-                        <img src={volkswagen} alt="volkswagen" className="h-12" />
+                        <img src={volkswagen} alt="volkswagen" className="h-12 mix-blend-multiply" />
                     </div>
                     <div className="flex items-center justify-center h-20 w-44 md:h-24 md:w-60 bg-slate-100/80 hover:bg-slate-100 transition-all duration-100">
-                        <img src={volvo} alt="volvo" className="h-12" />
+                        <img src={volvo} alt="volvo" className="h-12 mix-blend-multiply" />
                     </div>
                     <div className="flex items-center justify-center h-20 w-44 md:h-24 md:w-60 bg-slate-100/80 hover:bg-slate-100 transition-all duration-100">
-                        <img src={lamborghini} alt="lamborghini" className="h-12" />
+                        <img src={lamborghini} alt="lamborghini" className="h-12 mix-blend-multiply" />
                     </div>
                     <div className="flex items-center justify-center h-20 w-44 md:h-24 md:w-60 bg-slate-100/80 hover:bg-slate-100 transition-all duration-100">
-                        <img src={renault} alt="renault" className="h-12" />
+                        <img src={renault} alt="renault" className="h-12 mix-blend-multiply" />
                     </div>
                     <div className="flex items-center justify-center h-20 w-44 md:h-24 md:w-60 bg-slate-100/80 hover:bg-slate-100 transition-all duration-100">
-                        <img src={tesla} alt="tesla" className="h-12" />
+                        <img src={tesla} alt="tesla" className="h-12 mix-blend-multiply" />
                     </div>
                     <div className="flex items-center justify-center h-20 w-44 md:h-24 md:w-60 bg-slate-100/80 hover:bg-slate-100 transition-all duration-100">
-                        <img src={skoda} alt="skoda" className="h-12" />
+                        <img src={skoda} alt="skoda" className="h-12 mix-blend-multiply" />
                     </div>
                 </div>
             </Container>

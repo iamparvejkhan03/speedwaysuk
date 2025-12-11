@@ -49,7 +49,7 @@ function About() {
     }, []);
 
     return (
-        <section ref={ref} className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 items-center">
+        <section ref={ref} className="grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-0 items-center ">
             {/* Image Section - Enhanced */}
             <div className="lg:col-span-5 relative group">
                 <div className="relative overflow-hidden rounded-2xl">

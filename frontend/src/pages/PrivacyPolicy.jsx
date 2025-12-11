@@ -92,11 +92,11 @@ const PrivacyPolicy = () => {
                 <p className="mb-4">
                     Speed Ways UK <br />
                     {otherData.address} <br />
-                    <Link className="text-blue-600 underline" to="mailto:info@speedwaysuk.com">
-                        info@speedwaysuk.com
+                    <Link className="text-blue-600 underline" to="mailto:info@speedways.uk">
+                        info@speedways.uk
                     </Link> <br />
-                    <Link className="text-blue-600 underline" to="tel:9428747458">
-                        (942) 874-7458
+                    <Link className="text-blue-600 underline" to="tel:+441234567890">
+                        +441234567890
                     </Link> <br />
                 </p>
             </Container>

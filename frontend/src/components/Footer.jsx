@@ -128,7 +128,7 @@ function Footer() {
                             <li className="flex items-center gap-2">
                                 <Phone size={18} />
 
-                                <Link className="hover:underline" to={`tel:+1${otherData.phone}`}>(942) 874-7458</Link>
+                                <Link className="hover:underline" to={`tel:+44${otherData.phone}`}>+441234567890</Link>
                             </li>
 
                             <li className="flex items-center gap-2">

@@ -88,12 +88,12 @@ const BuyerAgreement = () => {
                 <p className="mb-4">
                     Speed Ways UK <br />
                     {otherData.address} <br />
-                    <Link className="text-blue-600 underline" to={`mailto:${otherData.email}`}>
-                        {otherData.email}
+                    <Link className="text-blue-600 underline" to="mailto:info@speedways.uk">
+                        info@speedways.uk
                     </Link> <br />
-                    <Link className="text-blue-600 underline" to={`tel:${otherData.phone}`}>
-                        {otherData.phone}
-                    </Link>
+                    <Link className="text-blue-600 underline" to="tel:+441234567890">
+                        +441234567890
+                    </Link> <br />
                 </p>
             </Container>
         </section>
