@@ -41,6 +41,13 @@ const Register = () => {
             username: '',
             firstName: '',
             lastName: '',
+            // Add new address fields
+            dealershipName: '',
+            buildingNameNo: '',
+            street: '',
+            city: '',
+            county: '',
+            postCode: '',
             country: '',
             userType: 'bidder'
         }
@@ -61,13 +68,20 @@ const Register = () => {
             const registrationPayload = {
                 firstName: registrationData.firstName,
                 lastName: registrationData.lastName,
+                username: registrationData.username,
                 email: registrationData.email,
                 phone: registrationData.phone,
                 password: registrationData.password,
-                username: registrationData.username,
                 countryCode: registrationData.country,
                 countryName: countries.find(c => c.code === registrationData.country)?.name || registrationData.country,
                 userType: registrationData.userType,
+                // Add new address fields
+                dealershipName: registrationData.dealershipName,
+                buildingNameNo: registrationData.buildingNameNo,
+                street: registrationData.street,
+                city: registrationData.city,
+                county: registrationData.county,
+                postCode: registrationData.postCode
             };
 
             // Send registration request
@@ -85,6 +99,7 @@ const Register = () => {
                 localStorage.setItem('user', JSON.stringify(data.data.user));
 
                 setUser(data.data.user);
+                console.log(data.data.user)
 
                 const redirectPath = data.data.user.userType === 'seller'
                     ? '/seller/dashboard'
@@ -121,7 +136,7 @@ const Register = () => {
                             <div className={`grid grid-cols-1 md:grid-cols-2 gap-4`}>
                                 <div className={`${errors.email && 'mb-3'}`}>
                                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                                        Email
+                                        Email *
                                     </label>
                                     <div className="relative">
                                         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -147,7 +162,7 @@ const Register = () => {
 
                                 <div className={`${errors.phone && 'mb-3'}`}>
                                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                                        Phone
+                                        Phone *
                                     </label>
                                     <div className="relative">
                                         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -158,12 +173,12 @@ const Register = () => {
                                             {...register('phone', {
                                                 required: 'Phone is required',
                                                 pattern: {
-                                                    value: /^[+]?[1-9][\d]{0,15}$/,
-                                                    message: 'Invalid phone number'
+                                                    value: /^[\d+\s()-]{10,15}$/,
+                                                    message: 'Please enter a valid phone number'
                                                 }
                                             })}
                                             className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                                            placeholder="Enter your contact no."
+                                            placeholder="e.g., 01234567890 or +441234567890"
                                         />
                                         {errors.phone && (
                                             <p className="text-red-500 text-sm mt-1 absolute">{errors.phone.message}</p>
@@ -175,7 +190,7 @@ const Register = () => {
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div className={`${errors.password && 'mb-3'}`}>
                                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                                        Password
+                                        Password *
                                     </label>
                                     <div className="relative">
                                         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -209,7 +224,7 @@ const Register = () => {
 
                                 <div className={`${errors.confirmPassword && 'mb-3'}`}>
                                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                                        Confirm Password
+                                        Confirm Password *
                                     </label>
                                     <div className="relative">
                                         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -250,7 +265,7 @@ const Register = () => {
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div className={`${errors.firstName && 'mb-3'}`}>
                                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                                        First name
+                                        First name *
                                     </label>
                                     <input
                                         type="text"
@@ -268,7 +283,7 @@ const Register = () => {
 
                                 <div className={`${errors.lastName && 'mb-3'}`}>
                                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                                        Last name
+                                        Last name *
                                     </label>
                                     <input
                                         type="text"
@@ -285,10 +300,12 @@ const Register = () => {
                                 </div>
                             </div>
 
-                            <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+                            {/* Add new address fields */}
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                {/* Username field */}
                                 <div className={`${errors.username && 'mb-3'}`}>
                                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                                        Username
+                                        Username *
                                     </label>
                                     <div className="relative">
                                         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -313,26 +330,139 @@ const Register = () => {
                                     </div>
                                 </div>
 
-                                <div className={`${errors.country && 'mb-3'}`}>
+                                {/* Dealership Name field */}
+                                <div className={`${errors.dealershipName && 'mb-3'}`}>
                                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                                        Country of residence
+                                        Dealership Name
                                     </label>
-                                    <div className="relative">
-                                        <select
-                                            {...register('country', { required: 'Country is required' })}
-                                            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent appearance-none"
-                                        >
-                                            <option value="">Select country</option>
-                                            {countries.map(country => (
-                                                <option key={country.code} value={country.code}>
-                                                    {country.name}
-                                                </option>
-                                            ))}
-                                        </select>
-                                        <ChevronDown size={20} className="absolute right-3 top-3 text-gray-400 pointer-events-none" />
-                                        {errors.country && (
-                                            <p className="text-red-500 text-sm mt-1 absolute">{errors.country.message}</p>
+                                    <input
+                                        type="text"
+                                        {...register('dealershipName')}
+                                        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                                        placeholder="Dealership name (optional)"
+                                    />
+                                    {errors.dealershipName && (
+                                        <p className="text-red-500 text-sm mt-1 absolute">{errors.dealershipName.message}</p>
+                                    )}
+                                </div>
+
+                                {/* Building Name/No field - spans full width on mobile, half on desktop */}
+                                <div className="md:col-span-1">
+                                    <div className={`${errors.buildingNameNo && 'mb-3'}`}>
+                                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                                            Building Name/No
+                                        </label>
+                                        <input
+                                            type="text"
+                                            {...register('buildingNameNo', {
+                                                required: 'Building name/number is required'
+                                            })}
+                                            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                                            placeholder="Building name or number"
+                                        />
+                                        {errors.buildingNameNo && (
+                                            <p className="text-red-500 text-sm mt-1 absolute">{errors.buildingNameNo.message}</p>
                                         )}
+                                    </div>
+                                </div>
+
+                                {/* Street field - spans full width on mobile, half on desktop */}
+                                <div className="md:col-span-1">
+                                    <div className={`${errors.street && 'mb-3'}`}>
+                                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                                            Street
+                                        </label>
+                                        <input
+                                            type="text"
+                                            {...register('street', {
+                                                required: 'Street is required'
+                                            })}
+                                            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                                            placeholder="Street address"
+                                        />
+                                        {errors.street && (
+                                            <p className="text-red-500 text-sm mt-1 absolute">{errors.street.message}</p>
+                                        )}
+                                    </div>
+                                </div>
+
+                                {/* City field */}
+                                <div className={`${errors.city && 'mb-3'}`}>
+                                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                                        City
+                                    </label>
+                                    <input
+                                        type="text"
+                                        {...register('city', {
+                                            required: 'City is required'
+                                        })}
+                                        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                                        placeholder="City"
+                                    />
+                                    {errors.city && (
+                                        <p className="text-red-500 text-sm mt-1 absolute">{errors.city.message}</p>
+                                    )}
+                                </div>
+
+                                {/* County field */}
+                                <div className={`${errors.county && 'mb-3'}`}>
+                                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                                        County
+                                    </label>
+                                    <input
+                                        type="text"
+                                        {...register('county', {
+                                            required: 'County is required'
+                                        })}
+                                        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                                        placeholder="County"
+                                    />
+                                    {errors.county && (
+                                        <p className="text-red-500 text-sm mt-1 absolute">{errors.county.message}</p>
+                                    )}
+                                </div>
+
+                                {/* Post Code field */}
+                                <div className={`${errors.postCode && 'mb-3'}`}>
+                                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                                        Post Code
+                                    </label>
+                                    <input
+                                        type="text"
+                                        {...register('postCode', {
+                                            required: 'Post code is required'
+                                        })}
+                                        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                                        placeholder="Postal code"
+                                    />
+                                    {errors.postCode && (
+                                        <p className="text-red-500 text-sm mt-1 absolute">{errors.postCode.message}</p>
+                                    )}
+                                </div>
+
+                                {/* Country field - spans full width on mobile, half on desktop */}
+                                <div className="md:col-span-1">
+                                    <div className={`${errors.country && 'mb-3'}`}>
+                                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                                            Country of residence
+                                        </label>
+                                        <div className="relative">
+                                            <select
+                                                {...register('country', { required: 'Country is required' })}
+                                                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent appearance-none"
+                                            >
+                                                <option value="">Select country</option>
+                                                {countries.map(country => (
+                                                    <option key={country.code} value={country.code}>
+                                                        {country.name}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                            <ChevronDown size={20} className="absolute right-3 top-3 text-gray-400 pointer-events-none" />
+                                            {errors.country && (
+                                                <p className="text-red-500 text-sm mt-1 absolute">{errors.country.message}</p>
+                                            )}
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BidderContainer, BidderHeader, BidderSidebar, AuctionCard } from "../../components";
+import { BidderContainer, BidderHeader, BidderSidebar, AuctionCard, AccountInactiveBanner } from "../../components";
 import { Clock, Gavel, Award, BarChart3, Search, Filter, SortAsc, Users, Loader } from "lucide-react";
 import { useAuctions } from "../../hooks/useAuctions";
 import { useStats } from "../../hooks/useStats";
@@ -128,6 +128,7 @@ function ActiveAuctions() {
                 <BidderHeader />
 
                 <BidderContainer>
+                    <AccountInactiveBanner />
                     <div className="max-w-full pt-16 pb-7 md:pt-0">
                         <div className="flex flex-col md:flex-row md:items-center md:justify-between">
                             <div>

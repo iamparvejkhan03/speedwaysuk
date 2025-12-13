@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, DollarSign, MessageSquare } from 'lucide-react';
+import { X, PoundSterling, MessageSquare } from 'lucide-react';
 
 const MakeOfferModal = ({
     isOpen,
@@ -39,7 +39,7 @@ const MakeOfferModal = ({
                         </label>
                         <div className="relative">
                             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <DollarSign className="h-5 w-5 text-gray-400" />
+                                <PoundSterling className="h-5 w-5 text-gray-400" />
                             </div>
                             <input
                                 type="number"
@@ -53,7 +53,7 @@ const MakeOfferModal = ({
                             />
                         </div>
                         <p className="text-sm text-gray-500 mt-1">
-                            Minimum offer: ${auction?.startPrice?.toLocaleString()}
+                            Minimum offer: £{auction?.startPrice?.toLocaleString()}
                         </p>
                     </div>
 

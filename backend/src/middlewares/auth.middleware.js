@@ -28,12 +28,12 @@ export const auth = async (req, res, next) => {
         }
 
         // Check if user is active
-        if (!user.isActive) {
-            return res.status(401).json({
-                success: false,
-                message: 'Account is deactivated'
-            });
-        }
+        // if (!user.isActive) {
+        //     return res.status(401).json({
+        //         success: false,
+        //         message: 'Account is deactivated'
+        //     });
+        // }
 
         // Attach user to request object
         req.user = user;

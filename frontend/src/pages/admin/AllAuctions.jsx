@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { AdminContainer, AdminHeader, AdminSidebar, LoadingSpinner, PaymentStatusDropdown } from "../../components";
-import { Search, Filter, Gavel, DollarSign, Clock, Eye, Edit, Shield, TrendingUp, User, Award, MoreVertical, Trash2, AlertTriangle, CheckCircle, Star, Crown, Plus, FileText, PoundSterling } from "lucide-react";
+import { Search, Filter, Gavel, DollarSign, Clock, Eye, Edit, Shield, TrendingUp, User, Award, MoreVertical, Trash2, AlertTriangle, CheckCircle, Star, Crown, Plus, FileText, PoundSterling, RefreshCcw } from "lucide-react";
 import { about } from "../../assets";
 import toast from "react-hot-toast";
 import axiosInstance from "../../utils/axiosInstance";
@@ -132,6 +132,19 @@ function AllAuctions() {
         }
     };
 
+    const relistAuction = async (auctionId) => {
+        try {
+            const { data } = await axiosInstance.patch(`/api/v1/admin/auctions/${auctionId}/relist`);
+            if (data.success) {
+                toast.success(data.message);
+                fetchAuctions(); // Refresh the list
+            }
+        } catch (err) {
+            console.error('Activate auction error:', err);
+            toast.error(err.response?.data?.message || "Failed to activate auction");
+        }
+    };
+
     const toggleFeatured = async (auctionId, currentlyFeatured) => {
         try {
             const { data } = await axiosInstance.patch(`/api/v1/admin/auctions/${auctionId}/status`, {
@@ -242,9 +255,6 @@ function AllAuctions() {
     };
 
     const handleEditAuction = (auction) => {
-        if (auction.status === 'sold') {
-            return toast.error(`Sold auction can't be edited`)
-        }
         navigate(`/admin/auctions/edit/${auction._id}`);
     };
 
@@ -629,7 +639,7 @@ function AllAuctions() {
                                                             </button>
 
                                                             {activeDropdown === auction._id && (
-                                                                <div className="absolute right-0 top-full mt-1 w-56 bg-white rounded-lg shadow-lg border border-gray-200 z-10 py-1">
+                                                                <div className="absolute right-0 top-full mt-1 w-56 bg-white rounded-lg shadow-lg border border-gray-200 z-40 py-1">
 
                                                                     {auction?.invoice?.url && (
                                                                         <Link
@@ -694,6 +704,19 @@ function AllAuctions() {
                                                                         >
                                                                             <CheckCircle size={16} />
                                                                             <span>Activate Auction</span>
+                                                                        </button>
+                                                                    )}
+
+                                                                    {auction.status === "sold" && (
+                                                                        <button
+                                                                            onClick={() => {
+                                                                                handleEditAuction(auction);
+                                                                                setActiveDropdown(null);
+                                                                            }}
+                                                                            className="flex items-center gap-3 w-full px-4 py-2 text-sm text-green-600 hover:bg-green-50 transition-colors"
+                                                                        >
+                                                                            <RefreshCcw size={16} />
+                                                                            <span>Relist Auction</span>
                                                                         </button>
                                                                     )}
 

@@ -155,29 +155,23 @@ const UploadProgressModal = ({ isOpen, fileCount }) => {
 };
 
 const categoryFields = {
-    // Same fields for ALL categories
     'ALL': [
-        { name: 'make', label: 'Make', type: 'text', required: true, placeholder: 'e.g., Porsche, Toyota, Tesla' },
-        { name: 'model', label: 'Model', type: 'text', required: true, placeholder: 'e.g., 911, Camry, Model S' },
-        { name: 'year', label: 'Year', type: 'number', required: true, min: 1900, max: new Date().getFullYear() + 1 },
         { name: 'registration', label: 'Registration Number', type: 'text', required: false, placeholder: 'e.g., AB12 CDE' },
-        { name: 'firstRegistration', label: 'First Registration Date', type: 'date', required: false },
-        { name: 'mileage', label: 'Mileage (miles)', type: 'number', required: false, min: 0, placeholder: 'e.g., 15000' },
-        { name: 'engine', label: 'Engine Type', type: 'text', required: false, placeholder: 'e.g., 3.8L Flat-6, 2.0L Turbo, Electric' },
-        { name: 'engineSize', label: 'Engine Size (cc)', type: 'text', required: false, placeholder: 'e.g., 1998, 3500, Electric' },
-        { name: 'horsepower', label: 'Horsepower (HP)', type: 'number', required: false, min: 0, placeholder: 'e.g., 300' },
+        { name: 'miles', label: 'Miles', type: 'number', required: false, min: 0, placeholder: 'e.g., 15000' },
+        { name: 'year', label: 'Year', type: 'number', required: true, min: 1900, max: new Date().getFullYear() + 1 },
+        { name: 'bodyType', label: 'Body Type', type: 'select', required: false, options: ['Hatchback', 'Saloon', 'SUV', 'Estate', 'Coupe', 'Convertible', 'MPV'] },
         { name: 'transmission', label: 'Transmission', type: 'select', required: false, options: ['Manual', 'Automatic', 'Dual-Clutch', 'CVT', 'Semi-Automatic'] },
         { name: 'fuelType', label: 'Fuel Type', type: 'select', required: false, options: ['Gasoline', 'Diesel', 'Hybrid', 'Electric'] },
-        { name: 'color', label: 'Exterior Color', type: 'text', required: false, placeholder: 'e.g., Red, Blue, Black' },
-        { name: 'interiorColor', label: 'Interior Color', type: 'text', required: false, placeholder: 'e.g., Black Leather, Beige Cloth' },
-        { name: 'condition', label: 'Condition', type: 'select', required: false, options: ['Excellent', 'Good', 'Fair', 'Project', 'Modified'] },
-        { name: 'capCleanValue', label: 'CAP Clean Value (£)', type: 'number', required: false, min: 0, placeholder: 'e.g., 25000' },
-        { name: 'owners', label: 'Number of Previous Owners', type: 'number', required: false, min: 1 },
-        { name: 'accidentHistory', label: 'Accident History', type: 'select', required: false, options: ['Clean', 'Minor', 'Major', 'Salvage'] },
-        { name: 'seating', label: 'Seating Capacity', type: 'number', required: false, min: 2, max: 9 },
+        { name: 'colour', label: 'Colour', type: 'text', required: false, placeholder: 'e.g., Red, Blue, Black' },
+        { name: 'keys', label: 'Keys', type: 'number', required: false, min: 1, max: 4 },
         { name: 'motExpiry', label: 'MOT Expiry Date', type: 'date', required: false },
-        { name: 'v5Document', label: 'V5 Document', type: 'select', required: false, options: ['Available', 'Not Available', 'Applied For'] },
-        { name: 'keys', label: 'Number of Keys', type: 'number', required: false, min: 1, max: 4 },
+        { name: 'serviceHistory', label: 'Service History', type: 'select', required: false, options: ['Full Service', 'Part Service', 'No History'] },
+        { name: 'insuranceCategory', label: 'Insurance Category', type: 'select', required: false, options: ['No Cat', 'CAT D', 'CAT S', 'CAT N'] },
+        { name: 'v5Status', label: 'V5 Status', type: 'select', required: false, options: ['V5 Present', 'Applied For', 'Not Available'] },
+        { name: 'previousOwners', label: 'Previous Owners', type: 'number', required: false, min: 1 },
+        { name: 'vatStatus', label: 'VAT Status', type: 'select', required: false, options: ['Marginal', 'Qualifying', 'Commercial'] },
+        { name: 'capClean', label: 'CAP Clean (£)', type: 'number', required: false, min: 0, placeholder: 'e.g., 15500' },
+        { name: 'vendor', label: 'Vendor', type: 'text', required: false, placeholder: 'e.g., City Motors' },
     ]
 };
 
@@ -206,7 +200,7 @@ const CreateAuction = () => {
         mode: 'onChange',
         defaultValues: {
             auctionType: 'buy_now',
-            category: ''
+            category: '',
         }
     });
 
@@ -289,118 +283,146 @@ const CreateAuction = () => {
         setUploadedServiceRecords(updatedRecords);
     };
 
-    // Get category-specific fields
     const getCategoryFields = () => {
-        return categoryFields['ALL'] || [];
+        const fields = categoryFields['ALL'];
+        // Since categoryFields['ALL'] is now an array, just return it
+        return fields;
     };
 
     // Render category-specific fields
     const renderCategoryFields = () => {
-        const fields = getCategoryFields();
+        const allFields = getCategoryFields();
 
-        // Format date for input field (YYYY-MM-DD)
-        const formatDateForInput = (date) => {
-            if (!date) return '';
-            const d = new Date(date);
-            return d.toISOString().split('T')[0];
-        };
+        // Categorize fields for display
+        const vehicleInfoFields = [
+            'registration', 'miles', 'year', 'bodyType', 'transmission', 'fuelType', 'colour'
+        ].map(name => allFields.find(f => f.name === name)).filter(Boolean);
+
+        const extraInfoFields = [
+            'keys', 'motExpiry', 'serviceHistory', 'insuranceCategory',
+            'v5Status', 'previousOwners', 'vatStatus', 'capClean', 'vendor'
+        ].map(name => allFields.find(f => f.name === name)).filter(Boolean);
 
         return (
-            <div className="mb-6">
-                <label className="text-sm font-medium text-secondary mb-4 flex items-center">
-                    {(() => {
-                        const IconComponent = Car;
-                        return <IconComponent size={20} className="mr-2" />;
-                    })()}
-                    Vehicle Specifications *
-                </label>
+            <div className="space-y-8 mb-6">
+                {/* Vehicle Information Section */}
+                <div className="bg-gray-50 p-6 rounded-lg border border-gray-200">
+                    <label className="text-sm font-medium text-secondary mb-4 flex items-center">
+                        <Car size={20} className="mr-2" />
+                        Vehicle Information *
+                    </label>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {vehicleInfoFields.map((field) => (
+                            <div key={field.name} className="space-y-2">
+                                <label htmlFor={field.name} className="block text-sm font-medium text-gray-700">
+                                    {field.label} {field.required && <span className="text-red-500">*</span>}
+                                </label>
+                                {renderField(field)}
+                                {errors.specifications?.[field.name] && (
+                                    <p className="text-red-500 text-sm">{errors.specifications[field.name].message}</p>
+                                )}
+                            </div>
+                        ))}
+                    </div>
+                </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {fields.map((field) => (
-                        <div key={field.name} className="space-y-2">
-                            <label htmlFor={field.name} className="block text-sm font-medium text-gray-700">
-                                {field.label} {field.required && <span className="text-red-500">*</span>}
-                            </label>
-
-                            {field.type === 'select' ? (
-                                <select
-                                    {...register(`specifications.${field.name}`, {
-                                        required: field.required ? `${field.label} is required` : false
-                                    })}
-                                    id={field.name}
-                                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
-                                >
-                                    <option value="">Select {field.label}</option>
-                                    {field.options.map(option => (
-                                        <option key={option} value={option}>{option}</option>
-                                    ))}
-                                </select>
-                            ) : field.type === 'date' ? (
-                                <input
-                                    {...register(`specifications.${field.name}`, {
-                                        required: field.required ? `${field.label} is required` : false,
-                                        validate: (value) => {
-                                            if (!value) return true; // Optional field
-                                            const date = new Date(value);
-                                            return !isNaN(date.getTime()) || 'Invalid date';
-                                        }
-                                    })}
-                                    id={field.name}
-                                    type="date"
-                                    // max={new Date().toISOString().split('T')[0]}
-                                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
-                                /> 
-                            ) : field.type === 'textarea' ? (
-                                <textarea
-                                    {...register(`specifications.${field.name}`, {
-                                        required: field.required ? `${field.label} is required` : false
-                                    })}
-                                    id={field.name}
-                                    rows={1}
-                                    placeholder={field.placeholder}
-                                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
-                                />
-                            ) : field.type === 'number' ? (
-                                <input
-                                    {...register(`specifications.${field.name}`, {
-                                        required: field.required ? `${field.label} is required` : false,
-                                        min: field.min ? {
-                                            value: field.min,
-                                            message: `Must be at least ${field.min}`
-                                        } : undefined,
-                                        max: field.max ? {
-                                            value: field.max,
-                                            message: `Must be at most ${field.max}`
-                                        } : undefined,
-                                        valueAsNumber: true
-                                    })}
-                                    id={field.name}
-                                    type="number"
-                                    placeholder={field.placeholder}
-                                    min={field.min}
-                                    max={field.max}
-                                    step={field.name === 'horsepower' || field.name === 'capCleanValue' ? "1" : "any"}
-                                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
-                                />
-                            ) : (
-                                <input
-                                    {...register(`specifications.${field.name}`, {
-                                        required: field.required ? `${field.label} is required` : false
-                                    })}
-                                    id={field.name}
-                                    type={field.type}
-                                    placeholder={field.placeholder}
-                                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
-                                />
-                            )}
-
-                            {errors.specifications?.[field.name] && (
-                                <p className="text-red-500 text-sm">{errors.specifications[field.name].message}</p>
-                            )}
-                        </div>
-                    ))}
+                {/* Extra Information Section */}
+                <div className="bg-gray-50 p-6 rounded-lg border border-gray-200">
+                    <label className="text-sm font-medium text-secondary mb-4 flex items-center">
+                        <Settings size={20} className="mr-2" />
+                        Extra Information
+                    </label>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {extraInfoFields.map((field) => (
+                            <div key={field.name} className="space-y-2">
+                                <label htmlFor={field.name} className="block text-sm font-medium text-gray-700">
+                                    {field.label}
+                                </label>
+                                {renderField(field)}
+                                {errors.specifications?.[field.name] && (
+                                    <p className="text-red-500 text-sm">{errors.specifications[field.name].message}</p>
+                                )}
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
+        );
+    };
+
+    // Add this helper function (ADD this)
+    const renderField = (field) => {
+        if (field.type === 'select') {
+            return (
+                <select
+                    {...register(`specifications.${field.name}`, {
+                        required: field.required ? `${field.label} is required` : false
+                    })}
+                    id={field.name}
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
+                >
+                    <option value="">Select {field.label}</option>
+                    {field.options.map(option => (
+                        <option key={option} value={option}>{option}</option>
+                    ))}
+                </select>
+            );
+        }
+
+        if (field.type === 'date') {
+            return (
+                <input
+                    {...register(`specifications.${field.name}`, {
+                        required: field.required ? `${field.label} is required` : false,
+                        validate: (value) => {
+                            if (!value) return true;
+                            const date = new Date(value);
+                            return !isNaN(date.getTime()) || 'Invalid date';
+                        }
+                    })}
+                    id={field.name}
+                    type="date"
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
+                />
+            );
+        }
+
+        if (field.type === 'number') {
+            return (
+                <input
+                    {...register(`specifications.${field.name}`, {
+                        required: field.required ? `${field.label} is required` : false,
+                        min: field.min ? {
+                            value: field.min,
+                            message: `Must be at least ${field.min}`
+                        } : undefined,
+                        max: field.max ? {
+                            value: field.max,
+                            message: `Must be at most ${field.max}`
+                        } : undefined,
+                        valueAsNumber: true
+                    })}
+                    id={field.name}
+                    type="number"
+                    placeholder={field.placeholder}
+                    min={field.min}
+                    max={field.max}
+                    step="any"
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
+                />
+            );
+        }
+
+        return (
+            <input
+                {...register(`specifications.${field.name}`, {
+                    required: field.required ? `${field.label} is required` : false
+                })}
+                id={field.name}
+                type={field.type}
+                placeholder={field.placeholder}
+                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
+            />
         );
     };
 
@@ -412,7 +434,7 @@ const CreateAuction = () => {
             // Trigger validation for all fields
             const fieldsToValidate = ['title', 'category', 'description', 'startDate', 'endDate'];
 
-            // Add ALL specification fields to validation
+            // Add all specification fields to validation (only required ones)
             const allSpecFields = getCategoryFields();
             allSpecFields.forEach(field => {
                 if (field.required) {
@@ -525,6 +547,7 @@ const CreateAuction = () => {
 
             // Append all text fields
             formData.append('title', auctionData.title);
+            formData.append('subTitle', auctionData.subTitle || '');
             formData.append('category', auctionData.category);
             formData.append('description', auctionData.description);
             formData.append('location', auctionData.location || '');
@@ -648,7 +671,7 @@ const CreateAuction = () => {
                                     <div>
                                         <h2 className="text-xl font-semibold mb-6 flex items-center">
                                             <Car size={20} className="mr-2" />
-                                            Vehicle Details
+                                            Vehicle Information
                                         </h2>
 
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
@@ -662,6 +685,18 @@ const CreateAuction = () => {
                                                     placeholder="e.g., 2020 Porsche 911 Carrera S"
                                                 />
                                                 {errors.title && <p className="text-red-500 text-sm mt-1">{errors.title.message}</p>}
+                                            </div>
+
+                                            <div>
+                                                <label htmlFor="subTitle" className="block text-sm font-medium text-secondary mb-1">Sub Title</label>
+                                                <input
+                                                    {...register('subTitle')}
+                                                    id="subTitle"
+                                                    type="text"
+                                                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
+                                                    placeholder="e.g., Sunroof, Automatic, Heated Seats"
+                                                />
+                                                {errors.subTitle && <p className="text-red-500 text-sm mt-1">{errors.subTitle.message}</p>}
                                             </div>
 
                                             <div>
@@ -1075,6 +1110,12 @@ const CreateAuction = () => {
                                                                 <p className="text-xs text-secondary">Vehicle Name</p>
                                                                 <p className="font-medium">{watch('title') || 'Not provided'}</p>
                                                             </div>
+                                                            {watch('subTitle') && (
+                                                                <div>
+                                                                    <p className="text-xs text-secondary">Sub Title</p>
+                                                                    <p className="font-medium">{watch('subTitle')}</p>
+                                                                </div>
+                                                            )}
                                                             <div>
                                                                 <p className="text-xs text-secondary">Category</p>
                                                                 <p className="font-medium">{watch('category') || 'Not provided'}</p>
@@ -1087,18 +1128,39 @@ const CreateAuction = () => {
                                                     </div>
 
                                                     {selectedCategory && (
-                                                        <div className="bg-white p-4 rounded-lg shadow-sm">
-                                                            <h4 className="font-medium mb-3">{selectedCategory} Specifications</h4>
-                                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                                                {getCategoryFields().map((field) => {
-                                                                    const value = watch(`specifications.${field.name}`);
-                                                                    return value ? (
-                                                                        <div key={field.name}>
-                                                                            <p className="text-xs text-secondary">{field.label}</p>
-                                                                            <p className="font-medium">{value}</p>
-                                                                        </div>
-                                                                    ) : null;
-                                                                }).filter(Boolean)}
+                                                        <div className="space-y-4">
+                                                            {/* Vehicle Information Review */}
+                                                            <div className="bg-white p-4 rounded-lg shadow-sm">
+                                                                <h4 className="font-medium mb-3">Vehicle Information</h4>
+                                                                <div className="grid grid-cols-2 gap-4">
+                                                                    {['registration', 'miles', 'year', 'bodyType', 'transmission', 'fuelType', 'colour'].map((fieldName) => {
+                                                                        const field = getCategoryFields().find(f => f.name === fieldName);
+                                                                        const value = watch(`specifications.${fieldName}`);
+                                                                        return value ? (
+                                                                            <div key={fieldName}>
+                                                                                <p className="text-xs text-secondary">{field?.label}</p>
+                                                                                <p className="font-medium">{value}</p>
+                                                                            </div>
+                                                                        ) : null;
+                                                                    }).filter(Boolean)}
+                                                                </div>
+                                                            </div>
+
+                                                            {/* Extra Information Review */}
+                                                            <div className="bg-white p-4 rounded-lg shadow-sm">
+                                                                <h4 className="font-medium mb-3">Extra Information</h4>
+                                                                <div className="grid grid-cols-2 gap-4">
+                                                                    {['keys', 'motExpiry', 'serviceHistory', 'insuranceCategory', 'v5Status', 'previousOwners', 'vatStatus', 'capClean', 'vendor'].map((fieldName) => {
+                                                                        const field = getCategoryFields().find(f => f.name === fieldName);
+                                                                        const value = watch(`specifications.${fieldName}`);
+                                                                        return value ? (
+                                                                            <div key={fieldName}>
+                                                                                <p className="text-xs text-secondary">{field?.label}</p>
+                                                                                <p className="font-medium">{fieldName === 'motExpiry' ? new Date(value).toLocaleDateString('en-GB') : value}</p>
+                                                                            </div>
+                                                                        ) : null;
+                                                                    }).filter(Boolean)}
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     )}

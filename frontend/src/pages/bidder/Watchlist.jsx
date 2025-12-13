@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { BidderContainer, BidderHeader, BidderSidebar, LoadingSpinner } from "../../components";
+import { AccountInactiveBanner, BidderContainer, BidderHeader, BidderSidebar, LoadingSpinner } from "../../components";
 import { Eye, Gavel, Clock, DollarSign, Trash2, Bell, BellOff, Search, Filter, SortAsc, Bookmark, MapPin, Award, Loader } from "lucide-react";
 import { about } from "../../assets";
 import axiosInstance from "../../utils/axiosInstance";
@@ -177,6 +177,7 @@ function Watchlist() {
                 <div className="w-full relative">
                     <BidderHeader />
                     <BidderContainer>
+                        <AccountInactiveBanner />
                         <div className="flex justify-center items-center min-h-96">
                             <div className="text-center">
                                 <p className="text-red-600 mb-4">{error}</p>
@@ -202,6 +203,7 @@ function Watchlist() {
                 <BidderHeader />
 
                 <BidderContainer>
+                    <AccountInactiveBanner />
                     <div className="max-w-full pt-16 pb-7 md:pt-0">
                         <div className="flex flex-col md:flex-row md:items-center md:justify-between">
                             <div>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { BidderContainer, BidderHeader, BidderSidebar, LoadingSpinner } from "../../components";
+import { AccountInactiveBanner, BidderContainer, BidderHeader, BidderSidebar, LoadingSpinner } from "../../components";
 import {
     Search,
     Filter,
@@ -314,6 +314,7 @@ function MyOffers() {
                 <div className="w-full relative">
                     <BidderHeader />
                     <BidderContainer>
+                        <AccountInactiveBanner />
                         <div className="bg-red-50 border border-red-200 rounded-xl p-6 text-center">
                             <p className="text-red-600">{error}</p>
                             <button
@@ -337,6 +338,7 @@ function MyOffers() {
                 <BidderHeader />
 
                 <BidderContainer>
+                    <AccountInactiveBanner />
                     {/* Header Section */}
                     <div className="max-w-full pt-16 pb-7 md:pt-0">
                         <div className="flex flex-col md:flex-row md:items-center md:justify-between">

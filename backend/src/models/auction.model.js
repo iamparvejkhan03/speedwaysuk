@@ -66,6 +66,10 @@ const auctionSchema = new Schema(
       required: true,
       trim: true,
     },
+    subTitle: { 
+      type: String,
+      trim: true,
+    },
     specifications: {
       type: Map,
       of: Schema.Types.Mixed,

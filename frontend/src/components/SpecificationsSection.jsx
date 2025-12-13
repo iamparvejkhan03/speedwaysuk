@@ -1,140 +1,66 @@
 import { 
     Car, 
-    Cog, 
-    Trophy, 
-    Calendar, 
-    Gauge, 
-    Fuel, 
-    Users, 
-    Wrench,
     Settings,
     FileText,
-    Award,
-    Clock,
-    MapPin,
-    RefreshCw,
-    Zap,
-    Palette,
-    Shield,
-    Cpu,
-    Heart,
-    Tag,
+    Calendar,
+    Gauge,
+    Fuel,
     Key,
-    DollarSign,
-    AlertCircle,
-    CheckCircle
+    PoundSterling,
+    Shield,
+    Wrench,
+    Users,
+    Award,
+    CheckCircle,
+    XCircle,
+    Clock,
+    Tag
 } from "lucide-react";
 
-// Icon mapping for specification fields - UPDATED WITH ALL NEW FIELDS
+// Icon mapping for specification fields - UPDATED
 const specificationIcons = {
-    // Car identification fields
-    make: Car,
-    model: Settings,
-    year: Calendar,
+    // Vehicle Information
     registration: FileText,
-    firstRegistration: Calendar,
-    
-    // Engine & Performance
-    engine: Cog,
-    engineSize: Cog,
-    horsepower: Zap,
+    miles: Gauge,
+    year: Calendar,
+    bodyType: Car,
     transmission: Settings,
     fuelType: Fuel,
+    colour: Car,
     
-    // Appearance
-    color: Palette,
-    interiorColor: Palette,
-    
-    // Condition & Value
-    condition: Award,
-    capCleanValue: DollarSign,
-    
-    // History & Ownership
-    owners: Users,
-    accidentHistory: AlertCircle,
-    mileage: Gauge,
-    
-    // Capacity & Features
-    seating: Users,
+    // Extra Information
     keys: Key,
-    
-    // Documentation
     motExpiry: Calendar,
-    v5Document: FileText,
-    
-    // Additional potential fields
-    drivetrain: Settings,
-    torque: Zap,
-    topSpeed: Gauge,
-    acceleration: Zap,
-    fuelEconomy: Fuel,
-    warranty: Shield,
     serviceHistory: Wrench,
-    modifications: Settings,
-    features: Cpu,
-    ownershipHistory: FileText,
-    exterior: Palette,
-    interior: Palette,
-    safetyFeatures: Shield,
-    entertainment: Cpu,
-    comfortFeatures: Heart,
-    bodyType: Car
+    insuranceCategory: Shield,
+    v5Status: FileText,
+    previousOwners: Users,
+    vatStatus: Tag,
+    capClean: PoundSterling,
+    vendor: Award,
 };
 
-// Field labels mapping - UPDATED WITH ALL NEW FIELDS
+// Field labels mapping - UPDATED
 const fieldLabels = {
-    // Car identification fields
-    make: 'Make',
-    model: 'Model', 
-    year: 'Year',
+    // Vehicle Information
     registration: 'Registration Number',
-    firstRegistration: 'First Registration',
-    
-    // Engine & Performance
-    engine: 'Engine Type',
-    engineSize: 'Engine Size',
-    horsepower: 'Horsepower',
+    miles: 'Miles',
+    year: 'Year',
+    bodyType: 'Body Type',
     transmission: 'Transmission',
     fuelType: 'Fuel Type',
+    colour: 'Colour',
     
-    // Appearance
-    color: 'Exterior Color',
-    interiorColor: 'Interior Color',
-    
-    // Condition & Value
-    condition: 'Condition',
-    capCleanValue: 'CAP Clean Value',
-    
-    // History & Ownership
-    owners: 'Previous Owners',
-    accidentHistory: 'Accident History',
-    mileage: 'Mileage',
-    
-    // Capacity & Features
-    seating: 'Seating Capacity',
-    keys: 'Number of Keys',
-    
-    // Documentation
-    motExpiry: 'MOT Expiry',
-    v5Document: 'V5 Document',
-    
-    // Additional fields
-    drivetrain: 'Drivetrain',
-    torque: 'Torque',
-    topSpeed: 'Top Speed',
-    acceleration: '0-60 mph',
-    fuelEconomy: 'Fuel Economy',
-    warranty: 'Warranty Status',
+    // Extra Information
+    keys: 'Keys',
+    motExpiry: 'MOT Expiry Date',
     serviceHistory: 'Service History',
-    modifications: 'Modifications',
-    features: 'Features',
-    ownershipHistory: 'Ownership History',
-    exterior: 'Exterior',
-    interior: 'Interior',
-    safetyFeatures: 'Safety Features',
-    entertainment: 'Entertainment System',
-    comfortFeatures: 'Comfort Features',
-    bodyType: 'Body Type'
+    insuranceCategory: 'Insurance Category',
+    v5Status: 'V5 Status',
+    previousOwners: 'Previous Owners',
+    vatStatus: 'VAT Status',
+    capClean: 'CAP Clean (£)',
+    vendor: 'Vendor',
 };
 
 // Value formatting functions
@@ -142,7 +68,7 @@ const formatValue = (field, value) => {
     if (!value) return '';
     
     // Handle date fields
-    if (field === 'firstRegistration' || field === 'motExpiry') {
+    if (field === 'motExpiry') {
         try {
             const date = new Date(value);
             return date.toLocaleDateString('en-GB', {
@@ -156,39 +82,51 @@ const formatValue = (field, value) => {
     }
     
     // Handle number fields with units
-    if (field === 'horsepower') return `${value} HP`;
-    if (field === 'mileage') return `${value.toLocaleString()} miles`;
-    if (field === 'engineSize') return `${value} cc`;
-    if (field === 'capCleanValue') return `£${value.toLocaleString()}`;
-    if (field === 'seating') return `${value} seats`;
-    if (field === 'owners') return `${value} owner${value !== 1 ? 's' : ''}`;
+    if (field === 'miles') return `${value.toLocaleString()} miles`;
+    if (field === 'capClean') return `£${value.toLocaleString()}`;
+    if (field === 'previousOwners') return `${value} owner${value !== 1 ? 's' : ''}`;
     if (field === 'keys') return `${value} key${value !== 1 ? 's' : ''}`;
     
-    // Handle boolean-like fields
-    if (field === 'v5Document') {
-        if (value === 'Available') return '✓ Available';
-        if (value === 'Not Available') return '✗ Not Available';
-        if (value === 'Applied For') return '⏳ Applied For';
+    // Handle special field values
+    if (field === 'serviceHistory') {
+        if (value === 'Full Service') return <span className="text-green-600">✓ {value}</span>;
+        if (value === 'Part Service') return <span className="text-yellow-600">⚠ {value}</span>;
+        if (value === 'No History') return <span className="text-red-600">✗ {value}</span>;
+    }
+    
+    if (field === 'v5Status') {
+        if (value === 'V5 Present') return <span className="text-green-600">✓ {value}</span>;
+        if (value === 'Applied For') return <span className="text-yellow-600">⏳ {value}</span>;
+        if (value === 'Not Available') return <span className="text-red-600">✗ {value}</span>;
+    }
+    
+    if (field === 'insuranceCategory') {
+        if (value === 'No Cat') return <span className="text-green-600">✓ {value}</span>;
+        return value;
+    }
+    
+    if (field === 'vatStatus') {
+        const statusColors = {
+            'Marginal': 'text-purple-600',
+            'Qualifying': 'text-blue-600',
+            'Commercial': 'text-green-600'
+        };
+        const colorClass = statusColors[value] || 'text-gray-800';
+        return <span className={colorClass}>{value}</span>;
     }
     
     return value;
 };
 
-// Category-specific field groupings - UPDATED WITH NEW FIELDS
-const categoryFieldGroups = {
-    // For all car categories
-    'ALL': {
-        'Vehicle Identification': ['make', 'model', 'year', 'registration', 'firstRegistration'],
-        'Engine & Performance': ['engine', 'engineSize', 'horsepower', 'transmission', 'fuelType'],
-        'Appearance & Interior': ['color', 'interiorColor', 'seating'],
-        'Condition & History': ['condition', 'mileage', 'owners', 'accidentHistory'],
-        'Value & Documentation': ['capCleanValue', 'motExpiry', 'v5Document', 'keys'],
-        
-        // Additional groups that can be used conditionally
-        'Technical Specifications': ['drivetrain', 'topSpeed', 'acceleration', 'fuelEconomy'],
-        'Features & Equipment': ['features', 'safetyFeatures', 'entertainment', 'comfortFeatures'],
-        'Service & Maintenance': ['serviceHistory', 'warranty', 'modifications']
-    }
+// Field groupings matching the create/edit forms
+const fieldGroups = {
+    'Vehicle Information': [
+        'registration', 'miles', 'year', 'bodyType', 'transmission', 'fuelType', 'colour'
+    ],
+    'Extra Information': [
+        'keys', 'motExpiry', 'serviceHistory', 'insuranceCategory', 
+        'v5Status', 'previousOwners', 'vatStatus', 'capClean', 'vendor'
+    ]
 };
 
 // Specifications Section Component
@@ -219,131 +157,96 @@ const SpecificationsSection = ({ auction }) => {
         }
     };
 
-    // Filter out empty values and create grouped specifications
-    const getFieldGroups = () => {
-        const groups = categoryFieldGroups['ALL'] || {};
-        const validGroups = {};
-        
-        Object.entries(groups).forEach(([groupName, fields]) => {
-            const validFields = fields.filter(field => {
-                const value = getFieldValue(field);
-                return value !== undefined && value !== null && value !== '' && value !== 0;
-            });
-            
-            if (validFields.length > 0) {
-                validGroups[groupName] = validFields;
-            }
-        });
-        
-        return validGroups;
-    };
-
-    // Check if a field should be displayed in simple view (not in any group)
-    const isFieldInAnyGroup = (field, groups) => {
-        for (const groupFields of Object.values(groups)) {
-            if (groupFields.includes(field)) {
-                return true;
-            }
-        }
-        return false;
-    };
-
-    const fieldGroups = getFieldGroups();
     const entries = getSpecificationsEntries();
 
-    // If no grouped fields or many ungrouped fields, show all in simple grid
-    if (Object.keys(fieldGroups).length === 0) {
-        return (
-            <div className="mt-8">
-                <h3 className="my-5 text-primary text-xl font-semibold flex items-center gap-2">
-                    <Car className="w-5 h-5" />
-                    Vehicle Specifications
-                </h3>
-                <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-x-5">
-                    {entries.map(([key, value]) => {
-                        if (!value || value === '' || value === 0) return null;
-                        
-                        const IconComponent = specificationIcons[key] || FileText;
-                        const label = fieldLabels[key] || key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
-                        const formattedValue = formatValue(key, value);
-                        
-                        return (
-                            <div key={key} className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
-                                <IconComponent className="flex-shrink-0 w-5 h-5 mt-1 text-primary" strokeWidth={1.5} />
-                                <div className="flex-1 min-w-0">
-                                    <p className="text-secondary text-sm font-medium">{label}</p>
-                                    <p className="text-base text-gray-900 break-words">{formattedValue}</p>
-                                </div>
-                            </div>
-                        );
-                    })}
-                </div>
-            </div>
-        );
-    }
-
-    // Get ungrouped fields (fields not in any group)
-    const ungroupedEntries = entries.filter(([key]) => !isFieldInAnyGroup(key, fieldGroups));
-
     return (
-        <div className="mt-8">
-            <h3 className="my-5 text-primary text-xl font-semibold flex items-center gap-2">
-                <Car className="w-5 h-5" />
-                Vehicle Specifications
-            </h3>
-            
-            {/* Render grouped fields */}
-            {Object.entries(fieldGroups).map(([groupName, fields]) => (
-                <div key={groupName} className="mb-6">
-                    <h4 className="text-base font-medium text-gray-800 mb-4 border-b pb-2">{groupName}</h4>
-                    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-x-5">
-                        {fields.map(field => {
-                            const value = getFieldValue(field);
-                            if (!value || value === '' || value === 0) return null;
-                            
-                            const IconComponent = specificationIcons[field] || FileText;
-                            const label = fieldLabels[field] || field.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
-                            const formattedValue = formatValue(field, value);
-                            
-                            return (
-                                <div key={field} className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
-                                    <IconComponent className="flex-shrink-0 w-8 h-8 mt-1 text-primary" strokeWidth={1} />
-                                    <div className="flex-1 min-w-0">
-                                        <p className="text-secondary text-sm font-medium">{label}</p>
-                                        <p className="text-base text-gray-900 break-words">{formattedValue}</p>
+        <div className="mt-8">            
+            {/* Render grouped sections */}
+            {Object.entries(fieldGroups).map(([sectionName, sectionFields]) => {
+                // Get fields that have values in this section
+                const validFields = sectionFields.filter(field => {
+                    const value = getFieldValue(field);
+                    return value !== undefined && value !== null && value !== '' && value !== 0;
+                });
+
+                if (validFields.length === 0) return null;
+
+                return (
+                    <div key={sectionName} className="mb-6 bg-gray-50 p-6 rounded-lg border border-gray-200">
+                        <h4 className="text-sm font-medium text-secondary mb-4 flex items-center">
+                            {sectionName === 'Vehicle Information' ? (
+                                <Car size={20} className="mr-2" />
+                            ) : (
+                                <Settings size={20} className="mr-2" />
+                            )}
+                            {sectionName}
+                        </h4>
+                        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4">
+                            {validFields.map(field => {
+                                const value = getFieldValue(field);
+                                if (!value || value === '' || value === 0) return null;
+                                
+                                const IconComponent = specificationIcons[field] || FileText;
+                                const label = fieldLabels[field] || field.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+                                const formattedValue = formatValue(field, value);
+                                
+                                return (
+                                    <div key={field} className="flex items-start gap-3 p-3 bg-white rounded-lg hover:bg-gray-100 transition-colors shadow-sm">
+                                        <IconComponent className="flex-shrink-0 w-5 h-5 mt-1 text-primary" strokeWidth={1.5} />
+                                        <div className="flex-1 min-w-0">
+                                            <p className="text-secondary text-sm font-medium">{label}</p>
+                                            <div className="text-base font-medium text-gray-900 break-words">
+                                                {formattedValue}
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            );
-                        })}
+                                );
+                            })}
+                        </div>
                     </div>
-                </div>
-            ))}
+                );
+            })}
             
-            {/* Render ungrouped fields if any */}
-            {ungroupedEntries.length > 0 && (
-                <div className="mb-6">
-                    <h4 className="text-base font-medium text-gray-800 mb-4 border-b pb-2">Additional Information</h4>
-                    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-x-5">
-                        {ungroupedEntries.map(([key, value]) => {
-                            if (!value || value === '' || value === 0) return null;
-                            
-                            const IconComponent = specificationIcons[key] || FileText;
-                            const label = fieldLabels[key] || key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
-                            const formattedValue = formatValue(key, value);
-                            
-                            return (
-                                <div key={key} className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
-                                    <IconComponent className="flex-shrink-0 w-5 h-5 mt-1 text-primary" strokeWidth={1.5} />
-                                    <div className="flex-1 min-w-0">
-                                        <p className="text-secondary text-sm font-medium">{label}</p>
-                                        <p className="text-base text-gray-900 break-words">{formattedValue}</p>
+            {/* Render any remaining fields not in our groups */}
+            {(() => {
+                const allGroupedFields = Object.values(fieldGroups).flat();
+                const ungroupedEntries = entries.filter(([key]) => 
+                    !allGroupedFields.includes(key) && 
+                    getFieldValue(key) && 
+                    getFieldValue(key) !== '' && 
+                    getFieldValue(key) !== 0
+                );
+
+                if (ungroupedEntries.length === 0) return null;
+
+                return (
+                    <div className="mb-6 bg-gray-50 p-6 rounded-lg border border-gray-200">
+                        <h4 className="text-sm font-medium text-secondary mb-4 flex items-center">
+                            <Settings size={20} className="mr-2" />
+                            Additional Specifications
+                        </h4>
+                        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4">
+                            {ungroupedEntries.map(([key, value]) => {
+                                const IconComponent = specificationIcons[key] || FileText;
+                                const label = fieldLabels[key] || key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+                                const formattedValue = formatValue(key, value);
+                                
+                                return (
+                                    <div key={key} className="flex items-start gap-3 p-3 bg-white rounded-lg hover:bg-gray-100 transition-colors shadow-sm">
+                                        <IconComponent className="flex-shrink-0 w-5 h-5 mt-1 text-primary" strokeWidth={1.5} />
+                                        <div className="flex-1 min-w-0">
+                                            <p className="text-secondary text-sm font-medium">{label}</p>
+                                            <p className="text-base font-medium text-gray-900 break-words">
+                                                {formattedValue}
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
-                            );
-                        })}
+                                );
+                            })}
+                        </div>
                     </div>
-                </div>
-            )}
+                );
+            })()}
         </div>
     );
 };

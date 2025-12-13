@@ -1,4 +1,4 @@
-import { Gavel, Heart, MapPin, Eye, Users, Shield, Clock, Zap } from "lucide-react";
+import { Gavel, Heart, MapPin, Eye, Users, Shield, Clock, Zap, File, Gauge, Settings } from "lucide-react";
 import { heroImg } from "../assets";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -190,10 +190,22 @@ function AuctionCard({ auction }) {
                     {auction.title}
                 </Link>
 
-                {/* Location */}
+                {/* Registration */}
                 <div className="flex items-center gap-1 text-sm text-gray-600 mb-3">
-                    <MapPin size={14} />
-                    <span className="truncate">{auction.location}</span>
+                    <span className="flex items-center gap-1"><File size={14} /> Registration:</span>
+                    <span className="truncate">{auction?.specifications?.registration}</span>
+                </div>
+
+                {/* Mileage */}
+                <div className="flex items-center gap-1 text-sm text-gray-600 mb-3">
+                    <span className="flex items-center gap-1"><Gauge size={14} /> Mileage:</span>
+                    <span className="truncate">{auction?.specifications?.mileage}</span>
+                </div>
+
+                {/* Transmission */}
+                <div className="flex items-center gap-1 text-sm text-gray-600 mb-3">
+                    <span className="flex items-center gap-1"><Settings size={14} /> Transmission:</span>
+                    <span className="truncate">{auction?.specifications?.transmission}</span>
                 </div>
 
                 {/* Auction Info Grid */}

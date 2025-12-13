@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
-import { BidderContainer, BidderHeader, BidderSidebar, LoadingSpinner } from "../../components";
+import { AccountInactiveBanner, BidderContainer, BidderHeader, BidderSidebar, LoadingSpinner } from "../../components";
 import {
     Award,
     Trophy,
     Star,
-    DollarSign,
     MessageCircle,
     Phone,
     Mail,
@@ -12,6 +11,7 @@ import {
     Zap,
     TrendingUp,
     SortAsc,
+    PoundSterling,
 } from "lucide-react";
 import axiosInstance from "../../utils/axiosInstance";
 import { Link } from "react-router-dom";
@@ -141,6 +141,7 @@ function WonAuctions() {
                 <div className="w-full relative">
                     <BidderHeader />
                     <BidderContainer>
+                        <AccountInactiveBanner />
                         <div className="bg-red-50 border border-red-200 rounded-xl p-6 text-center">
                             <p className="text-red-600">{error}</p>
                             <button
@@ -164,6 +165,7 @@ function WonAuctions() {
                 <BidderHeader />
 
                 <BidderContainer>
+                    <AccountInactiveBanner />
                     {/* Celebratory Header */}
                     <div className="max-w-full pt-16 pb-7 md:pt-0">
                         <div className="flex flex-col md:flex-row md:items-center md:justify-between">
@@ -213,7 +215,7 @@ function WonAuctions() {
                                     <p className="text-green-200 text-xs mt-1">In Winning Auctions</p>
                                 </div>
                                 <div className="p-3 bg-white/20 rounded-full">
-                                    <DollarSign size={24} />
+                                    <PoundSterling size={24} />
                                 </div>
                             </div>
                         </div>

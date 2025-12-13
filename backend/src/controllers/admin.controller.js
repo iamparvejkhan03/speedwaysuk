@@ -197,7 +197,13 @@ export const getAdminStats = async (req, res) => {
     // Calculate total offer value and average offer
     const offerValueStats = await Auction.aggregate([
       { $unwind: "$offers" },
-      { $match: { "offers.status": { $in: ["pending", "accepted", "rejected", "expired", "withdrawn"] } } },
+      {
+        $match: {
+          "offers.status": {
+            $in: ["pending", "accepted", "rejected", "expired", "withdrawn"],
+          },
+        },
+      },
       {
         $group: {
           _id: null,
@@ -216,7 +222,7 @@ export const getAdminStats = async (req, res) => {
       // Basic counts
       totalUsers,
       totalAuctions,
-      activeAuctions, 
+      activeAuctions,
       totalSoldAuctions,
 
       // User statistics
@@ -430,7 +436,7 @@ export const getUserDetails = async (req, res) => {
         { $unwind: "$offers" },
         { $match: { "offers.buyer": user._id } },
         { $group: { _id: null, count: { $sum: 1 } } },
-      ]); 
+      ]);
 
       const wonAuctions = await Auction.countDocuments({
         winner: user._id,
@@ -1012,16 +1018,17 @@ export const updateAuction = async (req, res) => {
       });
     }
 
-    if (auction.status === "sold" || auction.status === "sold_buy_now") {
-      return res.status(401).json({
-        success: false,
-        message: `Sold auctions can't be edited`,
-      });
-    }
+    // if (auction.status === "sold" || auction.status === "sold_buy_now") {
+    //   return res.status(401).json({
+    //     success: false,
+    //     message: `Sold auctions can't be edited`,
+    //   });
+    // }
 
     // For FormData, we need to access fields from req.body directly
     const {
       title,
+      subTitle,
       category,
       features,
       description,
@@ -1072,6 +1079,58 @@ export const updateAuction = async (req, res) => {
         success: false,
         message: "Start price is required and must be positive",
       });
+    }
+
+    // CHECK: If auction is sold, we'll reset everything
+    const isSoldAuction =
+      auction.status === "sold" || auction.status === "sold_buy_now";
+
+    if (isSoldAuction) {
+      const resetData = {
+        // Reset all bidding/offers/winner data
+        bids: [],
+        offers: [],
+        currentPrice: parseFloat(startPrice),
+        currentBidder: null,
+        winner: null,
+        finalPrice: null,
+        bidCount: 0,
+
+        // Reset payment info
+        paymentStatus: "pending",
+        paymentMethod: null,
+        paymentDate: null,
+        transactionId: null,
+        invoice: null,
+
+        // Reset notifications
+        notifications: {
+          ending30min: false,
+          ending2hour: false,
+          ending24hour: false,
+          ending30minSentAt: null,
+          ending2hourSentAt: null,
+          ending24hourSentAt: null,
+          offerReceived: false,
+          offerExpiring: false,
+        },
+
+        lastBidTime: null,
+
+        // Reset views and watchlist if you want a fresh start
+        views: 0,
+        // watchlistCount: 0,
+
+        // Reset commission
+        commissionAmount: 0,
+        bidPaymentRequired: true,
+
+        // Set status based on new dates
+        status: "draft", // Start as draft since it's being re-listed
+      };
+
+      // Apply reset data to auction object
+      Object.assign(auction, resetData);
     }
 
     // Validate bid increment for standard and reserve auctions
@@ -1493,6 +1552,7 @@ export const updateAuction = async (req, res) => {
     // Prepare update data
     const updateData = {
       title,
+      subTitle: subTitle || "",
       category,
       features: features || "",
       description,
@@ -1532,27 +1592,86 @@ export const updateAuction = async (req, res) => {
     }
 
     // Handle status changes based on new dates
-    if (start > now && end > now) {
-      // Dates are in future - activate if not already active
-      if (auction.status == "active") {
-        updateData.status = "approved";
-      } else if (auction.status == "ended") {
-        updateData.status = "approved";
-      } else if (auction.status == "reserve_not_met") {
-        updateData.status = "approved";
+    // Handle status changes based on new dates (only for non-sold auctions)
+    // Handle status changes based on new dates (only for non-sold auctions)
+    if (!isSoldAuction) {
+      if (start > now && end > now) {
+        // Dates are in future - activate if not already active
+        if (auction.status == "active") {
+          updateData.status = "approved";
+        } else if (auction.status == "ended") {
+          updateData.status = "approved";
+        } else if (auction.status == "reserve_not_met") {
+          updateData.status = "approved";
+        }
+      } else if (end <= now) {
+        // Auction has ended
+        if (auction.status === "active") {
+          updateData.status = "ended";
+          // Trigger end auction logic
+          await auction.endAuction();
+        }
+      } else if (start <= now && end > now) {
+        // Auction should be active now (start date passed but end date in future)
+        if (auction.status !== "active") {
+          updateData.status = "active";
+        }
       }
-    } else if (end <= now) {
-      // Auction has ended
-      if (auction.status === "active") {
-        updateData.status = "ended";
-        // Trigger end auction logic
-        await auction.endAuction();
+    } else {
+      // For sold auctions being reset, determine status based on new dates
+      // BUT: If dates haven't changed, we should check the actual date values
+      const originalStart = auction.startDate;
+      const originalEnd = auction.endDate;
+      const startChanged = start.getTime() !== originalStart.getTime();
+      const endChanged = end.getTime() !== originalEnd.getTime();
+
+      // If dates haven't changed, keep the original date logic but reset everything else
+      if (!startChanged && !endChanged) {
+        // Use the original date logic but with reset status
+        if (originalStart > now) {
+          updateData.status = "draft"; // Future date, start as draft
+        } else if (originalStart <= now && originalEnd > now) {
+          updateData.status = "active"; // Should be active now
+        } else if (originalEnd <= now) {
+          updateData.status = "ended"; // Already ended
+        }
+      } else {
+        // If dates have changed, use the new dates
+        if (start > now) {
+          updateData.status = "draft"; // Future date, start as draft
+        } else if (start <= now && end > now) {
+          updateData.status = "active"; // Should be active now
+        } else if (end <= now) {
+          updateData.status = "ended"; // Already ended
+        }
       }
-    } else if (start <= now && end > now) {
-      // Auction should be active now (start date passed but end date in future)
-      if (auction.status !== "active") {
-        updateData.status = "active";
-      }
+
+      // Add reset fields to updateData for sold auctions
+      updateData.bids = [];
+      updateData.offers = [];
+      updateData.currentPrice = parseFloat(startPrice);
+      updateData.currentBidder = null;
+      updateData.winner = null;
+      updateData.finalPrice = null;
+      updateData.bidCount = 0;
+      updateData.paymentStatus = "pending";
+      updateData.paymentMethod = null;
+      updateData.paymentDate = null;
+      updateData.transactionId = null;
+      updateData.invoice = null;
+      updateData.notifications = {
+        ending30min: false,
+        ending2hour: false,
+        ending24hour: false,
+        ending30minSentAt: null,
+        ending2hourSentAt: null,
+        ending24hourSentAt: null,
+        offerReceived: false,
+        offerExpiring: false,
+      };
+      updateData.lastBidTime = null;
+      updateData.commissionAmount = 0;
+      updateData.bidPaymentRequired = true;
     }
 
     const updatedAuction = await Auction.findByIdAndUpdate(id, updateData, {
@@ -1583,8 +1702,11 @@ export const updateAuction = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: "Auction updated successfully",
+      message: isSoldAuction
+        ? "Sold auction has been reset and updated successfully"
+        : "Auction updated successfully",
       data: { auction: updatedAuction },
+      reset: isSoldAuction,
     });
   } catch (error) {
     console.error("Update auction error:", error);

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { BidderContainer, BidderHeader, BidderSidebar, LoadingSpinner } from "../../components";
+import { AccountInactiveBanner, BidderContainer, BidderHeader, BidderSidebar, LoadingSpinner } from "../../components";
 import {
     User, Mail, Phone, MapPin, Camera, Edit, Save, X, Shield, Lock,
     Upload, Award, Gavel, Heart, Star, TrendingUp, Bell, Newspaper,
@@ -234,6 +234,7 @@ function Profile() {
                 <div className="w-full relative">
                     <BidderHeader />
                     <BidderContainer>
+                        <AccountInactiveBanner />
                         <div className="bg-red-50 border border-red-200 rounded-xl p-6 text-center">
                             <p className="text-red-600">Failed to load profile data</p>
                             <button
@@ -257,6 +258,7 @@ function Profile() {
                 <BidderHeader />
 
                 <BidderContainer>
+                    <AccountInactiveBanner />
                     <div className="max-w-full pt-16 pb-7 md:pt-0">
                         <h2 className="text-3xl md:text-4xl font-bold my-5">Bidder Profile</h2>
                         <p className="text-secondary">Manage your account settings and bidding preferences</p>
@@ -404,6 +406,19 @@ function Profile() {
                                                     <p className="text-sm text-gray-500 mt-1">Email cannot be changed</p>
                                                 </div>
                                                 <div className="space-y-1 md:col-span-2">
+                                                    <label className="block text-sm font-medium text-secondary">Username</label>
+                                                    <div className="flex items-center gap-2">
+                                                        <User size={18} className="text-gray-400" />
+                                                        <input
+                                                            type="text"
+                                                            value={userData.username || ''}
+                                                            disabled
+                                                            className="flex-1 px-4 py-2.5 border border-gray-300 rounded-lg bg-gray-100"
+                                                        />
+                                                    </div>
+                                                    <p className="text-sm text-gray-500 mt-1">Username cannot be changed</p>
+                                                </div>
+                                                <div className="space-y-1 md:col-span-2">
                                                     <label className="block text-sm font-medium text-secondary">Phone</label>
                                                     <div className="flex items-center gap-2">
                                                         <Phone size={18} className="text-gray-400" />
@@ -417,10 +432,10 @@ function Profile() {
                                                     </div>
                                                 </div>
                                                 <div className="space-y-1">
-                                                    <label className="block text-sm font-medium text-secondary">Username</label>
+                                                    <label className="block text-sm font-medium text-secondary">Dealership Name</label>
                                                     <input
                                                         type="text"
-                                                        value={userData.username || ''}
+                                                        value={userData?.address?.dealershipName || ''}
                                                         disabled
                                                         className="w-full px-4 py-2.5 border border-gray-300 rounded-lg bg-gray-100"
                                                     />
@@ -442,14 +457,37 @@ function Profile() {
                                 {/* Address Section */}
                                 {activeSection === "address" && (
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                        <div className="space-y-1">
+                                            <label className="block text-sm font-medium text-secondary">Dealership Name</label>
+                                            <input
+                                                type="text"
+                                                value={userData.address?.dealershipName || ''}
+                                                onChange={(e) => handleInputChange('address.dealershipName', e.target.value)}
+                                                disabled={!isEditing}
+                                                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent disabled:bg-gray-100"
+                                                placeholder="Dealership name (optional)"
+                                            />
+                                        </div>
+                                        <div className="space-y-1">
+                                            <label className="block text-sm font-medium text-secondary">Building Name/No</label>
+                                            <input
+                                                type="text"
+                                                value={userData.address?.buildingNameNo || ''}
+                                                onChange={(e) => handleInputChange('address.buildingNameNo', e.target.value)}
+                                                disabled={!isEditing}
+                                                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent disabled:bg-gray-100"
+                                                placeholder="Building name or number"
+                                            />
+                                        </div>
                                         <div className="md:col-span-2 space-y-1">
-                                            <label className="block text-sm font-medium text-secondary">Street Address</label>
+                                            <label className="block text-sm font-medium text-secondary">Street</label>
                                             <input
                                                 type="text"
                                                 value={userData.address?.street || ''}
                                                 onChange={(e) => handleInputChange('address.street', e.target.value)}
                                                 disabled={!isEditing}
                                                 className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent disabled:bg-gray-100"
+                                                placeholder="Street address"
                                             />
                                         </div>
                                         <div className="space-y-1">
@@ -460,26 +498,29 @@ function Profile() {
                                                 onChange={(e) => handleInputChange('address.city', e.target.value)}
                                                 disabled={!isEditing}
                                                 className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent disabled:bg-gray-100"
+                                                placeholder="City"
                                             />
                                         </div>
                                         <div className="space-y-1">
-                                            <label className="block text-sm font-medium text-secondary">State/Province</label>
+                                            <label className="block text-sm font-medium text-secondary">County</label>
                                             <input
                                                 type="text"
-                                                value={userData.address?.state || ''}
-                                                onChange={(e) => handleInputChange('address.state', e.target.value)}
+                                                value={userData.address?.county || ''}
+                                                onChange={(e) => handleInputChange('address.county', e.target.value)}
                                                 disabled={!isEditing}
                                                 className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent disabled:bg-gray-100"
+                                                placeholder="County"
                                             />
                                         </div>
                                         <div className="space-y-1">
-                                            <label className="block text-sm font-medium text-secondary">ZIP/Postal Code</label>
+                                            <label className="block text-sm font-medium text-secondary">Post Code</label>
                                             <input
                                                 type="text"
-                                                value={userData.address?.zipCode || ''}
-                                                onChange={(e) => handleInputChange('address.zipCode', e.target.value)}
+                                                value={userData.address?.postCode || ''}
+                                                onChange={(e) => handleInputChange('address.postCode', e.target.value)}
                                                 disabled={!isEditing}
                                                 className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent disabled:bg-gray-100"
+                                                placeholder="Postal code"
                                             />
                                         </div>
                                         <div className="space-y-1">
@@ -490,14 +531,8 @@ function Profile() {
                                                 onChange={(e) => handleInputChange('address.country', e.target.value)}
                                                 disabled={!isEditing}
                                                 className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent disabled:bg-gray-100"
+                                                placeholder="Country"
                                             />
-                                                {/* <option value="United States">United States</option>
-                                                <option value="Canada">Canada</option>
-                                                <option value="United Kingdom">United Kingdom</option>
-                                                <option value="Germany">Germany</option>
-                                                <option value="Australia">Australia</option>
-                                                <option value="Other">Other</option>
-                                            </select> */}
                                         </div>
                                     </div>
                                 )}

@@ -1078,7 +1078,7 @@ export const adminRespondToOffer = async (req, res) => {
   try {
     const { offerId } = req.params;
     const { auctionId, response, message } = req.body;
-    const { admin } = req.user;
+    const admin = req.user;
 
     if (!admin) {
       return res.status(403).json({

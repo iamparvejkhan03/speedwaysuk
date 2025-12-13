@@ -1,4 +1,4 @@
-import { CalendarDays, CheckSquare, Clock, Download, File, Fuel, Gauge, Gavel, Heart, Loader, MapPin, MessageCircle, PaintBucket, Plane, ShieldCheck, Tag, User, Users, Weight, DollarSign, Zap, PoundSterling } from "lucide-react";
+import { CalendarDays, CheckSquare, Clock, Download, File, Fuel, Gauge, Gavel, Heart, Loader, MapPin, MessageCircle, PaintBucket, Plane, ShieldCheck, Tag, User, Users, Weight, Zap, PoundSterling } from "lucide-react";
 import { BidConfirmationModal, BuyNowModal, Container, LoadingSpinner, MobileBidStickyBar, SpecificationsSection, TabSection, TimerDisplay, WatchlistButton } from "../components";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { lazy, Suspense, useRef, useState, useEffect } from "react";
@@ -406,8 +406,6 @@ function SingleAuction() {
                     />
                 </div>
 
-                <h2 className="text-2xl md:text-3xl font-semibold my-6 text-primary">{auction.title}</h2>
-
                 {/* Buy Now Badge */}
                 {isBuyNowAvailable && (
                     <div className="mb-4 inline-flex items-center gap-2 bg-green-100 text-green-800 px-4 py-2 rounded-full">
@@ -421,100 +419,24 @@ function SingleAuction() {
 
                 <hr className="my-8" />
 
+                <h2 className="text-2xl md:text-3xl font-semibold my-4 text-primary">{auction.title}</h2>
+                <h3 className="text-lg md:text-xl font-semibold text-primary">{auction?.subTitle}</h3>
+
+                <hr className="my-8" />
+
                 {/* Info section */}
                 <div>
-                    <h3 className="my-5 text-primary text-xl font-semibold">Auction Overview</h3>
-                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-5 gap-y-10">
-                        <div className="flex items-center gap-3">
-                            <Tag className="flex-shrink-0 w-7 h-7 md:w-8 md:h-8" strokeWidth={1} />
-                            <div>
-                                <p className="text-secondary text-sm">Category</p>
-                                <p className="text-base">{auction.category}</p>
-                            </div>
-                        </div>
-
-                        <div className="flex items-center gap-3">
-                            <MapPin className="flex-shrink-0 w-7 h-7 md:w-8 md:h-8" strokeWidth={1} />
-                            <div>
-                                <p className="text-secondary text-sm">Location</p>
-                                <p className="text-base">{auction.location || 'Not specified'}</p>
-                            </div>
-                        </div>
-
-                        <div className="flex items-center gap-3">
-                            <CalendarDays className="flex-shrink-0 w-7 h-7 md:w-8 md:h-8" strokeWidth={1} />
-                            <div>
-                                <p className="text-secondary text-sm">Start Date</p>
-                                <p className="text-base">
-                                    {new Date(auction.startDate).toLocaleDateString()}
-                                </p>
-                            </div>
-                        </div>
-
-                        <div className="flex items-center gap-3">
-                            <Clock className="flex-shrink-0 w-7 h-7 md:w-8 md:h-8" strokeWidth={1} />
-                            <div>
-                                <p className="text-secondary text-sm">End Date</p>
-                                <p className="text-base">
-                                    {new Date(auction.endDate).toLocaleDateString()}
-                                </p>
-                            </div>
-                        </div>
-
-                        <div className="flex items-center gap-3">
-                            <User className="flex-shrink-0 w-7 h-7 md:w-8 md:h-8" strokeWidth={1} />
-                            <div>
-                                <p className="text-secondary text-sm">Seller</p>
-                                <p className="text-base break-all">{auction.sellerUsername}</p>
-                            </div>
-                        </div>
-
-                        <div className="flex items-center gap-3">
-                            <Gavel className="flex-shrink-0 w-7 h-7 md:w-8 md:h-8" strokeWidth={1} />
-                            <div>
-                                <p className="text-secondary text-sm">Auction Type</p>
-                                <p className="text-base capitalize">
-                                    {auction.auctionType === 'reserve' ? 'Reserve Price' :
-                                        auction.auctionType === 'buy_now' ? 'Buy Now Available' : 'Standard'}
-                                </p>
-                            </div>
-                        </div>
-
-                        {/* Allow Offers Badge */}
-                        {auction.allowOffers && (
-                            <div className="flex items-center gap-3">
-                                <DollarSign className="flex-shrink-0 w-7 h-7 md:w-8 md:h-8" strokeWidth={1} />
-                                <div>
-                                    <p className="text-secondary text-sm">Offers</p>
-                                    <p className="text-base">Accepted</p>
-                                </div>
-                            </div>
-                        )}
-
-                        {/* Buy Now Price */}
-                        {auction.buyNowPrice && (
-                            <div className="flex items-center gap-3">
-                                <Zap className="flex-shrink-0 w-7 h-7 md:w-8 md:h-8" strokeWidth={1} />
-                                <div>
-                                    <p className="text-secondary text-sm">Buy Now Price</p>
-                                    <p className="text-base font-semibold text-green-600">
-                                        £{auction.buyNowPrice.toLocaleString()}
-                                    </p>
-                                </div>
-                            </div>
-                        )}
-                    </div>
+                    {/* <h3 className="my-5 text-primary text-xl font-semibold">Auction Overview</h3> */}
 
                     {/* Dynamic Specifications Section */}
                     <SpecificationsSection auction={auction} />
                 </div>
 
-                <hr className="my-8" />
-
                 {/* Features Section */}
                 {auction.features && (
                     <>
                         <div>
+                            <hr className="my-8" />
                             <h3 className="my-5 text-primary text-xl font-semibold">Features & Options</h3>
                             <div className="prose prose-lg max-w-none border rounded-lg px-6 py-3 bg-white text-md">
                                 {auction.features ? (
@@ -530,6 +452,7 @@ function SingleAuction() {
                 {/* Document section */}
                 {auction.documents && auction.documents.length > 0 && (
                     <div>
+                        <hr className="my-8" />
                         <h3 className="my-5 text-primary text-xl font-semibold">Document(s)</h3>
                         <div className="flex gap-5 max-w-full flex-wrap">
                             {auction.documents.map((doc, index) => (
@@ -548,8 +471,6 @@ function SingleAuction() {
                         </div>
                     </div>
                 )}
-
-                <hr className="my-8" />
 
                 {/* Service Records Section */}
                 {auction.serviceRecords && auction.serviceRecords.length > 0 && (
@@ -746,7 +667,7 @@ function SingleAuction() {
                                     onClick={handleOpenMakeOfferModal}
                                     className="flex items-center justify-center gap-2 w-full bg-[#edcd1f] text-black py-3 px-6 cursor-pointer rounded-lg hover:bg-[#edcd1f]/90 transition-colors"
                                 >
-                                    <DollarSign />
+                                    <PoundSterling />
                                     <span>Make an Offer</span>
                                 </button>
                             )}
@@ -830,7 +751,7 @@ function SingleAuction() {
                     {/* Pending Offers Count */}
                     {auction.offers && auction.offers.filter(o => o.status === 'pending').length > 0 && (
                         <p className="text-center bg-white p-3 text-secondary text-sm flex items-center justify-center gap-2 border border-gray-200 rounded-lg">
-                            <DollarSign className="w-4 h-4" />
+                            <PoundSterling className="w-4 h-4" />
                             <span>{auction.offers.filter(o => o.status === 'pending').length} pending offer{auction.offers.filter(o => o.status === 'pending').length !== 1 ? 's' : ''}</span>
                         </p>
                     )}

@@ -25,6 +25,7 @@ export const createAuction = async (req, res) => {
 
     const {
       title,
+      subTitle,
       category,
       features,
       description,
@@ -215,6 +216,7 @@ export const createAuction = async (req, res) => {
     // Create auction data object
     const auctionData = {
       title,
+      subTitle: subTitle || "",
       category,
       features: features || "",
       description,

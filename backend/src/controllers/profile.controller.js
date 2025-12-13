@@ -329,9 +329,7 @@ export const getUserStats = async (req, res) => {
         { $group: { _id: null, total: { $sum: "$offers.amount" } } },
       ]);
 
-      const totalSpent =
-        (winningBidsSpent[0]?.total || 0) +
-        (acceptedOffersSpent[0]?.total || 0);
+      const totalSpent = acceptedOffersSpent[0]?.total || 0;
 
       // 10. Average Bid Amount (only for regular bids, not buy now)
       const totalBids = totalBidsResult[0]?.total || 0;

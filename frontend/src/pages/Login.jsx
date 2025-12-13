@@ -79,7 +79,7 @@ const Login = () => {
                                     type="email"
                                     id="email"
                                     className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg"
-                                    placeholder="Enter your email or username"
+                                    placeholder="Enter your email"
                                     required
                                     {...register('email', { required: true })}
                                 />

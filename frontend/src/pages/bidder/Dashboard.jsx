@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { LoadingSpinner, StatCard, BidderContainer, BidderHeader, BidderSidebar } from "../../components";
+import { LoadingSpinner, StatCard, BidderContainer, BidderHeader, BidderSidebar, AccountInactiveBanner } from "../../components";
 import { useState } from "react";
 import { TrendingUp, Gavel, Award, PoundSterling, Bookmark, Hand } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -120,6 +120,7 @@ function Dashboard() {
                 <BidderHeader />
 
                 <BidderContainer>
+                    <AccountInactiveBanner />
                     <div className="max-w-full pt-16 pb-7 md:pt-0">
                         <h2 className="text-3xl md:text-4xl font-bold my-5">Bidder Dashboard</h2>
                         <p className="text-secondary">Track your bidding activity and find new vehicle auctions.</p>

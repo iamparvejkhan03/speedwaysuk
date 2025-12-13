@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { AdminContainer, AdminHeader, AdminSidebar, LoadingSpinner } from "../../components";
-import { Search, Filter, Mail, Phone, MapPin, Calendar, Award, Gavel, DollarSign, Shield, User, Edit, MoreVertical, UserX, Trash2, TrendingUp, Eye, Hand } from "lucide-react";
+import { Search, Filter, Mail, Phone, MapPin, Calendar, Award, Gavel, DollarSign, Shield, User, Edit, MoreVertical, UserX, Trash2, TrendingUp, Eye, Hand, Building, Home, PoundSterling } from "lucide-react";
 import { about, dummyUserImg } from "../../assets";
 import toast from "react-hot-toast";
 import axiosInstance from "../../utils/axiosInstance";
@@ -88,6 +88,22 @@ function AllUsers() {
             return;
         }
 
+        try {
+            const { data } = await axiosInstance.patch(`/api/v1/admin/users/${userId}/status`, {
+                isActive: newStatus
+            });
+            if (data.success) {
+                toast.success(data.message);
+                fetchUsers(); // Refresh the list
+            }
+        } catch (err) {
+            console.error('Update user status error:', err);
+            toast.error(err.response?.data?.message || "Failed to update user status");
+        }
+    };
+
+    const handleActivateUser = async (userId, userName, currentStatus) => {
+        const newStatus = true;
         try {
             const { data } = await axiosInstance.patch(`/api/v1/admin/users/${userId}/status`, {
                 isActive: newStatus
@@ -336,7 +352,7 @@ function AllUsers() {
                                                         </button>
 
                                                         {/* Dropdown Menu */}
-                                                        {/* <div className="relative">
+                                                        <div className="relative">
                                                             <button
                                                                 onClick={() => setActiveDropdown(activeDropdown === user._id ? null : user._id)}
                                                                 className="p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100 transition-colors"
@@ -346,55 +362,12 @@ function AllUsers() {
 
                                                             {activeDropdown === user._id && (
                                                                 <div className="absolute right-0 top-full mt-1 w-56 bg-white rounded-lg shadow-lg border border-gray-200 z-10 py-1">
-
-                                                                    <div className="px-3 py-2 text-xs font-medium text-gray-500 border-b border-gray-100">
-                                                                        Change Role
-                                                                    </div>
-                                                                    {user.userType !== 'admin' && (
-                                                                        <button
-                                                                            onClick={() => {
-                                                                                handleUpdateUserType(user._id, `${user.firstName} ${user.lastName}`, 'admin');
-                                                                                setActiveDropdown(null);
-                                                                            }}
-                                                                            className="flex items-center gap-3 w-full px-4 py-2 text-sm text-purple-600 hover:bg-purple-50 transition-colors"
-                                                                        >
-                                                                            <Shield size={16} />
-                                                                            <span>Make Admin</span>
-                                                                        </button>
-                                                                    )}
-                                                                    {user.userType !== 'seller' && (
-                                                                        <button
-                                                                            onClick={() => {
-                                                                                handleUpdateUserType(user._id, `${user.firstName} ${user.lastName}`, 'seller');
-                                                                                setActiveDropdown(null);
-                                                                            }}
-                                                                            className="flex items-center gap-3 w-full px-4 py-2 text-sm text-blue-600 hover:bg-blue-50 transition-colors"
-                                                                        >
-                                                                            <Gavel size={16} />
-                                                                            <span>Make Seller</span>
-                                                                        </button>
-                                                                    )}
-                                                                    {user.userType !== 'bidder' && (
-                                                                        <button
-                                                                            onClick={() => {
-                                                                                handleUpdateUserType(user._id, `${user.firstName} ${user.lastName}`, 'bidder');
-                                                                                setActiveDropdown(null);
-                                                                            }}
-                                                                            className="flex items-center gap-3 w-full px-4 py-2 text-sm text-green-600 hover:bg-green-50 transition-colors"
-                                                                        >
-                                                                            <User size={16} />
-                                                                            <span>Make Bidder</span>
-                                                                        </button>
-                                                                    )}
-
-                                                                    <div className="border-t border-gray-100 my-1"></div>
-
                                                                     <button
                                                                         onClick={() => {
                                                                             handleDeactivateUser(user._id, `${user.firstName} ${user.lastName}`, user.isActive);
                                                                             setActiveDropdown(null);
                                                                         }}
-                                                                        className="flex items-center gap-3 w-full px-4 py-2 text-sm text-amber-600 hover:bg-amber-50 transition-colors"
+                                                                        className={`flex items-center gap-3 w-full px-4 py-2 text-sm ${user.isActive ? 'text-amber-600 hover:bg-amber-50' : 'text-green-600 hover:bg-green-50'} transition-colors`}
                                                                     >
                                                                         <UserX size={16} />
                                                                         <span>{user.isActive ? 'Deactivate' : 'Activate'} User</span>
@@ -412,7 +385,7 @@ function AllUsers() {
                                                                     </button>
                                                                 </div>
                                                             )}
-                                                        </div> */}
+                                                        </div>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -516,13 +489,57 @@ function AllUsers() {
                                                         <div className="font-medium">{selectedUser.phone || 'Not provided'}</div>
                                                     </div>
                                                 </div>
-                                                <div className="flex items-center gap-3">
-                                                    <MapPin size={18} className="text-gray-400" />
-                                                    <div>
-                                                        <div className="text-sm text-gray-500">Location</div>
-                                                        <div className="font-medium">{selectedUser.countryName || 'Not specified'}</div>
+
+                                                {/* Add Address Information */}
+                                                {selectedUser.address && (
+                                                    <>
+                                                        {selectedUser.address.dealershipName && (
+                                                            <div className="flex items-center gap-3">
+                                                                <Building size={18} className="text-gray-400" />
+                                                                <div>
+                                                                    <div className="text-sm text-gray-500">Dealership</div>
+                                                                    <div className="font-medium">{selectedUser.address.dealershipName}</div>
+                                                                </div>
+                                                            </div>
+                                                        )}
+
+                                                        <div className="flex items-center gap-3">
+                                                            <Home size={18} className="text-gray-400" />
+                                                            <div>
+                                                                <div className="text-sm text-gray-500">Address</div>
+                                                                <div className="font-medium">
+                                                                    {selectedUser.address.buildingNameNo && `${selectedUser.address.buildingNameNo}, `}
+                                                                    {selectedUser.address.street}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="flex items-center gap-3">
+                                                            <MapPin size={18} className="text-gray-400" />
+                                                            <div>
+                                                                <div className="text-sm text-gray-500">Location</div>
+                                                                <div className="font-medium">
+                                                                    {selectedUser.address.city && `${selectedUser.address.city}, `}
+                                                                    {selectedUser.address.county && `${selectedUser.address.county}, `}
+                                                                    {selectedUser.address.postCode && `${selectedUser.address.postCode}, `}
+                                                                    {selectedUser.address.country || selectedUser.countryName || 'Not specified'}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </>
+                                                )}
+
+                                                {/* Keep existing Location as fallback if no address */}
+                                                {!selectedUser.address && (
+                                                    <div className="flex items-center gap-3">
+                                                        <MapPin size={18} className="text-gray-400" />
+                                                        <div>
+                                                            <div className="text-sm text-gray-500">Location</div>
+                                                            <div className="font-medium">{selectedUser.countryName || 'Not specified'}</div>
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                )}
+
                                                 <div className="flex items-center gap-3">
                                                     <Calendar size={18} className="text-gray-400" />
                                                     <div>
@@ -530,17 +547,28 @@ function AllUsers() {
                                                         <div className="font-medium">{formatDate(selectedUser.createdAt)}</div>
                                                     </div>
                                                 </div>
+
+                                                {/* Add Username if it exists */}
+                                                {selectedUser.username && (
+                                                    <div className="flex items-center gap-3">
+                                                        <User size={18} className="text-gray-400" />
+                                                        <div>
+                                                            <div className="text-sm text-gray-500">Username</div>
+                                                            <div className="font-medium">{selectedUser.username}</div>
+                                                        </div>
+                                                    </div>
+                                                )}
                                             </div>
                                         </div>
 
-                                        {/* User Statistics */}
+                                        {/* User Statistics - This part remains the same */}
                                         <div className="space-y-4">
                                             <h5 className="font-semibold text-gray-900">User Statistics</h5>
                                             <div className="space-y-3">
                                                 {selectedUser.userType === 'seller' && selectedUser.stats && (
                                                     <>
                                                         <div className="flex items-center gap-3">
-                                                            <DollarSign size={18} className="text-green-500" />
+                                                            <PoundSterling size={18} className="text-green-500" />
                                                             <div>
                                                                 <div className="text-sm text-gray-500">Total Sales</div>
                                                                 <div className="font-medium">{formatCurrency(selectedUser.stats.totalSales || 0)}</div>
@@ -553,13 +581,6 @@ function AllUsers() {
                                                                 <div className="font-medium">{selectedUser.stats.activeListings || 0}</div>
                                                             </div>
                                                         </div>
-                                                        {/* <div className="flex items-center gap-3">
-                                                            <Award size={18} className="text-amber-500" />
-                                                            <div>
-                                                                <div className="text-sm text-gray-500">Seller Rating</div>
-                                                                <div className="font-medium">{selectedUser.stats.rating || 'N/A'}/5.0</div>
-                                                            </div>
-                                                        </div> */}
                                                         <div className="flex items-center gap-3">
                                                             <TrendingUp size={18} className="text-green-500" />
                                                             <div>

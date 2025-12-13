@@ -51,6 +51,7 @@ import BuyNowModal from "./BuyNowModal";
 import PaymentStatusModal from "./PaymentStatusModal";
 import PaymentStatusDropdown from "./admin/PaymentStatusDropdown";
 import CategoryIconsSection from "./CategoryIconsSection";
+import AccountInactiveBanner from "./bidder/AccountInactiveBanner";
 
 export {
     Container,
@@ -106,4 +107,5 @@ export {
     PaymentStatusModal,
     PaymentStatusDropdown,
     CategoryIconsSection,
+    AccountInactiveBanner,
 }
