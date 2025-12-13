@@ -1,4 +1,4 @@
-import { CheckCircle, XCircle, DollarSign, Package, Clock, AlertCircle } from 'lucide-react';
+import { CheckCircle, XCircle, PoundSterling, Package, Clock, AlertCircle } from 'lucide-react';
 
 const BuyNowModal = ({ isOpen, onClose, onConfirm, auction, loading }) => {
     if (!isOpen) return null;
@@ -36,9 +36,9 @@ const BuyNowModal = ({ isOpen, onClose, onConfirm, auction, loading }) => {
                         <div className="text-center">
                             <p className="text-gray-600 mb-1">Buy Now Price</p>
                             <div className="flex items-center justify-center gap-2">
-                                <DollarSign className="h-6 w-6 text-green-600" />
+                                <PoundSterling className="h-6 w-6 text-green-600" />
                                 <p className="text-3xl font-bold text-green-600">
-                                    ${auction.buyNowPrice.toLocaleString()}
+                                    £{auction.buyNowPrice.toLocaleString()}
                                 </p>
                             </div>
                         </div>
@@ -58,7 +58,7 @@ const BuyNowModal = ({ isOpen, onClose, onConfirm, auction, loading }) => {
                             </li>
                             <li className="flex items-center gap-2">
                                 <CheckCircle className="h-4 w-4 text-green-500" />
-                                <span>Set final price to ${auction.buyNowPrice.toLocaleString()}</span>
+                                <span>Set final price to £{auction.buyNowPrice.toLocaleString()}</span>
                             </li>
                             <li className="flex items-center gap-2">
                                 <CheckCircle className="h-4 w-4 text-green-500" />

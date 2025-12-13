@@ -5,7 +5,7 @@ import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import {
     FileText,
-    DollarSign,
+    PoundSterling,
     Settings,
     CheckCircle,
     ArrowLeft,
@@ -930,7 +930,7 @@ const CreateAuction = () => {
                                 {step === 2 && (
                                     <div>
                                         <h2 className="text-xl font-semibold mb-6 flex items-center">
-                                            <DollarSign size={20} className="mr-2" />
+                                            <PoundSterling size={20} className="mr-2" />
                                             Pricing & Bidding
                                         </h2>
 

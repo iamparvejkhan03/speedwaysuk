@@ -199,7 +199,7 @@ function AuctionCard({ auction }) {
                 {/* Mileage */}
                 <div className="flex items-center gap-1 text-sm text-gray-600 mb-3">
                     <span className="flex items-center gap-1"><Gauge size={14} /> Mileage:</span>
-                    <span className="truncate">{auction?.specifications?.mileage}</span>
+                    <span className="truncate">{auction?.specifications?.miles || auction?.specifications?.mileage || ''}</span>
                 </div>
 
                 {/* Transmission */}

@@ -28,6 +28,14 @@ export const makeOffer = async (req, res) => {
     const { amount, message } = req.body;
     const buyer = req.user;
 
+    // Validate auction status
+    if (!buyer?.isActive) {
+      return res.status(400).json({
+        success: false,
+        message: `Account is inactive. Can't send an offer.`,
+      });
+    }
+
     // Find auction
     const auction = await Auction.findById(id)
       .populate("seller", "username firstName lastName email")
