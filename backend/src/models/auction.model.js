@@ -3,6 +3,61 @@ import mongoose from "mongoose";
 import agendaService from "../services/agendaService.js";
 
 // Create a separate schema for offers
+// const offerSchema = new Schema(
+//   {
+//     buyer: {
+//       type: Schema.Types.ObjectId,
+//       ref: "User",
+//       required: true,
+//     },
+//     buyerUsername: {
+//       type: String,
+//       required: true,
+//     },
+//     amount: {
+//       type: Number,
+//       required: true,
+//       min: 0,
+//     },
+//     message: {
+//       type: String,
+//       trim: true,
+//     },
+//     status: {
+//       type: String,
+//       enum: [
+//         "pending",
+//         "accepted",
+//         "rejected",
+//         "countered",
+//         "expired",
+//         "withdrawn",
+//       ],
+//       default: "pending",
+//     },
+//     sellerResponse: {
+//       type: String,
+//       trim: true,
+//     },
+//     counterOffer: {
+//       amount: Number,
+//       message: String,
+//     },
+//     expiresAt: {
+//       type: Date,
+//       default: function () {
+//         // Offers expire after 48 hours by default
+//         const expiryDate = new Date();
+//         expiryDate.setHours(expiryDate.getHours() + 48);
+//         return expiryDate;
+//       },
+//     },
+//   },
+//   {
+//     timestamps: true,
+//   }
+// );
+
 const offerSchema = new Schema(
   {
     buyer: {
@@ -19,6 +74,15 @@ const offerSchema = new Schema(
       required: true,
       min: 0,
     },
+    // NEW FIELDS FOR REACTIVATION
+    canBeReactivated: {
+      type: Boolean,
+      default: true,
+    },
+    reactivatedAt: {
+      type: Date,
+    },
+    // EXISTING FIELDS
     message: {
       type: String,
       trim: true,
@@ -655,6 +719,72 @@ auctionSchema.methods.withdrawOffer = async function (offerId, userId) {
   }
 
   offer.status = "withdrawn";
+  return this.save();
+};
+
+// NEW: Method to reactivate and accept a previously rejected offer
+auctionSchema.methods.reactivateAndAcceptOffer = async function (
+  offerId,
+  userId,
+  isAdmin = false
+) {
+  const offer = this.offers.id(offerId);
+
+  if (!offer) {
+    throw new Error("Offer not found");
+  }
+
+  // Only allow reactivation of rejected offers
+  if (offer.status !== "rejected") {
+    throw new Error("Only rejected offers can be reactivated");
+  }
+
+  // For non-admin users, verify it's the seller
+  if (!isAdmin && this.seller.toString() !== userId.toString()) {
+    throw new Error("Only the seller or admin can reactivate offers");
+  }
+
+  // Check if offer can be reactivated
+  if (!offer.canBeReactivated) {
+    throw new Error("This offer cannot be reactivated");
+  }
+
+  // Check if auction is still active
+  if (this.status !== "active") {
+    throw new Error("Cannot reactivate offer on inactive auction");
+  }
+
+  // Reactivate and accept the offer
+  const previousResponse = offer.sellerResponse || "";
+  offer.status = "accepted";
+  offer.sellerResponse = `${
+    previousResponse ? previousResponse + " | " : ""
+  }Reactivated and accepted by ${
+    isAdmin ? "admin" : "seller"
+  } on ${new Date().toLocaleDateString()}`;
+  offer.reactivatedAt = new Date();
+  // Optionally disable future reactivation if you want
+  // offer.canBeReactivated = false;
+
+  // Update auction details
+  this.currentPrice = offer.amount;
+  this.currentBidder = offer.buyer;
+  this.winner = offer.buyer;
+  this.finalPrice = offer.amount;
+  this.status = "sold";
+  this.endDate = new Date();
+
+  // Reject all other pending offers
+  this.offers.forEach((o) => {
+    if (o.status === "pending" && o._id.toString() !== offerId) {
+      o.status = "rejected";
+      o.sellerResponse = "Offer rejected - auction sold to another buyer";
+    }
+  });
+
+  // Cancel any scheduled jobs
+  await agendaService.cancelAuctionJobs(this._id);
+
   return this.save();
 };
 

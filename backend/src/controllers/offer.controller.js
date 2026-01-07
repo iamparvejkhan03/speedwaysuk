@@ -1170,9 +1170,7 @@ export const adminRespondToOffer = async (req, res) => {
         console.error("Failed to send offer accepted email:", error)
       );
 
-      sendAuctionEndedSellerEmail(
-        updatedAuction
-      ).catch((error) =>
+      sendAuctionEndedSellerEmail(updatedAuction).catch((error) =>
         console.error("Failed to send seller ended auction email:", error)
       );
 
@@ -1180,8 +1178,9 @@ export const adminRespondToOffer = async (req, res) => {
         console.error("Failed to send buyer won auction email:", error)
       );
 
-      auctionWonAdminEmail(admin?.email, updatedAuction, offer?.buyer?.email).catch((error) =>
-        console.error("Failed to send admin auction won email:", error)
+      auctionWonAdminEmail(admin?.email, updatedAuction, offer?.buyer).catch(
+        (error) =>
+          console.error("Failed to send admin auction won email:", error)
       );
     } else {
       offerRejectedEmail(
@@ -1537,6 +1536,112 @@ export const adminEndAuctionWithOffer = async (req, res) => {
     res.status(500).json({
       success: false,
       message: error.message || "Failed to end auction via offer",
+    });
+  }
+};
+
+// Add this function in offer.controller.js after the adminCancelOffer function:
+
+/**
+ * @desc    Reactivate and accept a rejected offer
+ * @route   POST /api/v1/offers/:offerId/reactivate
+ * @access  Private (Seller or Admin)
+ */
+export const reactivateOffer = async (req, res) => {
+  try {
+    const { offerId } = req.params;
+    const { auctionId, reason } = req.body;
+    const user = req.user;
+    const isAdmin = user.userType === 'admin';
+
+    // Find auction
+    const auction = await Auction.findById(auctionId)
+      .populate("offers.buyer", "username firstName lastName email phone")
+      .populate("seller", "username firstName lastName email phone");
+
+    if (!auction) {
+      return res.status(404).json({
+        success: false,
+        message: "Auction not found",
+      });
+    }
+
+    // Verify permissions
+    if (!isAdmin && auction.seller._id.toString() !== user._id.toString()) {
+      return res.status(403).json({
+        success: false,
+        message: "You are not authorized to reactivate offers for this auction",
+      });
+    }
+
+    // Use the reactivate method
+    await auction.reactivateAndAcceptOffer(offerId, user._id, isAdmin);
+
+    // Save auction
+    await auction.save();
+
+    // Populate updated auction
+    const updatedAuction = await Auction.findById(auctionId)
+      .populate("offers.buyer", "username firstName lastName email phone")
+      .populate("seller", "username firstName lastName email phone")
+      .populate("winner", "username firstName lastName email phone");
+
+    res.status(200).json({
+      success: true,
+      message: "Offer reactivated and accepted successfully",
+      data: {
+        auction: updatedAuction,
+        offer: updatedAuction.offers.id(offerId),
+        reactivatedBy: user.username,
+        reactivatedAt: new Date(),
+      },
+    });
+
+    // Send email notifications
+    const offer = updatedAuction.offers.id(offerId);
+    try {
+      // Notify buyer
+      offerAcceptedEmail(
+        offer.buyer.email,
+        offer.buyer.firstName || offer.buyer.username,
+        updatedAuction.seller,
+        updatedAuction,
+        offer.amount,
+        offerId
+      ).catch((error) =>
+        console.error("Failed to send offer accepted email:", error)
+      );
+
+      // Notify seller (if admin did it)
+      if (isAdmin) {
+        sendAuctionEndedSellerEmail(updatedAuction).catch((error) =>
+          console.error("Failed to send seller ended auction email:", error)
+        );
+      }
+
+      sendAuctionWonEmail(updatedAuction).catch((error) =>
+        console.error("Failed to send buyer won auction email:", error)
+      );
+
+      // Notify admin (if seller did it)
+      if (!isAdmin) {
+        // You might want to add a different email function for this
+        auctionWonAdminEmail(
+          process.env.ADMIN_EMAIL || "admin@example.com",
+          updatedAuction,
+          offer.buyer
+        ).catch((error) =>
+          console.error("Failed to send admin notification email:", error)
+        );
+      }
+    } catch (emailError) {
+      console.error("Failed to send reactivation emails:", emailError);
+    }
+  } catch (error) {
+    console.error("Reactivate offer error:", error);
+    res.status(400).json({
+      success: false,
+      message: error.message || "Failed to reactivate offer",
     });
   }
 };

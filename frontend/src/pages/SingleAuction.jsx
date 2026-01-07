@@ -353,7 +353,7 @@ function SingleAuction() {
                         }
 
                         {/* Offers Count */}
-                        {auction.offers && auction.offers.length > 0 && (
+                        {auction?.allowOffers && (
                             <p onClick={() => handleTabClick('offers')}
                                 className="flex items-center gap-2 border border-gray-200 py-1 px-3 rounded-full cursor-pointer hover:bg-gray-100">
                                 <PoundSterling size={18} />
@@ -563,7 +563,7 @@ function SingleAuction() {
                     )}
 
                     {/* Buy Now Price Display */}
-                    {auction.buyNowPrice && (
+                    {(auction.auctionType === 'buy_now' && auction.buyNowPrice) && (
                         <div className="bg-white border border-green-300 rounded-lg p-3 mb-2">
                             <div className="flex justify-between items-center">
                                 <div>
@@ -578,41 +578,47 @@ function SingleAuction() {
                     {/* Conditional Action Buttons based on auction status */}
                     {countdown.status === 'counting-down' ? (
                         <>
-                            {/* Bid Form */}
-                            <form ref={formRef} onSubmit={handleBid} className="flex flex-col gap-4">
-                                <input
-                                    type="number"
-                                    value={bidAmount}
-                                    onChange={(e) => setBidAmount(e.target.value)}
-                                    className="py-3 px-5 w-full rounded-lg focus:outline-2 focus:outline-primary"
-                                    placeholder={`Bid £${auction.bidCount > 0 ? minBidAmount : auction.startPrice} or higher`}
-                                    min={minBidAmount}
-                                />
-                                <button
-                                    type="button"
-                                    disabled={bidding}
-                                    onClick={() => handleOpenBidModal(bidAmount)}
-                                    className="flex items-center justify-center gap-2 w-full bg-primary text-white py-3 px-6 cursor-pointer rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-primary/90 transition-colors"
-                                >
-                                    {bidding ? (
-                                        <Loader size={16} className="animate-spin-slow" />
-                                    ) : (
-                                        <>
-                                            <Gavel />
-                                            <span>Place Bid</span>
-                                        </>
-                                    )}
-                                </button>
+                            {
+                                (auction.auctionType === 'standard' || auction.auctionType === 'reserve') && (
+                                    <>
+                                        {/* Bid Form */}
+                                        <form ref={formRef} onSubmit={handleBid} className="flex flex-col gap-4">
+                                            <input
+                                                type="number"
+                                                value={bidAmount}
+                                                onChange={(e) => setBidAmount(e.target.value)}
+                                                className="py-3 px-5 w-full rounded-lg focus:outline-2 focus:outline-primary"
+                                                placeholder={`Bid £${auction.bidCount > 0 ? minBidAmount : auction.startPrice} or higher`}
+                                                min={minBidAmount}
+                                            />
+                                            <button
+                                                type="button"
+                                                disabled={bidding}
+                                                onClick={() => handleOpenBidModal(bidAmount)}
+                                                className="flex items-center justify-center gap-2 w-full bg-primary text-white py-3 px-6 cursor-pointer rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-primary/90 transition-colors"
+                                            >
+                                                {bidding ? (
+                                                    <Loader size={16} className="animate-spin-slow" />
+                                                ) : (
+                                                    <>
+                                                        <Gavel />
+                                                        <span>Place Bid</span>
+                                                    </>
+                                                )}
+                                            </button>
 
-                                <BidConfirmationModal
-                                    isOpen={isBidModalOpen}
-                                    onClose={handleCloseBidModal}
-                                    onConfirm={handleConfirmBid}
-                                    bidAmount={bidAmount}
-                                    auction={auction}
-                                    ref={formRef}
-                                />
-                            </form>
+                                            <BidConfirmationModal
+                                                isOpen={isBidModalOpen}
+                                                onClose={handleCloseBidModal}
+                                                onConfirm={handleConfirmBid}
+                                                bidAmount={bidAmount}
+                                                auction={auction}
+                                                ref={formRef}
+                                            />
+                                        </form>
+                                    </>
+                                )
+                            }
 
                             {/* Buy Now Button */}
                             {isBuyNowAvailable && (

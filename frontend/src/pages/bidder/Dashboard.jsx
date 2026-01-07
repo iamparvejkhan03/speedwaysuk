@@ -36,20 +36,20 @@ function Dashboard() {
         //     icon: <Hand size={24} />,
         //     trend: "up"
         // },
-        // {
-        //     title: "Active Bids",
-        //     value: stats?.activeBids?.toLocaleString(),
-        //     change: "On Live Auctions",
-        //     icon: <Gavel size={24} />,
-        //     trend: "up"
-        // },
         {
-            title: "Total Offers",
-            value: stats?.totalOffers?.toLocaleString(),
+            title: "Active Bids",
+            value: stats?.activeBids?.toLocaleString(),
             change: "On Live Auctions",
-            icon: <Hand size={24} />,
+            icon: <Gavel size={24} />,
             trend: "up"
         },
+        // {
+        //     title: "Total Offers",
+        //     value: stats?.totalOffers?.toLocaleString(),
+        //     change: "On Live Auctions",
+        //     icon: <Hand size={24} />,
+        //     trend: "up"
+        // },
         {
             title: "Active Offers",
             value: stats?.activeOffers?.toLocaleString(),
@@ -123,7 +123,7 @@ function Dashboard() {
                     <AccountInactiveBanner />
                     <div className="max-w-full pt-16 pb-7 md:pt-0">
                         <h2 className="text-3xl md:text-4xl font-bold my-5">Bidder Dashboard</h2>
-                        <p className="text-secondary">Track your bidding activity and find new vehicle auctions.</p>
+                        {/* <p className="text-secondary">Track your bidding activity and find new vehicle auctions.</p> */}
                     </div>
 
                     {loading ? (

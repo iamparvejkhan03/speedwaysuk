@@ -228,7 +228,7 @@ function AllAuctions() {
                 <SellerContainer>
                     <div className="max-w-full pt-16 pb-7 md:pt-0">
                         <h2 className="text-3xl md:text-4xl font-bold my-5">All Auctions</h2>
-                        <p className="text-secondary">Monitor and manage your active auctions in real-time.</p>
+                        {/* <p className="text-secondary">Monitor and manage your active auctions in real-time.</p> */}
                     </div>
 
                     {/* Stats Overview */}

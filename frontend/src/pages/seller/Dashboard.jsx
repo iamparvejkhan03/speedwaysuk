@@ -94,7 +94,7 @@ function Dashboard() {
                 <SellerContainer>
                     <div className="max-w-full pt-16 pb-7 md:pt-0">
                         <h2 className="text-3xl md:text-4xl font-bold my-5">Seller Dashboard</h2>
-                        <p className="text-secondary">Easily track your auctions in one place.</p>
+                        {/* <p className="text-secondary">Easily track your auctions in one place.</p> */}
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

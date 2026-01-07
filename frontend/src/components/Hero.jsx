@@ -79,7 +79,7 @@ function Hero() {
         >
             {/* Gradient Overlay */}
             <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/50" />
-            
+
             {/* Decorative Elements */}
             <div className="absolute top-0 left-0 w-64 h-64 bg-[#edcd1f]/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
             <div className="absolute bottom-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl translate-x-1/3 translate-y-1/3" />
@@ -95,11 +95,11 @@ function Hero() {
                         </div>
 
                         {/* Main Heading */}
-                        <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight">
-                            Discover Your Dream 
+                        <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-5xl font-bold text-white leading-tight">
+                            Wholesale Vehicles for the Motor Trade
                             <span className="block">
                                 <span className="text-[#edcd1f] relative">
-                                    Car Auction
+                                    Remarketing & Auctions
                                     <span className="absolute -bottom-2 left-0 w-full h-1 bg-[#edcd1f]/50 rounded-full"></span>
                                 </span>
                             </span>
@@ -107,7 +107,8 @@ function Hero() {
 
                         {/* Description */}
                         <p className="text-lg md:text-xl text-white/90 leading-relaxed max-w-4xl mt-3">
-                            Make offers with confidence on certified luxury cars and exclusive automotive collectibles, supported by real-time updates for a seamless, transparent, and trustworthy auction experience.
+                            Connecting motor traders with nearly new vehicles at wholesale prices.
+                            Partnering with leasing, finance, fleet, and insurance companies to deliver reliable trade stock through a secure remarketing platform.
                         </p>
 
                         {/* Search Form */}

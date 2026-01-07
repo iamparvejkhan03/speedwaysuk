@@ -176,9 +176,9 @@ function WonAuctions() {
                                         Your Won Auctions
                                     </h2>
                                 </div>
-                                <p className="text-secondary text-lg">
+                                {/* <p className="text-secondary text-lg">
                                     Your winning bids and manage your acquisitions
-                                </p>
+                                </p> */}
                             </div>
                         </div>
                     </div>

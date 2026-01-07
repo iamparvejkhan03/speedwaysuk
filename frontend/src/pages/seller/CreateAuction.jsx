@@ -535,7 +535,7 @@ const CreateAuction = () => {
                     <SellerContainer>
                         <div className="pt-16 md:py-7">
                             <h1 className="text-3xl md:text-4xl font-bold mb-5">Create Car Auction</h1>
-                            <p className="text-secondary mb-8">List your vehicle for bidding on our platform</p>
+                            {/* <p className="text-secondary mb-8">List your vehicle for bidding on our platform</p> */}
 
                             {/* Progress Steps */}
                             <div className="mb-8">

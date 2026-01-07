@@ -172,14 +172,40 @@ function Dashboard() {
             currency: "£",
             description: `${adminStats?.totalSoldAuctions} Sold Auctions`
         },
-        // {
-        //     title: "Total Bids",
-        //     value: adminStats?.totalBids?.toLocaleString(),
-        //     change: "Record sale",
-        //     icon: <Hand size={24} />,
-        //     trend: "up",
-        //     description: `On ${adminStats?.totalAuctions} Auctions`
-        // },
+        {
+            title: "Total Bids",
+            value: adminStats?.totalBids?.toLocaleString(),
+            change: "Record sale",
+            icon: <Gavel size={24} />,
+            trend: "up",
+            description: `On ${adminStats?.totalAuctions} Auctions`
+        },
+        {
+            title: "Recent Bids",
+            value: adminStats?.recentBids?.toLocaleString(),
+            change: "Newly placed",
+            icon: <Gavel size={24} />,
+            trend: "up",
+            description: `Newly placed`
+        },
+        {
+            title: "Highest Bid Amount",
+            value: adminStats?.highestBidAmount?.toLocaleString(),
+            change: "Highest bid",
+            icon: <PoundSterling size={24} />,
+            trend: "up",
+            currency: "£",
+            description: `On ${adminStats?.totalAuctions} Auctions`
+        },
+        {
+            title: "Average Bid Amount",
+            value: adminStats?.averageBidAmount?.toFixed(0)?.toLocaleString(),
+            change: "Average bid",
+            icon: <PoundSterling size={24} />,
+            trend: "up",
+            currency: "£",
+            description: `On ${adminStats?.totalAuctions} Auctions`
+        },
         {
             title: "Pending Offers",
             value: adminStats?.pendingOffers?.toLocaleString(),
@@ -228,7 +254,7 @@ function Dashboard() {
                             <Crown size={32} className="text-[#1e2d3b]" />
                             <h2 className="text-3xl md:text-4xl font-bold">Admin Dashboard</h2>
                         </div>
-                        <p className="text-gray-600">Monitor platform performance and manage system operations</p>
+                        {/* <p className="text-gray-600">Monitor platform performance and manage system operations</p> */}
                     </div>
 
                     {loading ? (

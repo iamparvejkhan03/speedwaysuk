@@ -362,9 +362,9 @@ function Categories() {
                                 <h2 className="text-3xl md:text-4xl font-bold my-5 text-gray-800">
                                     Categories Management
                                 </h2>
-                                <p className="text-gray-600">
+                                {/* <p className="text-gray-600">
                                     Manage product categories and their specifications
-                                </p>
+                                </p> */}
                             </div>
                             <button
                                 onClick={() => setShowForm(true)}

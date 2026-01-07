@@ -272,7 +272,7 @@ function Home() {
     const [auctions, setAuctions] = useState([]);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
-    const [activeTab, setActiveTab] = useState('active'); // 'sold', 'active', 'approved'
+    const [activeTab, setActiveTab] = useState('approved'); // 'sold', 'active', 'approved'
 
     // Map tab values to API status values
     const tabStatusMap = {
@@ -323,7 +323,7 @@ function Home() {
     };
 
     useEffect(() => {
-        fetchAuctions('active'); // Load sold auctions by default
+        fetchAuctions('approved'); // Load sold auctions by default
     }, []);
 
     const handleLoadByStatus = () => {
@@ -473,7 +473,7 @@ function Home() {
                 <section className="">
                     <h2 className="text-3xl md:text-4xl font-bold text-primary">How It Works For Sellers</h2>
                     <p className="text-sm md:text-base text-gray-500 mt-3 mb-8">
-                        Easy process, smooth results — see how Speed Ways UK streamlines every stage of selling your car.
+                        Easy process, smooth results — see how SpeedWays Auto streamlines every stage of selling your car.
                     </p>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 xl:gap-8">
@@ -492,7 +492,7 @@ function Home() {
                 <section className="">
                     <h2 className="text-3xl md:text-4xl font-bold text-primary">How It Works</h2>
                     <p className="text-sm md:text-base text-gray-500 mt-3 mb-8">
-                        Effortless bidding, confident buying — experience how Speed Ways UK makes finding the right car simple and smooth.
+                        Effortless bidding, confident buying — experience how SpeedWays Auto makes finding the right car simple and smooth.
                     </p>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 xl:gap-8">
@@ -562,7 +562,7 @@ function Home() {
                         What Our Customers Say
                     </h2>
                     <p className="text-sm md:text-base text-gray-500 mt-3">
-                        Trusted by car buyers and sellers across the UK — discover why thousands rely on Speed Ways UK for every automotive deal.
+                        Trusted by car buyers and sellers across the UK — discover why thousands rely on SpeedWays Auto for every automotive deal.
                     </p>
                     <Marquee speed={50} gradient={false} pauseOnHover={true}>
                         <div className="flex flex-wrap justify-between items-stretch gap-5 mt-8 mx-5 text-left pb-1">

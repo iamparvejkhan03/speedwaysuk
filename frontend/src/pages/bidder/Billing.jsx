@@ -173,7 +173,7 @@ const Billing = () => {
                 <BidderContainer>
                     <div className="max-w-full pt-16 pb-7 md:pt-0">
                         <h2 className="text-3xl md:text-4xl font-bold my-5">Billing & Payment Methods</h2>
-                        <p className="text-secondary">Manage your payment methods and billing information.</p>
+                        {/* <p className="text-secondary">Manage your payment methods and billing information.</p> */}
                     </div>
 
                     {loading ? (

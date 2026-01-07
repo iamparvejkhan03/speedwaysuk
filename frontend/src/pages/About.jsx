@@ -274,7 +274,7 @@ function About() {
                 </div>
             </Container>
 
-            {/* Why choose Speed Ways UK */}
+            {/* Why choose SpeedWays Auto */}
             <div className="">
                 <Container>
                     <div className="max-w-full mx-auto mb-10 text-left">
@@ -427,7 +427,7 @@ function About() {
                 <section className="">
                     <h2 className="text-3xl md:text-4xl font-bold text-primary">How It Works</h2>
                     <p className="text-sm md:text-base text-gray-500 mt-3 mb-8">
-                        Effortless bidding, confident buying — experience how Speed Ways UK makes finding the right car simple and smooth.
+                        Effortless bidding, confident buying — experience how SpeedWays Auto makes finding the right car simple and smooth.
                     </p>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 xl:gap-8">
@@ -449,7 +449,7 @@ function About() {
                         What Our Customers Say
                     </h2>
                     <p className="text-sm md:text-base text-gray-500 mt-3">
-                        Trusted by car buyers and sellers across the UK — discover why thousands rely on Speed Ways UK for every automotive deal.
+                        Trusted by car buyers and sellers across the UK — discover why thousands rely on SpeedWays Auto for every automotive deal.
                     </p>
                     <Marquee speed={50} gradient={false} pauseOnHover={true}>
                         <div className="flex flex-wrap justify-between items-stretch gap-5 mt-8 mx-5 text-left">

@@ -28,7 +28,7 @@ const contactEmail = async (
 ) => {
   try {
     const info = await transporter.sendMail({
-      from: `"Speed Ways UK" <${process.env.EMAIL_USER}>`,
+      from: `"SpeedWays Auto" <${process.env.EMAIL_USER}>`,
       to: `${process.env.EMAIL_USER}`,
       subject: `New Contact Query - ${name}`,
       html: `
@@ -72,7 +72,7 @@ const contactEmail = async (
                                 <!-- Replace with your logo URL if available -->
                                 <img src="${
                                   process.env.FRONTEND_URL
-                                }/logo.png" alt="Speed Ways UK Logo" class="logo">
+                                }/logo.png" alt="SpeedWays Auto Logo" class="logo">
                             </div>
                             <div class="tagline">Premium Vehicle Auctions</div>
                         </div>
@@ -120,8 +120,8 @@ const contactEmail = async (
                         </div>
                         
                         <div class="footer">
-                            <p class="footer-text">This email was sent from the contact form on <span class="highlight">Speed Ways UK</span> website.</p>
-                            <p class="footer-text">© ${new Date().getFullYear()} Speed Ways UK. All rights reserved.</p>
+                            <p class="footer-text">This email was sent from the contact form on <span class="highlight">SpeedWays Auto</span> website.</p>
+                            <p class="footer-text">© ${new Date().getFullYear()} SpeedWays Auto. All rights reserved.</p>
                             <p class="footer-text">Premium Vehicle Auctions | United Kingdom</p>
                         </div>
                     </div>
@@ -139,9 +139,9 @@ const contactEmail = async (
 const contactConfirmationEmail = async (name, email) => {
   try {
     const info = await transporter.sendMail({
-      from: `"Speed Ways UK" <${process.env.EMAIL_USER}>`,
+      from: `"SpeedWays Auto" <${process.env.EMAIL_USER}>`,
       to: email,
-      subject: `Thank You for Contacting Speed Ways UK`,
+      subject: `Thank You for Contacting SpeedWays Auto`,
       html: `
                 <!DOCTYPE html>
                 <html>
@@ -177,7 +177,7 @@ const contactConfirmationEmail = async (name, email) => {
                             <div class="logo-container">
                                 <img src="${
                                   process.env.FRONTEND_URL
-                                }/logo.png" alt="Speed Ways UK Logo" class="logo">
+                                }/logo.png" alt="SpeedWays Auto Logo" class="logo">
                             </div>
                             <div class="tagline">Premium Vehicle Auctions</div>
                         </div>
@@ -189,7 +189,7 @@ const contactConfirmationEmail = async (name, email) => {
                                 <p class="greeting">Dear <span class="highlight">${name}</span>,</p>
                                 
                                 <p class="message-text">
-                                    Thank you for reaching out to <span class="highlight">Speed Ways UK</span>. We have successfully received your inquiry and appreciate you taking the time to contact us.
+                                    Thank you for reaching out to <span class="highlight">SpeedWays Auto</span>. We have successfully received your inquiry and appreciate you taking the time to contact us.
                                 </p>
                                 
                                 <p class="message-text">
@@ -218,14 +218,14 @@ const contactConfirmationEmail = async (name, email) => {
                             
                             <div class="signature">
                                 <p>Best regards,</p>
-                                <p><strong>The Speed Ways UK Team</strong></p>
+                                <p><strong>The SpeedWays Auto Team</strong></p>
                                 <p>Premium Vehicle Auctions | United Kingdom</p>
                             </div>
                         </div>
                         
                         <div class="footer">
                             <p class="footer-text">This is an automated confirmation email. Please do not reply to this message.</p>
-                            <p class="footer-text">© ${new Date().getFullYear()} Speed Ways UK. All rights reserved.</p>
+                            <p class="footer-text">© ${new Date().getFullYear()} SpeedWays Auto. All rights reserved.</p>
                             <p class="footer-text">Your dream car is just a bid away!</p>
                         </div>
                     </div>
@@ -252,7 +252,7 @@ const bidConfirmationEmail = async (
 ) => {
   try {
     const info = await transporter.sendMail({
-      from: `"Speed Ways UK" <${process.env.EMAIL_USER}>`,
+      from: `"SpeedWays Auto" <${process.env.EMAIL_USER}>`,
       to: userEmail,
       subject: `Bid Confirmation - ${itemName}`,
       html: `
@@ -325,7 +325,7 @@ const bidConfirmationEmail = async (
                             <div class="logo-container">
                                 <img src="${
                                   process.env.FRONTEND_URL
-                                }/logo.png" alt="Speed Ways UK Logo" class="logo">
+                                }/logo.png" alt="SpeedWays Auto Logo" class="logo">
                             </div>
                             <div class="tagline">Premium Vehicle Auctions</div>
                         </div>
@@ -338,10 +338,6 @@ const bidConfirmationEmail = async (
                                 
                                 <div class="bid-amount">
                                     Bid Amount: <span>£${amount?.toLocaleString()}</span>
-                                </div>
-                                
-                                <div class="auction-id">
-                                    Auction ID: ${auctionId || "N/A"}
                                 </div>
                                 
                                 <div class="status-indicator ${
@@ -434,7 +430,7 @@ const bidConfirmationEmail = async (
                             </div>
                             
                             <p>Dear <span class="highlight">${userName}</span>,</p>
-                            <p>Thank you for placing your bid on <strong>${itemName}</strong> on Speed Ways UK.</p>
+                            <p>Thank you for placing your bid on <strong>${itemName}</strong> on SpeedWays Auto.</p>
                             <p>We'll notify you immediately if you are outbid or when the auction ends.</p>
                             
                             <div style="text-align: center; margin: 25px 0;">
@@ -445,12 +441,12 @@ const bidConfirmationEmail = async (
                                 </a>
                             </div>
                             
-                            <p><strong>Important:</strong> Remember that auctions on Speed Ways UK use automatic extension. If a bid is placed in the last 2 minutes, the auction extends by 2 minutes to ensure fair bidding.</p>
+                            <p><strong>Important:</strong> Remember that auctions on SpeedWays Auto use automatic extension. If a bid is placed in the last 2 minutes, the auction extends by 2 minutes to ensure fair bidding.</p>
                         </div>
                         
                         <div class="footer">
-                            <p class="footer-text">This is an automated confirmation from Speed Ways UK.</p>
-                            <p class="footer-text">© ${new Date().getFullYear()} Speed Ways UK. All rights reserved.</p>
+                            <p class="footer-text">This is an automated confirmation from SpeedWays Auto.</p>
+                            <p class="footer-text">© ${new Date().getFullYear()} SpeedWays Auto. All rights reserved.</p>
                             <p class="footer-text">Happy Bidding! Your dream vehicle awaits.</p>
                         </div>
                     </div>
@@ -477,7 +473,7 @@ const offerConfirmationEmail = async (
 ) => {
   try {
     const info = await transporter.sendMail({
-      from: `"Speed Ways UK" <${process.env.EMAIL_USER}>`,
+      from: `"SpeedWays Auto" <${process.env.EMAIL_USER}>`,
       to: userEmail,
       subject: `Offer Submitted - ${carName}`,
       html: `
@@ -514,7 +510,7 @@ const offerConfirmationEmail = async (
                             <div class="logo-container">
                                 <img src="${
                                   process.env.FRONTEND_URL
-                                }/logo.png" alt="Speed Ways UK Logo" class="logo">
+                                }/logo.png" alt="SpeedWays Auto Logo" class="logo">
                             </div>
                             <div class="tagline">Premium Vehicle Auctions</div>
                         </div>
@@ -539,13 +535,13 @@ const offerConfirmationEmail = async (
                                         <span class="detail-value">£${offerAmount?.toLocaleString()}</span>
                                     </div>
                                     <div class="detail-row">
-                                        <span class="detail-label">Buy Now Price:</span>
+                                        <span class="detail-label">Listing Price:</span>
                                         <span class="detail-value">£${listingPrice?.toLocaleString()}</span>
                                     </div>
                                     <div class="detail-row">
                                         <span class="detail-label">Offer Difference:</span>
                                         <span class="detail-value">£${(
-                                          listingPrice - offerAmount
+                                          offerAmount - listingPrice
                                         ).toLocaleString()}</span>
                                     </div>
                                 </div>
@@ -559,13 +555,13 @@ const offerConfirmationEmail = async (
                             </div>
                             
                             <p>Dear <span class="highlight">${userName}</span>,</p>
-                            <p>Thank you for submitting your offer for the <strong>${carYear} ${carName}</strong> on Speed Ways UK.</p>
+                            <p>Thank you for submitting your offer for the <strong>${carYear} ${carName}</strong> on SpeedWays Auto.</p>
                             <p>We have notified the seller of your offer and they have 48 hours to accept or decline your offer.</p>
                         </div>
                         
                         <div class="footer">
-                            <p class="footer-text">This is an automated confirmation from Speed Ways UK.</p>
-                            <p class="footer-text">© ${new Date().getFullYear()} Speed Ways UK. All rights reserved.</p>
+                            <p class="footer-text">This is an automated confirmation from SpeedWays Auto.</p>
+                            <p class="footer-text">© ${new Date().getFullYear()} SpeedWays Auto. All rights reserved.</p>
                             <p class="footer-text">Your dream car is just an offer away!</p>
                         </div>
                     </div>
@@ -592,7 +588,7 @@ const outbidNotificationEmail = async (
 ) => {
   try {
     const info = await transporter.sendMail({
-      from: `"Speed Ways UK" <${process.env.EMAIL_USER}>`,
+      from: `"SpeedWays Auto" <${process.env.EMAIL_USER}>`,
       to: userEmail,
       subject: `🚨 You've Been Outbid - ${itemName}`,
       html: `
@@ -662,7 +658,7 @@ const outbidNotificationEmail = async (
                     <div class="container">
                         <div class="header">
                             <div class="logo-container">
-                                <img src="${process.env.FRONTEND_URL}/logo.png" alt="Speed Ways UK Logo" class="logo">
+                                <img src="${process.env.FRONTEND_URL}/logo.png" alt="SpeedWays Auto Logo" class="logo">
                             </div>
                             <div class="tagline">Premium Vehicle Auctions</div>
                         </div>
@@ -741,7 +737,7 @@ const outbidNotificationEmail = async (
                             
                             <div class="tip-box">
                                 <div class="tip-title">💡 Quick Tip:</div>
-                                <p>For a better chance to win, consider placing a bid that's significantly higher than the current bid. Remember, auctions on Speed Ways UK use automatic extension - if a bid is placed in the last 2 minutes, the auction extends by 2 minutes.</p>
+                                <p>For a better chance to win, consider placing a bid that's significantly higher than the current bid. Remember, auctions on SpeedWays Auto use automatic extension - if a bid is placed in the last 2 minutes, the auction extends by 2 minutes.</p>
                             </div>
                             
                             <p>Dear <span class="highlight">${userName}</span>,</p>
@@ -751,8 +747,8 @@ const outbidNotificationEmail = async (
                         
                         <div class="footer">
                             <p class="footer-text">You're receiving this email because you placed a bid on ${itemName}.</p>
-                            <p class="footer-text">This is an automated notification from Speed Ways UK.</p>
-                            <p class="footer-text">© ${new Date().getFullYear()} Speed Ways UK. All rights reserved.</p>
+                            <p class="footer-text">This is an automated notification from SpeedWays Auto.</p>
+                            <p class="footer-text">© ${new Date().getFullYear()} SpeedWays Auto. All rights reserved.</p>
                             <p class="footer-text">Need help? Contact support at ${process.env.EMAIL_USER || 'info@speedwaysuk.com'}</p>
                         </div>
                     </div>
@@ -779,7 +775,7 @@ const offerOutbidEmail = async (
 ) => {
   try {
     const info = await transporter.sendMail({
-      from: `"Speed Ways UK" <${process.env.EMAIL_USER}>`,
+      from: `"SpeedWays Auto" <${process.env.EMAIL_USER}>`,
       to: userEmail,
       subject: `🚨 Higher Offer Received - ${carYear} ${carName}`,
       html: `
@@ -820,7 +816,7 @@ const offerOutbidEmail = async (
                             <div class="logo-container">
                                 <img src="${
                                   process.env.FRONTEND_URL
-                                }/logo.png" alt="Speed Ways UK Logo" class="logo">
+                                }/logo.png" alt="SpeedWays Auto Logo" class="logo">
                             </div>
                             <div class="tagline">Premium Vehicle Auctions</div>
                         </div>
@@ -871,7 +867,7 @@ const offerOutbidEmail = async (
                         
                         <div class="footer">
                             <p class="footer-text">You're receiving this email because you submitted an offer on this vehicle.</p>
-                            <p class="footer-text">© ${new Date().getFullYear()} Speed Ways UK. All rights reserved.</p>
+                            <p class="footer-text">© ${new Date().getFullYear()} SpeedWays Auto. All rights reserved.</p>
                             <p class="footer-text">Don't miss out on your dream car – act now!</p>
                         </div>
                     </div>
@@ -1187,7 +1183,7 @@ const sendAuctionWonEmail = async (auction) => {
                     <div class="container">
                         <!-- Company Header -->
                         <div class="header">
-                            <div class="company-name">Speed Ways UK</div>
+                            <div class="company-name">SpeedWays Auto</div>
                             <div class="company-address">
                                 Wilmslow Road, Heald Green, Cheadle, SK8 3PW
                             </div>
@@ -1361,7 +1357,7 @@ const sendAuctionWonEmail = async (auction) => {
                             <p>Please transfer the full amount to the following account:</p>
                             <div class="bank-details">
                                 <div class="detail-row">
-                                    <span class="detail-label">Account name:</span> SPEED WAYS UK LIMITED
+                                    <span class="detail-label">Account name:</span> SPEEDWAYS Auto LIMITED
                                 </div>
                                 <div class="detail-row">
                                     <span class="detail-label">Bank:</span> NatWest
@@ -1401,10 +1397,10 @@ const sendAuctionWonEmail = async (auction) => {
                         <!-- Footer -->
                         <div class="footer">
                             <div class="footer-company">
-                                Speed Ways UK
+                                SpeedWays Auto
                             </div>
                             <div class="footer-contact">
-                                ©Speed Ways UK ${new Date().getFullYear()} | Need assistance? Contact support at info@speedwaysuk.com
+                                ©SpeedWays Auto ${new Date().getFullYear()} | Need assistance? Contact support at info@speedwaysuk.com
                             </div>
                         </div>
                     </div>
@@ -1448,7 +1444,7 @@ const sendAuctionEndedSellerEmail = async (car) => {
         : "Listing ended without sale";
 
     const info = await transporter.sendMail({
-      from: `"Speed Ways UK" <${process.env.EMAIL_USER}>`,
+      from: `"SpeedWays Auto" <${process.env.EMAIL_USER}>`,
       to: car?.seller?.email,
       subject: `Your Car Listing Has Ended - ${specs?.year} ${car?.title}`,
       html: `
@@ -1514,7 +1510,7 @@ const sendAuctionEndedSellerEmail = async (car) => {
                             <div class="logo-container">
                                 <img src="${
                                   process.env.FRONTEND_URL
-                                }/logo.png" alt="Speed Ways UK Logo" class="logo">
+                                }/logo.png" alt="SpeedWays Auto Logo" class="logo">
                             </div>
                             <div class="tagline">Premium Vehicle Auctions</div>
                         </div>
@@ -1629,13 +1625,13 @@ const sendAuctionEndedSellerEmail = async (car) => {
                             }</span>,</p>
                             <p>Your listing for the <strong>${specs?.year} ${
         car?.title
-      }</strong> on Speed Ways UK has ended.</p>
+      }</strong> on SpeedWays Auto has ended.</p>
                             <p>For any questions about the sale process or assistance, please contact our support team.</p>
                         </div>
                         
                         <div class="footer">
-                            <p class="footer-text">This is an automated notification from Speed Ways UK.</p>
-                            <p class="footer-text">© ${new Date().getFullYear()} Speed Ways UK. All rights reserved.</p>
+                            <p class="footer-text">This is an automated notification from SpeedWays Auto.</p>
+                            <p class="footer-text">© ${new Date().getFullYear()} SpeedWays Auto. All rights reserved.</p>
                             <p class="footer-text">Need help? Contact support at ${
                               process.env.EMAIL_USER || "info@speedwaysuk.com"
                             }</p>
@@ -1662,9 +1658,9 @@ const auctionListedEmail = async (car, seller) => {
       : {};
 
     const info = await transporter.sendMail({
-      from: `"Speed Ways UK" <${process.env.EMAIL_USER}>`,
+      from: `"SpeedWays Auto" <${process.env.EMAIL_USER}>`,
       to: seller.email,
-      subject: `✅ Your Listing is Live on Speed Ways UK: ${specs?.year} ${car?.title}`,
+      subject: `✅ Your Listing is Live on SpeedWays Auto: ${specs?.year} ${car?.title}`,
       html: `
                 <!DOCTYPE html>
                 <html>
@@ -1740,7 +1736,7 @@ const auctionListedEmail = async (car, seller) => {
                             <div class="logo-container">
                                 <img src="${
                                   process.env.FRONTEND_URL
-                                }/logo.png" alt="Speed Ways UK Logo" class="logo">
+                                }/logo.png" alt="SpeedWays Auto Logo" class="logo">
                             </div>
                             <div class="tagline">Premium Vehicle Auctions</div>
                         </div>
@@ -1748,13 +1744,13 @@ const auctionListedEmail = async (car, seller) => {
                         <div class="content">
                             <div class="confirmation-box">
                                 <div class="confirmation-title">🚗 YOUR CAR IS NOW LIVE!</div>
-                                <p style="font-size: 18px; color: #155724;">Your vehicle is now available for offers on Speed Ways UK</p>
+                                <p style="font-size: 18px; color: #155724;">Your vehicle is now available for offers on SpeedWays Auto</p>
                             </div>
                             
                             <p>Dear <span class="highlight">${
                               seller?.firstName || seller?.username
                             }</span>,</p>
-                            <p>Great news! Your car listing is now active and visible to thousands of potential buyers on Speed Ways UK.</p>
+                            <p>Great news! Your car listing is now active and visible to thousands of potential buyers on SpeedWays Auto.</p>
                             
                             <div class="car-details">
                                 <div class="car-title">${specs?.year} ${
@@ -1859,8 +1855,8 @@ const auctionListedEmail = async (car, seller) => {
                         </div>
                         
                         <div class="footer">
-                            <p class="footer-text">This is an automated confirmation from Speed Ways UK.</p>
-                            <p class="footer-text">© ${new Date().getFullYear()} Speed Ways UK. All rights reserved.</p>
+                            <p class="footer-text">This is an automated confirmation from SpeedWays Auto.</p>
+                            <p class="footer-text">© ${new Date().getFullYear()} SpeedWays Auto. All rights reserved.</p>
                             <p class="footer-text">Need assistance? Contact our seller support team.</p>
                         </div>
                     </div>
@@ -1889,7 +1885,7 @@ const auctionEndingSoonEmail = async (
       : {};
 
     const info = await transporter.sendMail({
-      from: `"Speed Ways UK" <${process.env.EMAIL_USER}>`,
+      from: `"SpeedWays Auto" <${process.env.EMAIL_USER}>`,
       to: userEmail,
       subject: `⏰ Listing Expires Soon: ${specs?.year} ${car?.title}`,
       html: `
@@ -1970,7 +1966,7 @@ const auctionEndingSoonEmail = async (
                             <div class="logo-container">
                                 <img src="${
                                   process.env.FRONTEND_URL
-                                }/logo.png" alt="Speed Ways UK Logo" class="logo">
+                                }/logo.png" alt="SpeedWays Auto Logo" class="logo">
                             </div>
                             <div class="tagline">Premium Vehicle Auctions</div>
                         </div>
@@ -2014,12 +2010,6 @@ const auctionEndingSoonEmail = async (
                                         <div class="detail-label">Views</div>
                                         <div class="detail-value">${
                                           car?.views || 0
-                                        }</div>
-                                    </div>
-                                    <div class="detail-item">
-                                        <div class="detail-label">Condition</div>
-                                        <div class="detail-value">${
-                                          specs?.condition
                                         }</div>
                                     </div>
                                 </div>
@@ -2082,7 +2072,7 @@ const auctionEndingSoonEmail = async (
                         
                         <div class="footer">
                             <p class="footer-text">You're receiving this email because you showed interest in this vehicle.</p>
-                            <p class="footer-text">© ${new Date().getFullYear()} Speed Ways UK. All rights reserved.</p>
+                            <p class="footer-text">© ${new Date().getFullYear()} SpeedWays Auto. All rights reserved.</p>
                             <p class="footer-text">Don't miss out on your dream car - act before time runs out!</p>
                         </div>
                     </div>
@@ -2198,7 +2188,7 @@ const paymentCompletedEmail = async (user, car, paymentAmount) => {
       : {};
 
     const info = await transporter.sendMail({
-      from: `"Speed Ways UK" <${process.env.EMAIL_USER}>`,
+      from: `"SpeedWays Auto" <${process.env.EMAIL_USER}>`,
       to: user?.email,
       subject: `✅ Payment Completed - ${specs?.year} ${car?.title}`,
       html: `
@@ -2276,7 +2266,7 @@ const paymentCompletedEmail = async (user, car, paymentAmount) => {
                             <div class="logo-container">
                                 <img src="${
                                   process.env.FRONTEND_URL
-                                }/logo.png" alt="Speed Ways UK Logo" class="logo">
+                                }/logo.png" alt="SpeedWays Auto Logo" class="logo">
                             </div>
                             <div class="tagline">Premium Vehicle Auctions</div>
                         </div>
@@ -2382,7 +2372,7 @@ const paymentCompletedEmail = async (user, car, paymentAmount) => {
                         
                         <div class="footer">
                             <p class="footer-text">This payment confirmation was sent after the seller marked your payment as completed.</p>
-                            <p class="footer-text">© ${new Date().getFullYear()} Speed Ways UK. All rights reserved.</p>
+                            <p class="footer-text">© ${new Date().getFullYear()} SpeedWays Auto. All rights reserved.</p>
                             <p class="footer-text">Need assistance? Contact support at ${
                               process.env.EMAIL_USER || "indo@speedwaysuk.com"
                             }</p>
@@ -2404,9 +2394,9 @@ const paymentCompletedEmail = async (user, car, paymentAmount) => {
 const welcomeEmail = async (user) => {
   try {
     const info = await transporter.sendMail({
-      from: `"Speed Ways UK" <${process.env.EMAIL_USER}>`,
+      from: `"SpeedWays Auto" <${process.env.EMAIL_USER}>`,
       to: user.email,
-      subject: `🚗 Welcome to Speed Ways UK!`,
+      subject: `🚗 Welcome to SpeedWays Auto!`,
       html: `
                 <!DOCTYPE html>
                 <html>
@@ -2473,14 +2463,14 @@ const welcomeEmail = async (user) => {
                             <div class="logo-container">
                                 <img src="${
                                   process.env.FRONTEND_URL
-                                }/logo.png" alt="Speed Ways UK Logo" class="logo">
+                                }/logo.png" alt="SpeedWays Auto Logo" class="logo">
                             </div>
                             <div class="tagline">Premium Vehicle Auctions</div>
                         </div>
                         
                         <div class="content">
                             <div class="welcome-box">
-                                <div class="welcome-title">🚗 WELCOME TO SPEED WAYS UK!</div>
+                                <div class="welcome-title">🚗 WELCOME TO SPEEDWAYS Auto!</div>
                                 <p style="font-size: 18px; color: #1e2d3b;">Your premier destination for premium vehicle auctions</p>
                             </div>
                             
@@ -2490,7 +2480,7 @@ const welcomeEmail = async (user) => {
                                 }</span>!
                             </div>
                             
-                            <p>We're thrilled to welcome you to Speed Ways UK, where you'll find exceptional vehicles and unbeatable deals. Your account has been successfully created.</p>
+                            <p>We're thrilled to welcome you to SpeedWays Auto, where you'll find exceptional vehicles and unbeatable deals. Your account has been successfully created.</p>
                             
                             <div class="features-box">
                                 <div class="features-title">🎯 GET STARTED TODAY</div>
@@ -2528,7 +2518,7 @@ const welcomeEmail = async (user) => {
                             
                             <div class="cta-box">
                                 <div class="cta-title">🚀 READY TO EXPLORE?</div>
-                                <p>Start browsing our premium selection of vehicles or complete your profile to get the most out of your Speed Ways UK experience.</p>
+                                <p>Start browsing our premium selection of vehicles or complete your profile to get the most out of your SpeedWays Auto experience.</p>
                                 <p style="margin: 15px 0;">
                                     <a href="${process.env.FRONTEND_URL}/${
         user?.userType
@@ -2545,8 +2535,8 @@ const welcomeEmail = async (user) => {
                         </div>
                         
                         <div class="footer">
-                            <p class="footer-text">Welcome to the Speed Ways UK community - where your dream car awaits!</p>
-                            <p class="footer-text">© ${new Date().getFullYear()} Speed Ways UK. All rights reserved.</p>
+                            <p class="footer-text">Welcome to the SpeedWays Auto community - where your dream car awaits!</p>
+                            <p class="footer-text">© ${new Date().getFullYear()} SpeedWays Auto. All rights reserved.</p>
                             <p class="footer-text">Questions? Contact us at ${
                               process.env.EMAIL_USER || "info@speedwaysuk.com"
                             }</p>
@@ -2623,9 +2613,9 @@ const welcomeEmail = async (user) => {
 const resetPasswordEmail = async (email, url) => {
   try {
     const info = await transporter.sendMail({
-      from: `"Speed Ways UK" <${process.env.EMAIL_USER}>`,
+      from: `"SpeedWays Auto" <${process.env.EMAIL_USER}>`,
       to: email,
-      subject: `🔒 Reset Your Speed Ways UK Password`,
+      subject: `🔒 Reset Your SpeedWays Auto Password`,
       html: `
                 <!DOCTYPE html>
                 <html>
@@ -2689,7 +2679,7 @@ const resetPasswordEmail = async (email, url) => {
                             <div class="logo-container">
                                 <img src="${
                                   process.env.FRONTEND_URL
-                                }/logo.png" alt="Speed Ways UK Logo" class="logo">
+                                }/logo.png" alt="SpeedWays Auto Logo" class="logo">
                             </div>
                             <div class="tagline">Premium Vehicle Auctions</div>
                         </div>
@@ -2697,7 +2687,7 @@ const resetPasswordEmail = async (email, url) => {
                         <div class="content">
                             <div class="security-box">
                                 <div class="security-title">🔒 PASSWORD RESET REQUEST</div>
-                                <p style="font-size: 18px; color: #1e2d3b;">We received a request to reset your Speed Ways UK password</p>
+                                <p style="font-size: 18px; color: #1e2d3b;">We received a request to reset your SpeedWays Auto password</p>
                             </div>
                             
                             <div class="instruction-box">
@@ -2731,12 +2721,12 @@ const resetPasswordEmail = async (email, url) => {
                                 <p>• Don't reuse passwords from other websites</p>
                             </div>
                             
-                            <p>After resetting your password, you can log in to your Speed Ways UK account and continue browsing our premium vehicle selection.</p>
+                            <p>After resetting your password, you can log in to your SpeedWays Auto account and continue browsing our premium vehicle selection.</p>
                         </div>
                         
                         <div class="footer">
-                            <p class="footer-text">This is an automated security email from Speed Ways UK.</p>
-                            <p class="footer-text">© ${new Date().getFullYear()} Speed Ways UK. All rights reserved.</p>
+                            <p class="footer-text">This is an automated security email from SpeedWays Auto.</p>
+                            <p class="footer-text">© ${new Date().getFullYear()} SpeedWays Auto. All rights reserved.</p>
                             <p class="footer-text">If you need further assistance, contact our support team.</p>
                         </div>
                     </div>
@@ -2754,7 +2744,7 @@ const resetPasswordEmail = async (email, url) => {
 const newUserRegistrationEmail = async (adminEmail, user) => {
   try {
     const info = await transporter.sendMail({
-      from: `"Speed Ways UK" <${process.env.EMAIL_USER}>`,
+      from: `"SpeedWays Auto" <${process.env.EMAIL_USER}>`,
       to: adminEmail,
       subject: `👤 New User Registration - ${user.userType || "Bidder"}`,
       html: `
@@ -2831,7 +2821,7 @@ const newUserRegistrationEmail = async (adminEmail, user) => {
                             <div class="logo-container">
                                 <img src="${
                                   process.env.FRONTEND_URL
-                                }/logo.png" alt="Speed Ways UK Logo" class="logo">
+                                }/logo.png" alt="SpeedWays Auto Logo" class="logo">
                             </div>
                             <div class="tagline">Premium Vehicle Auctions</div>
                         </div>
@@ -2839,11 +2829,11 @@ const newUserRegistrationEmail = async (adminEmail, user) => {
                         <div class="content">
                             <div class="notification-box">
                                 <div class="notification-title">👤 NEW USER REGISTRATION</div>
-                                <p style="font-size: 18px; color: #1e2d3b;">A new user has joined Speed Ways UK</p>
+                                <p style="font-size: 18px; color: #1e2d3b;">A new user has joined SpeedWays Auto</p>
                             </div>
                             
                             <p><strong>Hello Admin,</strong></p>
-                            <p>A new user has successfully registered on Speed Ways UK. Here are the user details:</p>
+                            <p>A new user has successfully registered on SpeedWays Auto. Here are the user details:</p>
                             
                             <div class="user-card">
                                 <div class="user-title">USER INFORMATION</div>
@@ -2910,8 +2900,8 @@ const newUserRegistrationEmail = async (adminEmail, user) => {
                         </div>
                         
                         <div class="footer">
-                            <p class="footer-text">This is an automated notification from Speed Ways UK Admin System.</p>
-                            <p class="footer-text">© ${new Date().getFullYear()} Speed Ways UK. All rights reserved.</p>
+                            <p class="footer-text">This is an automated notification from SpeedWays Auto Admin System.</p>
+                            <p class="footer-text">© ${new Date().getFullYear()} SpeedWays Auto. All rights reserved.</p>
                             <p class="footer-text">You're receiving this email because you're an administrator.</p>
                         </div>
                     </div>
@@ -2937,7 +2927,7 @@ const auctionWonAdminEmail = async (adminEmail, car, buyer) => {
       : {};
 
     const info = await transporter.sendMail({
-      from: `"Speed Ways UK" <${process.env.EMAIL_USER}>`,
+      from: `"SpeedWays Auto" <${process.env.EMAIL_USER}>`,
       to: adminEmail,
       subject: `🏆 Vehicle Sold - ${specs?.year} ${car?.title}`,
       html: `
@@ -3016,7 +3006,7 @@ const auctionWonAdminEmail = async (adminEmail, car, buyer) => {
                             <div class="logo-container">
                                 <img src="${
                                   process.env.FRONTEND_URL
-                                }/logo.png" alt="Speed Ways UK Logo" class="logo">
+                                }/logo.png" alt="SpeedWays Auto Logo" class="logo">
                             </div>
                             <div class="tagline">Premium Vehicle Auctions</div>
                         </div>
@@ -3024,7 +3014,7 @@ const auctionWonAdminEmail = async (adminEmail, car, buyer) => {
                         <div class="content">
                             <div class="success-box">
                                 <div class="success-title">🏆 VEHICLE SOLD!</div>
-                                <p style="font-size: 18px; color: #155724;">A vehicle has been successfully sold on Speed Ways UK</p>
+                                <p style="font-size: 18px; color: #155724;">A vehicle has been successfully sold on SpeedWays Auto</p>
                             </div>
                             
                             <p><strong>Hello Admin,</strong></p>
@@ -3051,49 +3041,49 @@ const auctionWonAdminEmail = async (adminEmail, car, buyer) => {
                                             <span class="sale-type-badge">${car?.auctionType?.toUpperCase()}</span>
                                         </div>
                                     </div>
-                                    <div class="spec-item">
-                                        <div class="spec-label">Registration</div>
-                                        <div class="spec-value">${
+                                    <div class="detail-item">
+                                        <div class="detail-label">Registration</div>
+                                        <div class="detail-value">${
                                           specs?.registration || 'N/A'
                                         }</div>
                                     </div>
-                                    <div class="spec-item">
-                                        <div class="spec-label">Miles</div>
-                                        <div class="spec-value">${
+                                    <div class="detail-item">
+                                        <div class="detail-label">Miles</div>
+                                        <div class="detail-value">${
                                           specs?.miles || 'N/A'
                                         }</div>
                                     </div>
-                                    <div class="spec-item">
-                                        <div class="spec-label">Year</div>
-                                        <div class="spec-value">${
+                                    <div class="detail-item">
+                                        <div class="detail-label">Year</div>
+                                        <div class="detail-value">${
                                           specs?.year
                                         }</div>
                                     </div>
-                                    <div class="spec-item">
-                                        <div class="spec-label">Body Type</div>
-                                        <div class="spec-value">${
+                                    <div class="detail-item">
+                                        <div class="detail-label">Body Type</div>
+                                        <div class="detail-value">${
                                           specs?.bodyTpe || 'N/A'
                                         }</div>
                                     </div>
-                                    <div class="spec-item">
-                                        <div class="spec-label">Fuel Type</div>
-                                        <div class="spec-value">${specs?.fuelType || 'N/A'}</div>
+                                    <div class="detail-item">
+                                        <div class="detail-label">Fuel Type</div>
+                                        <div class="detail-value">${specs?.fuelType || 'N/A'}</div>
                                     </div>
-                                    <div class="spec-item">
-                                        <div class="spec-label">Colour</div>
-                                        <div class="spec-value">${
+                                    <div class="detail-item">
+                                        <div class="detail-label">Colour</div>
+                                        <div class="detail-value">${
                                           specs?.colour || 'N/A'
                                         }</div>
                                     </div>
-                                    <div class="spec-item">
-                                        <div class="spec-label">Cap Clean</div>
-                                        <div class="spec-value">${
+                                    <div class="detail-item">
+                                        <div class="detail-label">Cap Clean</div>
+                                        <div class="detail-value">${
                                           specs?.capClean || 'N/A'
                                         }</div>
                                     </div>
-                                    <div class="spec-item">
-                                        <div class="spec-label">Previous Owners</div>
-                                        <div class="spec-value">${
+                                    <div class="detail-item">
+                                        <div class="detail-label">Previous Owners</div>
+                                        <div class="detail-value">${
                                           specs?.previousOwners || 'N/A'
                                         }</div>
                                     </div>
@@ -3179,8 +3169,8 @@ const auctionWonAdminEmail = async (adminEmail, car, buyer) => {
                         </div>
                         
                         <div class="footer">
-                            <p class="footer-text">This is an automated notification from Speed Ways UK Sales System.</p>
-                            <p class="footer-text">© ${new Date().getFullYear()} Speed Ways UK. All rights reserved.</p>
+                            <p class="footer-text">This is an automated notification from SpeedWays Auto Sales System.</p>
+                            <p class="footer-text">© ${new Date().getFullYear()} SpeedWays Auto. All rights reserved.</p>
                             <p class="footer-text">You're receiving this email because you're an administrator.</p>
                         </div>
                     </div>
@@ -3244,7 +3234,7 @@ const auctionEndedAdminEmail = async (adminEmail, car) => {
       : {};
 
     const info = await transporter.sendMail({
-      from: `"Speed Ways UK" <${process.env.EMAIL_USER}>`,
+      from: `"SpeedWays Auto" <${process.env.EMAIL_USER}>`,
       to: adminEmail,
       subject: `${statusDetails.subject} - ${specs?.year} ${car?.title}`,
       html: `
@@ -3329,7 +3319,7 @@ const auctionEndedAdminEmail = async (adminEmail, car) => {
                             <div class="logo-container">
                                 <img src="${
                                   process.env.FRONTEND_URL
-                                }/logo.png" alt="Speed Ways UK Logo" class="logo">
+                                }/logo.png" alt="SpeedWays Auto Logo" class="logo">
                             </div>
                             <div class="tagline">Premium Vehicle Auctions</div>
                         </div>
@@ -3348,7 +3338,7 @@ const auctionEndedAdminEmail = async (adminEmail, car) => {
                             </div>
                             
                             <p><strong>Hello Admin,</strong></p>
-                            <p>A vehicle listing on Speed Ways UK has ended. Here are the details:</p>
+                            <p>A vehicle listing on SpeedWays Auto has ended. Here are the details:</p>
                             
                             <div class="vehicle-card">
                                 <div class="vehicle-title">${specs?.year} ${
@@ -3486,8 +3476,8 @@ const auctionEndedAdminEmail = async (adminEmail, car) => {
                         </div>
                         
                         <div class="footer">
-                            <p class="footer-text">This is an automated notification from Speed Ways UK Admin System.</p>
-                            <p class="footer-text">© ${new Date().getFullYear()} Speed Ways UK. All rights reserved.</p>
+                            <p class="footer-text">This is an automated notification from SpeedWays Auto Admin System.</p>
+                            <p class="footer-text">© ${new Date().getFullYear()} SpeedWays Auto. All rights reserved.</p>
                             <p class="footer-text">You're receiving this email because you're an administrator.</p>
                         </div>
                     </div>
@@ -3519,7 +3509,7 @@ const flaggedCommentAdminEmail = async (
       : {};
 
     const info = await transporter.sendMail({
-      from: `"Speed Ways UK" <${process.env.EMAIL_USER}>`,
+      from: `"SpeedWays Auto" <${process.env.EMAIL_USER}>`,
       to: adminEmail,
       subject: `🚩 Flagged Comment - ${specs?.year} ${car?.title}`,
       html: `
@@ -3604,7 +3594,7 @@ const flaggedCommentAdminEmail = async (
                             <div class="logo-container">
                                 <img src="${
                                   process.env.FRONTEND_URL
-                                }/logo.png" alt="Speed Ways UK Logo" class="logo">
+                                }/logo.png" alt="SpeedWays Auto Logo" class="logo">
                             </div>
                             <div class="tagline">Premium Vehicle Auctions</div>
                         </div>
@@ -3736,8 +3726,8 @@ const flaggedCommentAdminEmail = async (
                         </div>
                         
                         <div class="footer">
-                            <p class="footer-text">This is an automated notification from Speed Ways UK Moderation System.</p>
-                            <p class="footer-text">© ${new Date().getFullYear()} Speed Ways UK. All rights reserved.</p>
+                            <p class="footer-text">This is an automated notification from SpeedWays Auto Moderation System.</p>
+                            <p class="footer-text">© ${new Date().getFullYear()} SpeedWays Auto. All rights reserved.</p>
                             <p class="footer-text">You're receiving this email because you're a moderator/administrator.</p>
                         </div>
                     </div>
@@ -3764,7 +3754,7 @@ const newCommentSellerEmail = async (seller, car, comment, commentAuthor) => {
       : {};
 
     const info = await transporter.sendMail({
-      from: `"Speed Ways UK" <${process.env.EMAIL_USER}>`,
+      from: `"SpeedWays Auto" <${process.env.EMAIL_USER}>`,
       to: seller?.email,
       subject: `💬 New Comment on Your Vehicle: ${specs?.year} ${car.title}`,
       html: `
@@ -3850,7 +3840,7 @@ const newCommentSellerEmail = async (seller, car, comment, commentAuthor) => {
                             <div class="logo-container">
                                 <img src="${
                                   process.env.FRONTEND_URL
-                                }/logo.png" alt="Speed Ways UK Logo" class="logo">
+                                }/logo.png" alt="SpeedWays Auto Logo" class="logo">
                             </div>
                             <div class="tagline">Premium Vehicle Auctions</div>
                         </div>
@@ -3921,7 +3911,7 @@ const newCommentSellerEmail = async (seller, car, comment, commentAuthor) => {
                         
                         <div class="footer">
                             <p class="footer-text">You're receiving this email because you're the seller of this vehicle listing.</p>
-                            <p class="footer-text">© ${new Date().getFullYear()} Speed Ways UK. All rights reserved.</p>
+                            <p class="footer-text">© ${new Date().getFullYear()} SpeedWays Auto. All rights reserved.</p>
                         </div>
                     </div>
                 </body>
@@ -3944,7 +3934,7 @@ const newCommentBidderEmail = async (buyer, car, comment, commentAuthor) => {
       : {};
 
     const info = await transporter.sendMail({
-      from: `"Speed Ways UK" <${process.env.EMAIL_USER}>`,
+      from: `"SpeedWays Auto" <${process.env.EMAIL_USER}>`,
       to: buyer?.email,
       subject: `💬 New Activity on Vehicle: ${specs?.year} ${car?.title}`,
       html: `
@@ -4051,7 +4041,7 @@ const newCommentBidderEmail = async (buyer, car, comment, commentAuthor) => {
                             <div class="logo-container">
                                 <img src="${
                                   process.env.FRONTEND_URL
-                                }/logo.png" alt="Speed Ways UK Logo" class="logo">
+                                }/logo.png" alt="SpeedWays Auto Logo" class="logo">
                             </div>
                             <div class="tagline">Premium Vehicle Auctions</div>
                         </div>
@@ -4133,7 +4123,7 @@ const newCommentBidderEmail = async (buyer, car, comment, commentAuthor) => {
                         
                         <div class="footer">
                             <p class="footer-text">You're receiving this email because you've shown interest in this vehicle.</p>
-                            <p class="footer-text">© ${new Date().getFullYear()} Speed Ways UK. All rights reserved.</p>
+                            <p class="footer-text">© ${new Date().getFullYear()} SpeedWays Auto. All rights reserved.</p>
                         </div>
                     </div>
                 </body>
@@ -4157,7 +4147,7 @@ const auctionSubmittedForApprovalEmail = async (adminEmail, car, seller) => {
       : {};
 
     const info = await transporter.sendMail({
-      from: `"Speed Ways UK" <${process.env.EMAIL_USER}>`,
+      from: `"SpeedWays Auto" <${process.env.EMAIL_USER}>`,
       to: adminEmail,
       subject: `📝 New Vehicle Listing for Approval - ${specs.year || "N/A"} ${
         car.title
@@ -4204,7 +4194,7 @@ const auctionSubmittedForApprovalEmail = async (adminEmail, car, seller) => {
                         .price-label { color: #666; font-size: 14px; margin-bottom: 5px; }
                         .price-value { font-weight: bold; color: #1e2d3b; font-size: 18px; }
                         .vehicle-specs { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 20px 0; }
-                        .spec-item { background: #ffffff; padding: 15px; border-radius: 6px; border: 1px solid #e9ecef; }
+                        .detail-item { background: #ffffff; padding: 15px; border-radius: 6px; border: 1px solid #e9ecef; }
                         .spec-label { color: #666; font-size: 14px; margin-bottom: 5px; }
                         .spec-value { font-weight: bold; color: #1e2d3b; font-size: 16px; }
                         .seller-card { background: #e3f2fd; padding: 20px; border-radius: 8px; margin: 25px 0; border: 1px solid #bbdefb; }
@@ -4247,7 +4237,7 @@ const auctionSubmittedForApprovalEmail = async (adminEmail, car, seller) => {
                             <div class="logo-container">
                                 <img src="${
                                   process.env.FRONTEND_URL
-                                }/logo.png" alt="Speed Ways UK Logo" class="logo">
+                                }/logo.png" alt="SpeedWays Auto Logo" class="logo">
                             </div>
                             <div class="tagline">Premium Vehicle Auctions</div>
                         </div>
@@ -4432,8 +4422,8 @@ const auctionSubmittedForApprovalEmail = async (adminEmail, car, seller) => {
                         </div>
                         
                         <div class="footer">
-                            <p class="footer-text">This is an automated notification from Speed Ways UK Listing Approval System.</p>
-                            <p class="footer-text">© ${new Date().getFullYear()} Speed Ways UK. All rights reserved.</p>
+                            <p class="footer-text">This is an automated notification from SpeedWays Auto Listing Approval System.</p>
+                            <p class="footer-text">© ${new Date().getFullYear()} SpeedWays Auto. All rights reserved.</p>
                             <p class="footer-text">You're receiving this email because you're an administrator.</p>
                         </div>
                     </div>
@@ -4459,7 +4449,7 @@ const auctionApprovedEmail = async (seller, car) => {
       : {};
 
     const info = await transporter.sendMail({
-      from: `"Speed Ways UK" <${process.env.EMAIL_USER}>`,
+      from: `"SpeedWays Auto" <${process.env.EMAIL_USER}>`,
       to: seller.email,
       subject: `✅ Your Vehicle Listing is Live: ${specs?.year} ${car?.title}`,
       html: `
@@ -4538,7 +4528,7 @@ const auctionApprovedEmail = async (seller, car) => {
                             <div class="logo-container">
                                 <img src="${
                                   process.env.FRONTEND_URL
-                                }/logo.png" alt="Speed Ways UK Logo" class="logo">
+                                }/logo.png" alt="SpeedWays Auto Logo" class="logo">
                             </div>
                             <div class="tagline">Premium Vehicle Auctions</div>
                         </div>
@@ -4552,7 +4542,7 @@ const auctionApprovedEmail = async (seller, car) => {
                             <p>Dear <span class="highlight">${
                               seller?.firstName || seller?.username
                             }</span>,</p>
-                            <p>Great news! Your vehicle listing has been approved and is now live on Speed Ways UK.</p>
+                            <p>Great news! Your vehicle listing has been approved and is now live on SpeedWays Auto.</p>
                             
                             <div class="vehicle-card">
                                 <div class="vehicle-title">${specs?.year} ${
@@ -4632,8 +4622,8 @@ const auctionApprovedEmail = async (seller, car) => {
                         </div>
                         
                         <div class="footer">
-                            <p class="footer-text">This is an automated notification from Speed Ways UK.</p>
-                            <p class="footer-text">© ${new Date().getFullYear()} Speed Ways UK. All rights reserved.</p>
+                            <p class="footer-text">This is an automated notification from SpeedWays Auto.</p>
+                            <p class="footer-text">© ${new Date().getFullYear()} SpeedWays Auto. All rights reserved.</p>
                             <p class="footer-text">Need assistance? Contact our seller support team.</p>
                         </div>
                     </div>
@@ -4691,7 +4681,7 @@ const newAuctionNotificationEmail = async (buyer, car, seller) => {
       : {};
 
     const info = await transporter.sendMail({
-      from: `"Speed Ways UK" <${process.env.EMAIL_USER}>`,
+      from: `"SpeedWays Auto" <${process.env.EMAIL_USER}>`,
       to: buyer.email,
       subject: `🚗 New Vehicle: ${specs?.year} ${car?.title}`,
       html: `
@@ -4835,7 +4825,7 @@ const newAuctionNotificationEmail = async (buyer, car, seller) => {
                             <div class="logo-container">
                                 <img src="${
                                   process.env.FRONTEND_URL
-                                }/logo.png" alt="Speed Ways UK Logo" class="logo">
+                                }/logo.png" alt="SpeedWays Auto Logo" class="logo">
                             </div>
                             <div class="tagline">Premium Vehicle Auctions</div>
                             <div class="listing-badge">${listingStatus}</div>
@@ -4845,7 +4835,7 @@ const newAuctionNotificationEmail = async (buyer, car, seller) => {
                             <p>Dear <span class="highlight">${
                               buyer?.firstName || buyer?.username
                             }</span>,</p>
-                            <p>We're excited to let you know about a new vehicle listing on Speed Ways UK that matches your interests!</p>
+                            <p>We're excited to let you know about a new vehicle listing on SpeedWays Auto that matches your interests!</p>
                             
                             <div class="vehicle-card">
                                 <div class="vehicle-title">${specs?.year} ${
@@ -4886,47 +4876,47 @@ const newAuctionNotificationEmail = async (buyer, car, seller) => {
                                 </div>
                                 
                                 <div class="vehicle-details">
-                                    <div class="spec-item">
+                                    <div class="detail-box">
                                         <div class="spec-label">Registration</div>
                                         <div class="spec-value">${
                                           specs?.registration || 'N/A'
                                         }</div>
                                     </div>
-                                    <div class="spec-item">
+                                    <div class="detail-box">
                                         <div class="spec-label">Miles</div>
                                         <div class="spec-value">${
                                           specs?.miles || 'N/A'
                                         }</div>
                                     </div>
-                                    <div class="spec-item">
+                                    <div class="detail-box">
                                         <div class="spec-label">Year</div>
                                         <div class="spec-value">${
                                           specs?.year
                                         }</div>
                                     </div>
-                                    <div class="spec-item">
+                                    <div class="detail-box">
                                         <div class="spec-label">Body Type</div>
                                         <div class="spec-value">${
                                           specs?.bodyTpe || 'N/A'
                                         }</div>
                                     </div>
-                                    <div class="spec-item">
+                                    <div class="detail-box">
                                         <div class="spec-label">Fuel Type</div>
                                         <div class="spec-value">${specs?.fuelType || 'N/A'}</div>
                                     </div>
-                                    <div class="spec-item">
+                                    <div class="detail-box">
                                         <div class="spec-label">Colour</div>
                                         <div class="spec-value">${
                                           specs?.colour || 'N/A'
                                         }</div>
                                     </div>
-                                    <div class="spec-item">
+                                    <div class="detail-box">
                                         <div class="spec-label">Cap Clean</div>
                                         <div class="spec-value">${
                                           specs?.capClean || 'N/A'
                                         }</div>
                                     </div>
-                                    <div class="spec-item">
+                                    <div class="detail-box">
                                         <div class="spec-label">Previous Owners</div>
                                         <div class="spec-value">${
                                           specs?.previousOwners || 'N/A'
@@ -5000,7 +4990,7 @@ const newAuctionNotificationEmail = async (buyer, car, seller) => {
                             <ul>
                                 <li>Matches your saved preferences and search criteria</li>
                                 <li>Competitively priced in the current market</li>
-                                <li>From a verified seller on Speed Ways UK</li>
+                                <li>From a verified seller on SpeedWays Auto</li>
                                 <li>${
                                   car?.buyNowPrice
                                     ? "Available for immediate purchase with Buy Now"
@@ -5012,8 +5002,8 @@ const newAuctionNotificationEmail = async (buyer, car, seller) => {
                         </div>
                         
                         <div class="footer">
-                            <p class="footer-text">You're receiving this email because you're a registered buyer on Speed Ways UK.</p>
-                            <p class="footer-text">© ${new Date().getFullYear()} Speed Ways UK. Premium Vehicle Auctions.</p>
+                            <p class="footer-text">You're receiving this email because you're a registered buyer on SpeedWays Auto.</p>
+                            <p class="footer-text">© ${new Date().getFullYear()} SpeedWays Auto. Premium Vehicle Auctions.</p>
                         </div>
                     </div>
                 </body>
@@ -5088,7 +5078,7 @@ const sendBulkAuctionNotifications = async (buyers, car, seller) => {
 const newBidNotificationEmail = async (seller, auction, bidAmount, bidder) => {
   try {
     const info = await transporter.sendMail({
-      from: `"Speed Ways UK" <${process.env.EMAIL_USER}>`,
+      from: `"SpeedWays Auto" <${process.env.EMAIL_USER}>`,
       to: seller.email,
       subject: `💰 New Bid Received - ${auction.title}`,
       html: `
@@ -5154,7 +5144,7 @@ const newBidNotificationEmail = async (seller, auction, bidAmount, bidder) => {
                             <div class="logo-container">
                                 <img src="${
                                   process.env.FRONTEND_URL
-                                }/logo.png" alt="Speed Ways UK Logo" class="logo">
+                                }/logo.png" alt="SpeedWays Auto Logo" class="logo">
                             </div>
                             <div class="tagline">Premium Vehicle Auctions</div>
                         </div>
@@ -5239,7 +5229,7 @@ const newBidNotificationEmail = async (seller, auction, bidAmount, bidder) => {
                         
                         <div class="footer">
                             <p class="footer-text">You're receiving this email because you're the seller of this auction.</p>
-                            <p class="footer-text">© ${new Date().getFullYear()} Speed Ways UK. All rights reserved.</p>
+                            <p class="footer-text">© ${new Date().getFullYear()} SpeedWays Auto. All rights reserved.</p>
                         </div>
                     </div>
                 </body>
@@ -5262,7 +5252,7 @@ const newOfferNotificationEmail = async (seller, car, offerAmount, buyer) => {
       : {};
 
     const info = await transporter.sendMail({
-      from: `"Speed Ways UK" <${process.env.EMAIL_USER}>`,
+      from: `"SpeedWays Auto" <${process.env.EMAIL_USER}>`,
       to: seller?.email,
       subject: `💰 New Offer Received - ${specs?.year} ${car?.title}`,
       html: `
@@ -5347,7 +5337,7 @@ const newOfferNotificationEmail = async (seller, car, offerAmount, buyer) => {
                             <div class="logo-container">
                                 <img src="${
                                   process.env.FRONTEND_URL
-                                }/logo.png" alt="Speed Ways UK Logo" class="logo">
+                                }/logo.png" alt="SpeedWays Auto Logo" class="logo">
                             </div>
                             <div class="tagline">Premium Vehicle Auctions</div>
                         </div>
@@ -5369,10 +5359,6 @@ const newOfferNotificationEmail = async (seller, car, offerAmount, buyer) => {
                             
                             <div class="price-comparison">
                                 <div class="price-item">
-                                    <div class="price-label">Buy Now Price</div>
-                                    <div class="price-value">£${car?.buyNowPrice?.toLocaleString()}</div>
-                                </div>
-                                <div class="price-item">
                                     <div class="price-label">Offer Amount</div>
                                     <div class="price-value" style="color: #edcd1f;">£${offerAmount?.toLocaleString()}</div>
                                 </div>
@@ -5385,18 +5371,6 @@ const newOfferNotificationEmail = async (seller, car, offerAmount, buyer) => {
                                         <div class="detail-value">${
                                           specs?.year
                                         } ${car?.title}</div>
-                                    </div>
-                                    <div class="detail-item">
-                                        <div class="detail-label">Difference</div>
-                                        <div class="detail-value">£${(
-                                          car?.buyNowPrice - offerAmount
-                                        ).toLocaleString()}</div>
-                                    </div>
-                                    <div class="detail-item">
-                                        <div class="detail-label">Total Offers</div>
-                                        <div class="detail-value">${
-                                          car?.offers?.length || 0
-                                        }</div>
                                     </div>
                                     <div class="detail-item">
                                         <div class="detail-label">Offer Received</div>
@@ -5432,12 +5406,11 @@ const newOfferNotificationEmail = async (seller, car, offerAmount, buyer) => {
                             <p><strong>Available Actions:</strong></p>
                             <p>• <strong>Accept</strong> - Complete the sale at the offered price</p>
                             <p>• <strong>Decline</strong> - Politely decline the offer</p>
-                            <p>• <strong>Message</strong> - Contact the buyer for more details</p>
                         </div>
                         
                         <div class="footer">
                             <p class="footer-text">You're receiving this email because you're the seller of this vehicle.</p>
-                            <p class="footer-text">© ${new Date().getFullYear()} Speed Ways UK. All rights reserved.</p>
+                            <p class="footer-text">© ${new Date().getFullYear()} SpeedWays Auto. All rights reserved.</p>
                             <p class="footer-text">Respond quickly to maximize your chances of a successful sale!</p>
                         </div>
                     </div>
@@ -5464,7 +5437,7 @@ const offerCanceledEmail = async (
 ) => {
   try {
     const info = await transporter.sendMail({
-      from: `"Speed Ways UK" <${process.env.EMAIL_USER}>`,
+      from: `"SpeedWays Auto" <${process.env.EMAIL_USER}>`,
       to: buyerEmail,
       subject: `❌ Offer Canceled - ${car?.specifications?.get("year") || ""} ${
         car?.title
@@ -5558,7 +5531,7 @@ const offerCanceledEmail = async (
                             <div class="logo-container">
                                 <img src="${
                                   process.env.FRONTEND_URL
-                                }/logo.png" alt="Speed Ways UK Logo" class="logo">
+                                }/logo.png" alt="SpeedWays Auto Logo" class="logo">
                             </div>
                             <div class="tagline">Premium Vehicle Auctions</div>
                         </div>
@@ -5623,7 +5596,7 @@ const offerCanceledEmail = async (
                             
                             <div class="cta-box">
                                 <div class="cta-title">🚗 FIND ANOTHER VEHICLE</div>
-                                <p>Continue your search for the perfect vehicle. Speed Ways UK has thousands of vehicles waiting for you.</p>
+                                <p>Continue your search for the perfect vehicle. SpeedWays Auto has thousands of vehicles waiting for you.</p>
                                 <p style="margin: 20px 0;">
                                     <a href="${
                                       process.env.FRONTEND_URL
@@ -5638,12 +5611,12 @@ const offerCanceledEmail = async (
                                 </div>
                             </div>
                             
-                            <p>Thank you for using Speed Ways UK. We're here to help you find your dream vehicle!</p>
+                            <p>Thank you for using SpeedWays Auto. We're here to help you find your dream vehicle!</p>
                         </div>
                         
                         <div class="footer">
-                            <p class="footer-text">This is an automated notification from Speed Ways UK.</p>
-                            <p class="footer-text">© ${new Date().getFullYear()} Speed Ways UK. All rights reserved.</p>
+                            <p class="footer-text">This is an automated notification from SpeedWays Auto.</p>
+                            <p class="footer-text">© ${new Date().getFullYear()} SpeedWays Auto. All rights reserved.</p>
                             <p class="footer-text">If you have questions about this cancellation, please contact our support team.</p>
                         </div>
                     </div>
@@ -5674,7 +5647,7 @@ const offerAcceptedEmail = async (
       : {};
 
     const info = await transporter.sendMail({
-      from: `"Speed Ways UK" <${process.env.EMAIL_USER}>`,
+      from: `"SpeedWays Auto" <${process.env.EMAIL_USER}>`,
       to: buyerEmail,
       subject: `✅ Offer Accepted - ${specs?.year || ""} ${car?.title}`,
       html: `
@@ -5769,7 +5742,7 @@ const offerAcceptedEmail = async (
                             <div class="logo-container">
                                 <img src="${
                                   process.env.FRONTEND_URL
-                                }/logo.png" alt="Speed Ways UK Logo" class="logo">
+                                }/logo.png" alt="SpeedWays Auto Logo" class="logo">
                             </div>
                             <div class="tagline">Premium Vehicle Auctions</div>
                         </div>
@@ -5855,8 +5828,8 @@ const offerAcceptedEmail = async (
                         </div>
                         
                         <div class="footer">
-                            <p class="footer-text">Congratulations on your successful purchase! This is an automated confirmation from Speed Ways UK.</p>
-                            <p class="footer-text">© ${new Date().getFullYear()} Speed Ways UK. All rights reserved.</p>
+                            <p class="footer-text">Congratulations on your successful purchase! This is an automated confirmation from SpeedWays Auto.</p>
+                            <p class="footer-text">© ${new Date().getFullYear()} SpeedWays Auto. All rights reserved.</p>
                             <p class="footer-text">Need assistance? Contact support at ${
                               process.env.EMAIL_USER || "info@speedwaysuk.com"
                             }</p>
@@ -5890,7 +5863,7 @@ const offerRejectedEmail = async (
       : {};
 
     const info = await transporter.sendMail({
-      from: `"Speed Ways UK" <${process.env.EMAIL_USER}>`,
+      from: `"SpeedWays Auto" <${process.env.EMAIL_USER}>`,
       to: buyerEmail,
       subject: `❌ Offer Declined - ${specs?.year || ""} ${car?.title}`,
       html: `
@@ -5984,7 +5957,7 @@ const offerRejectedEmail = async (
                             <div class="logo-container">
                                 <img src="${
                                   process.env.FRONTEND_URL
-                                }/logo.png" alt="Speed Ways UK Logo" class="logo">
+                                }/logo.png" alt="SpeedWays Auto Logo" class="logo">
                             </div>
                             <div class="tagline">Premium Vehicle Auctions</div>
                         </div>
@@ -5997,7 +5970,7 @@ const offerRejectedEmail = async (
                             </div>
                             
                             <p>Dear <span class="highlight">${buyerName}</span>,</p>
-                            <p>We wanted to inform you that the seller has decided not to accept your offer on their vehicle. This is a normal part of the negotiation process on Speed Ways UK.</p>
+                            <p>We wanted to inform you that the seller has decided not to accept your offer on their vehicle. This is a normal part of the negotiation process on SpeedWays Auto.</p>
                             
                             ${
                               reason
@@ -6081,8 +6054,8 @@ const offerRejectedEmail = async (
                         </div>
                         
                         <div class="footer">
-                            <p class="footer-text">This is an automated notification from Speed Ways UK.</p>
-                            <p class="footer-text">© ${new Date().getFullYear()} Speed Ways UK. All rights reserved.</p>
+                            <p class="footer-text">This is an automated notification from SpeedWays Auto.</p>
+                            <p class="footer-text">© ${new Date().getFullYear()} SpeedWays Auto. All rights reserved.</p>
                             <p class="footer-text">If you have questions about this decision, you can contact the seller directly.</p>
                         </div>
                     </div>
@@ -6103,9 +6076,9 @@ export {
   contactEmail, //tested
   contactConfirmationEmail, //tested
   resetPasswordEmail, //tested
-  bidConfirmationEmail, // Not tested properly
+  bidConfirmationEmail, // tested
   offerConfirmationEmail, // tested
-  outbidNotificationEmail, // Not tested
+  outbidNotificationEmail, // tested
   sendOutbidNotifications, // tested
   sendAuctionWonEmail, // tested
   sendAuctionEndedSellerEmail, // tested
@@ -6121,7 +6094,7 @@ export {
   auctionSubmittedForApprovalEmail, // tested
   auctionApprovedEmail, // tested
   sendBulkAuctionNotifications, // tested
-  newBidNotificationEmail, // Not tested
+  newBidNotificationEmail, // tested
   newOfferNotificationEmail, // tested
   newAuctionNotificationEmail, // tested
   sendOfferOutbidNotifications, // Not tested, we do not need it I think because offers can not be outbid

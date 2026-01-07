@@ -289,7 +289,7 @@ function Transactions() {
                 <AdminContainer>
                     <div className="max-w-full pt-16 pb-7 md:pt-0">
                         <h2 className="text-3xl md:text-4xl font-bold my-5 text-gray-800">Transactions</h2>
-                        <p className="text-gray-600">Monitor all payment transactions and revenue.</p>
+                        {/* <p className="text-gray-600">Monitor all payment transactions and revenue.</p> */}
                     </div>
 
                     {/* Statistics Cards */}

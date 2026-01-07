@@ -245,7 +245,7 @@ function BidHistory() {
                 <SellerContainer>
                     <div className="max-w-full pt-16 pb-7 md:pt-0">
                         <h2 className="text-3xl md:text-4xl font-bold my-5 text-gray-800">Bid History</h2>
-                        <p className="text-gray-600">Track all bidding activity on your auctions.</p>
+                        {/* <p className="text-gray-600">Track all bidding activity on your auctions.</p> */}
                     </div>
 
                     {/* Auction Selection */}

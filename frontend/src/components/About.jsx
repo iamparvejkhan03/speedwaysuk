@@ -57,7 +57,7 @@ function About() {
                     <img 
                         loading="lazy" 
                         src={faqImg} 
-                        alt="Speed Ways UK Team" 
+                        alt="SpeedWays Auto Team" 
                         className={`w-full h-64 sm:h-80 lg:h-full object-cover transition-all duration-700 ${isVisible ? 'scale-100 opacity-100' : 'scale-105 opacity-90'}`}
                     />
                     {/* Decorative elements */}
@@ -95,7 +95,7 @@ function About() {
                     </h2>
                     
                     <p className="text-lg text-gray-700 leading-relaxed mb-8 border-l-4 border-[#edcd1f] pl-4 py-1">
-                        Speed Ways UK is a trusted car auction platform where you can buy or sell premium vehicles with complete transparency. Our secure technology and dedicated support ensure every transaction is smooth and reliable.
+                        SpeedWays Auto Limited is a trade-only vehicle remarketing and auction platform, providing motor traders with access to nearly new vehicles at wholesale prices. We partner with leasing, finance, fleet, and insurance companies, supported by secure technology and an experienced team to ensure transparent, efficient, and reliable transactions.
                     </p>
 
                     {/* Features Grid - Enhanced with collapsible sections */}
@@ -150,7 +150,7 @@ function About() {
                             <div className={`overflow-hidden transition-all duration-300 ${expanded.second ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'}`}>
                                 <div className="px-4 pb-4 pl-20">
                                     <p className="text-gray-600">
-                                        From listing your vehicle to placing a bid, Speed Ways UK ensures a secure and transparent process throughout.
+                                        From listing your vehicle to placing a bid, SpeedWays Auto ensures a secure and transparent process throughout.
                                     </p>
                                 </div>
                             </div>

@@ -43,9 +43,9 @@ import truck from './truck.webp';
 import van from './van.webp';
 
 const otherData = {
-    phone: '1234567890',
-    email: 'info@speedways.uk',
-    address: 'United Kingdom'
+    phone: '+441618832737',
+    email: 'admin@speedways.uk',
+    address: 'Wilmslow Rd, Heald Green, Cheadle SK8 3PW, UK'
 }
 
 export {

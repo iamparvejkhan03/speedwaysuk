@@ -1,100 +1,205 @@
 import { Link } from "react-router";
 import { Container } from "../components";
-import { otherData } from "../assets";
 
 const BuyerAgreement = () => {
+    const currentDate = new Date();
+    const formattedDate = currentDate.toLocaleDateString('en-GB', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+    });
+
     return (
-        <section className="pt-32 pb-10 text-gray-800">
+        <section className="pt-28 pb-16 bg-white">
             <Container>
-                <h1 className="text-4xl md:text-5xl font-bold my-5 text-black">Buyer Agreement</h1>
+                {/* Header */}
+                <div className="max-w-full mx-auto mb-10">
+                    <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">Buyer Agreement</h1>
+                    <p className="text-gray-600 mb-6">SpeedWays Auto Limited | Last Updated: {formattedDate}</p>
+                    
+                    <div className="bg-red-50 border-l-4 border-red-500 p-4 mb-6">
+                        <p className="text-red-800 font-semibold mb-2">TRADE-ONLY PLATFORM</p>
+                        <p className="text-red-700 text-sm">
+                            This agreement applies exclusively to motor trade buyers based in the UK or Ireland. 
+                            By using SpeedWays Auto, you confirm you are acting in the course of business.
+                        </p>
+                    </div>
+                </div>
 
-                <p className="mb-2">Effective Date: December 11, 2025</p>
-                <p className="mb-4">Last Updated: December 11, 2025</p>
+                {/* Main Content */}
+                <div className="max-w-full mx-auto">
+                    <div className="space-y-8">
+                        {/* Introduction */}
+                        <div className="mb-8">
+                            <p className="text-gray-700 mb-4">
+                                <strong>SpeedWays Auto Limited</strong> ("we", "our", "us") and you, the motor trade buyer 
+                                ("Buyer"), enter into this Buyer Agreement governing all purchases made through our platform.
+                            </p>
+                            <p className="text-gray-700">
+                                By placing a bid, making an offer, or using Buy Now, you agree to be bound by this Agreement.
+                            </p>
+                        </div>
 
-                <p className="mb-4">
-                    This Buyer Agreement outlines the terms for customers purchasing vehicles or products from
-                    Speed Ways UK (“we,” “our”). By using our website or completing a purchase, you agree to these terms.
-                </p>
+                        {/* Section 1 */}
+                        <div className="border-t pt-6">
+                            <h2 className="text-xl font-bold text-gray-900 mb-3">1. Eligibility</h2>
+                            <ul className="text-gray-700 space-y-2 list-disc pl-5">
+                                <li>This agreement applies only to motor trade buyers based in the UK or Ireland</li>
+                                <li>Only verified trade accounts may purchase vehicles</li>
+                                <li>Consumer use is strictly prohibited</li>
+                            </ul>
+                        </div>
 
-                <h2 className="text-2xl text-black font-semibold mt-6 mb-4">1. Eligibility</h2>
-                <ul className="mb-4">
-                    <li>- You must be at least 18 years old and legally able to enter into a purchase agreement.</li>
-                    <li>- You must provide accurate contact and payment details.</li>
-                </ul>
+                        {/* Section 2 */}
+                        <div className="border-t pt-6">
+                            <h2 className="text-xl font-bold text-gray-900 mb-3">2. Binding Contract</h2>
+                            <p className="text-gray-700 mb-3">A binding contract is formed when:</p>
+                            <ul className="text-gray-700 space-y-2 list-disc pl-5 mb-3">
+                                <li>A bid is accepted</li>
+                                <li>An offer is accepted</li>
+                                <li>Buy Now is used</li>
+                            </ul>
+                            <div className="bg-gray-50 p-4 rounded">
+                                <p className="text-red-600 font-semibold text-sm">
+                                    All actions are legally binding. No retractions or cancellations permitted.
+                                </p>
+                            </div>
+                        </div>
 
-                <h2 className="text-2xl text-black font-semibold mt-6 mb-4">2. Buying Process</h2>
-                <ul className="mb-4">
-                    <li>- Purchases can be made through “Buy Now” or “Make an Offer.”</li>
-                    <li>- Submitting an offer does not guarantee acceptance.</li>
-                    <li>- Once your offer is accepted or you complete a Buy Now checkout, you agree to proceed with payment.</li>
-                </ul>
+                        {/* Section 3 */}
+                        <div className="border-t pt-6">
+                            <h2 className="text-xl font-bold text-gray-900 mb-3">3. Vehicle Condition</h2>
+                            <p className="text-gray-700 mb-3">Vehicles are sold:</p>
+                            <ul className="text-gray-700 space-y-2 list-disc pl-5 mb-3">
+                                <li>Trade sale (B2B only)</li>
+                                <li>As seen</li>
+                                <li>Without warranty</li>
+                                <li>Without consumer rights</li>
+                            </ul>
+                            <p className="text-gray-600 text-sm">
+                                Descriptions, photographs, and specifications are provided for guidance only.
+                            </p>
+                        </div>
 
-                <h2 className="text-2xl text-black font-semibold mt-6 mb-4">3. Vehicle Information & Inspections</h2>
-                <ul className="mb-4">
-                    <li>- All vehicle descriptions and photos are provided by Speed Ways UK.</li>
-                    <li>- You may request an inspection or viewing before confirming your purchase.</li>
-                    <li>- Speed Ways UK does not guarantee suitability for your individual needs.</li>
-                </ul>
+                        {/* Section 4 */}
+                        <div className="border-t pt-6">
+                            <h2 className="text-xl font-bold text-gray-900 mb-3">4. Inspection</h2>
+                            <ul className="text-gray-700 space-y-2 list-disc pl-5">
+                                <li>Buyers are encouraged to inspect and test drive vehicles before payment</li>
+                                <li>Failure to inspect is at the buyer's sole risk</li>
+                                <li>No claims can be made for issues visible upon inspection</li>
+                            </ul>
+                        </div>
 
-                <h2 className="text-2xl text-black font-semibold mt-6 mb-4">4. Payments</h2>
-                <ul className="mb-4">
-                    <li>- Payments are completed via secure bank transfer after purchase confirmation.</li>
-                    <li>- A vehicle is considered sold only after full payment is received.</li>
-                    <li>- Failure to complete payment may result in cancellation at our discretion.</li>
-                </ul>
+                        {/* Section 5 */}
+                        <div className="border-t pt-6">
+                            <h2 className="text-xl font-bold text-gray-900 mb-3">5. No Returns or Claims</h2>
+                            <div className="bg-red-50 border border-red-200 p-4 rounded mb-3">
+                                <p className="text-red-700 font-bold text-center mb-2">ABSOLUTE FINAL SALE</p>
+                                <div className="text-center space-y-1">
+                                    <p className="text-red-600">No claims once vehicle leaves our premises</p>
+                                    <p className="text-red-600">No refunds under any circumstances</p>
+                                    <p className="text-red-600">No disputes accepted after collection/delivery</p>
+                                </div>
+                            </div>
+                        </div>
 
-                <h2 className="text-2xl text-black font-semibold mt-6 mb-4">5. Delivery & Collection</h2>
-                <ul className="mb-4">
-                    <li>- Buyers may arrange collection or request delivery assistance.</li>
-                    <li>- Any delivery fees will be communicated in advance.</li>
-                    <li>- Ownership transfers once payment is received and paperwork is completed.</li>
-                </ul>
+                        {/* Section 6 */}
+                        <div className="border-t pt-6">
+                            <h2 className="text-xl font-bold text-gray-900 mb-3">6. Payment</h2>
+                            <ul className="text-gray-700 space-y-2 list-disc pl-5">
+                                <li>Bank transfer only (no cash, cards, or third-party payments)</li>
+                                <li>Full payment due within 3 working days of contract formation</li>
+                                <li>Vehicles will not be released until payment clears</li>
+                            </ul>
+                        </div>
 
-                <h2 className="text-2xl text-black font-semibold mt-6 mb-4">6. Prohibited Conduct</h2>
-                <ul className="mb-4">
-                    <li>- No fraudulent information, misuse of the platform, or false purchase commitments.</li>
-                    <li>- No attempts to bypass Speed Ways UK procedures or payment requirements.</li>
-                </ul>
+                        {/* Section 7 */}
+                        <div className="border-t pt-6">
+                            <h2 className="text-xl font-bold text-gray-900 mb-3">7. Collection & Delivery</h2>
+                            <ul className="text-gray-700 space-y-2 list-disc pl-5">
+                                <li>Collection by appointment only</li>
+                                <li>Minimum one hour notice required for collection</li>
+                                <li>Delivery available at buyer's cost (quoted in advance)</li>
+                                <li>Release codes required for third-party collection</li>
+                            </ul>
+                        </div>
 
-                <h2 className="text-2xl text-black font-semibold mt-6 mb-4">7. Risk & Liability</h2>
-                <ul className="mb-4">
-                    <li>- Vehicles are sold “as described” in the listing.</li>
-                    <li>- Speed Ways UK is not responsible for post-purchase issues caused by misuse or external factors.</li>
-                    <li>- Buyers accept all responsibility once the vehicle is collected or delivered.</li>
-                </ul>
+                        {/* Section 8 */}
+                        <div className="border-t pt-6">
+                            <h2 className="text-xl font-bold text-gray-900 mb-3">8. Default</h2>
+                            <p className="text-gray-700 mb-2">If payment is not completed, we may:</p>
+                            <ul className="text-gray-700 space-y-2 list-disc pl-5">
+                                <li>Cancel the sale</li>
+                                <li>Resell the vehicle</li>
+                                <li>Recover losses and costs</li>
+                                <li>Suspend or terminate the account</li>
+                            </ul>
+                        </div>
 
-                <h2 className="text-2xl text-black font-semibold mt-6 mb-4">8. Disputes</h2>
-                <p className="mb-4">
-                    Any disputes arising from a purchase will be handled directly between the buyer and Speed Ways UK.
-                </p>
+                        {/* Section 9 */}
+                        <div className="border-t pt-6">
+                            <h2 className="text-xl font-bold text-gray-900 mb-3">9. Limitation of Liability</h2>
+                            <p className="text-gray-700">
+                                Our liability is limited to the purchase price of the vehicle, except where 
+                                excluded by law (e.g., death or personal injury caused by negligence).
+                            </p>
+                        </div>
 
-                <h2 className="text-2xl text-black font-semibold mt-6 mb-4">9. Limitation of Liability</h2>
-                <p className="mb-4">
-                    Speed Ways UK is not liable for indirect, incidental, or consequential damages. By purchasing from us,
-                    you agree to release Speed Ways UK from any claims related to the transaction beyond the value of the purchase.
-                </p>
+                        {/* Section 10 */}
+                        <div className="border-t pt-6">
+                            <h2 className="text-xl font-bold text-gray-900 mb-3">10. Governing Law</h2>
+                            <ul className="text-gray-700 space-y-2 list-disc pl-5">
+                                <li>This agreement is governed by England and Wales law</li>
+                                <li>English courts have exclusive jurisdiction</li>
+                            </ul>
+                        </div>
 
-                <h2 className="text-2xl text-black font-semibold mt-6 mb-4">10. Amendments</h2>
-                <p className="mb-4">
-                    This Agreement may be updated at any time. Continued use of our website indicates acceptance of the latest version.
-                </p>
+                        {/* Acceptance & Contact */}
+                        <div className="border-t pt-6">
+                            <h2 className="text-xl font-bold text-gray-900 mb-4">Acceptance & Contact</h2>
+                            <p className="text-gray-700 mb-4">
+                                By using SpeedWays Auto, you acknowledge you have read and agree to this Buyer Agreement.
+                            </p>
+                            <div className="bg-gray-50 p-4 rounded">
+                                <p className="font-semibold text-gray-900 mb-2">SpeedWays Auto Limited</p>
+                                <p className="text-gray-700 text-sm mb-1">Wilmslow Rd, Heald Green, Cheadle SK8 3PW, UK</p>
+                                <p className="text-gray-700 text-sm mb-1">
+                                    Email: <a href="mailto:admin@speedways.uk" className="text-blue-600 hover:underline">admin@speedways.uk</a>
+                                </p>
+                                <p className="text-gray-700 text-sm">
+                                    Phone: <a href="tel:+441618832737" className="text-blue-600 hover:underline">+44 (0)161 883 2737</a>
+                                </p>
+                            </div>
+                        </div>
 
-                <h2 className="text-2xl text-black font-semibold mt-6 mb-4">11. Governing Law</h2>
-                <p className="mb-4">
-                    This Agreement is governed by the laws of the United Kingdom.
-                </p>
+                        {/* Footer Note */}
+                        <div className="border-t pt-6 mt-8">
+                            <p className="text-gray-500 text-sm">
+                                This Buyer Agreement was last updated on {formattedDate}. It forms an integral part of 
+                                the contract for every vehicle purchased through SpeedWays Auto.
+                            </p>
+                        </div>
+                    </div>
 
-                <h2 className="text-2xl text-black font-semibold mt-6 mb-4">Contact</h2>
-                <p className="mb-4">
-                    Speed Ways UK <br />
-                    {otherData.address} <br />
-                    <Link className="text-blue-600 underline" to="mailto:info@speedways.uk">
-                        info@speedways.uk
-                    </Link> <br />
-                    <Link className="text-blue-600 underline" to="tel:+441234567890">
-                        +441234567890
-                    </Link> <br />
-                </p>
+                    {/* Navigation Links */}
+                    <div className="mt-12 pt-8 border-t">
+                        <div className="flex flex-wrap gap-3">
+                            <Link 
+                                to="/terms-of-use" 
+                                className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded text-sm font-medium transition-colors"
+                            >
+                                Terms of Use
+                            </Link>
+                            <Link 
+                                to="/privacy-policy" 
+                                className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded text-sm font-medium transition-colors"
+                            >
+                                Privacy Policy
+                            </Link>
+                        </div>
+                    </div>
+                </div>
             </Container>
         </section>
     );

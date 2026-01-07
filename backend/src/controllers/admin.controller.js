@@ -3,7 +3,7 @@ import Auction from "../models/auction.model.js";
 import Comment from "../models/comment.model.js";
 import Watchlist from "../models/watchlist.model.js";
 import agendaService from "../services/agendaService.js";
-import axios from 'axios';
+import axios from "axios";
 
 import {
   deleteFromCloudinary,
@@ -153,6 +153,18 @@ export const getAdminStats = async (req, res) => {
 
     const recentBidsCount = recentBids[0]?.count || 0;
 
+    const highestBidStats = await Auction.aggregate([
+      { $unwind: "$bids" },
+      {
+        $group: {
+          _id: null,
+          highestBidAmount: { $max: "$bids.amount" },
+          averageBidAmount: { $avg: "$bids.amount" },
+          totalBids: { $sum: 1 },
+        },
+      },
+    ]);
+
     // Get top performing categories
     const categoryStats = await Auction.aggregate([
       { $match: { status: "sold" } },
@@ -265,6 +277,8 @@ export const getAdminStats = async (req, res) => {
       totalWatchlists,
       totalBids: totalBidsCount,
       recentBids: recentBidsCount,
+      highestBidAmount: highestBidStats[0]?.highestBidAmount || 0,
+      averageBidAmount: highestBidStats[0]?.averageBidAmount || 0,
 
       // Engagement metrics section
       totalOffers: totalOffersCount,

@@ -19,7 +19,7 @@ function Footer() {
         { name: 'Terms of Use', href: '/terms-of-use' },
         // { name: 'Seller Agreement', href: '/seller-agreement' },
         { name: 'Buyer Agreement', href: '/buyer-agreement' },
-        { name: 'Payment Refund Policy', href: '/payment-refund-policy' },
+        // { name: 'Payment Refund Policy', href: '/payment-refund-policy' },
     ];
 
     const categoryImg = [
@@ -128,7 +128,7 @@ function Footer() {
                             <li className="flex items-center gap-2">
                                 <Phone size={18} />
 
-                                <Link className="hover:underline" to={`tel:+44${otherData.phone}`}>+441234567890</Link>
+                                <Link className="hover:underline" to={`tel:${otherData.phone}`}>+44 (0)161 883 2737</Link>
                             </li>
 
                             <li className="flex items-center gap-2">
@@ -146,7 +146,7 @@ function Footer() {
                     <p>
                         <span>© {new Date().getFullYear()} &nbsp;</span>
                         <Link to="/" className="underline">
-                            Speed Ways UK.
+                            SpeedWays Auto.
                         </Link>
                         &nbsp; All rights reserved. &nbsp;
                     </p>

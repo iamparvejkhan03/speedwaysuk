@@ -53,7 +53,7 @@ function Header() {
         <header className={`${isScrolled ? 'fixed bg-white bg-opacity-100 shadow-lg shadow-primary/5' : 'absolute bg-opacity-0'} w-full transition-all duration-150 z-50`}>
             <Container className={`flex items-center justify-between py-4`}>
                 <Link to="/">
-                    <img src={(isScrolled || isMenuOpen) ? `${darkLogo}` : `${logo}`} alt="Speed Ways UK Logo" className="h-12 md:h-14 z-10" />
+                    <img src={(isScrolled || isMenuOpen) ? `${darkLogo}` : `${logo}`} alt="SpeedWays Auto Logo" className="h-12 md:h-14 z-10" />
                 </Link>
 
                 {/* Navlinks for larger screens */}

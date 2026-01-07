@@ -304,6 +304,34 @@ function AllOffers() {
         }
     };
 
+    const handleReactivateOffer = async () => {
+        if (!selectedOffer) return;
+
+        if (!window.confirm(`Are you sure you want to reactivate and accept this offer for ${formatCurrency(selectedOffer.amount)}?\nThis will end the auction and sell it to ${selectedOffer.buyerUsername}.`)) {
+            return;
+        }
+
+        try {
+            setProcessing(true);
+
+            const res = await axiosInstance.post(`/api/v1/offers/${selectedOffer._id}/reactivate`, {
+                auctionId: selectedOffer.auction._id,
+                reason: "Offer reactivated by administrator"
+            });
+
+            if (res.data.success) {
+                toast.success('Offer reactivated and accepted successfully');
+
+                // Refresh offers
+                await fetchAllOffers();
+            }
+        } catch (error) {
+            toast.error(error?.response?.data?.message || 'Failed to reactivate offer');
+        } finally {
+            setProcessing(false);
+        }
+    };
+
     // Stats cards configuration
     const statCards = [
         {
@@ -362,7 +390,7 @@ function AllOffers() {
                 <AdminContainer>
                     <div className="max-w-full pt-16 pb-7 md:pt-0">
                         <h2 className="text-3xl md:text-4xl font-bold my-5 text-gray-800">Offers Management</h2>
-                        <p className="text-gray-600">Monitor and manage all private offers across auctions.</p>
+                        {/* <p className="text-gray-600">Monitor and manage all private offers across auctions.</p> */}
                     </div>
 
                     {/* Statistics Cards */}
@@ -759,13 +787,25 @@ function AllOffers() {
                                                         </button>
                                                     </>
                                                 )}
-                                                {selectedOffer.status !== 'withdrawn' && selectedOffer.status !== 'cancelled' && (
+                                                {/* {selectedOffer.status !== 'withdrawn' && selectedOffer.status !== 'cancelled' && (
                                                     <button
                                                         onClick={() => setShowCancelModal(true)}
                                                         className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors flex items-center gap-2"
                                                     >
                                                         <Ban size={16} />
                                                         Cancel Offer
+                                                    </button>
+                                                )} */}
+                                                {/* button conditionally for rejected offers */}
+                                                {selectedOffer.status === 'rejected' && selectedOffer.canBeReactivated !== false && (
+                                                    <button
+                                                        onClick={() => {
+                                                            handleReactivateOffer();
+                                                        }}
+                                                        className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors flex items-center gap-2"
+                                                    >
+                                                        <RefreshCw size={16} />
+                                                        Reactivate & Accept
                                                     </button>
                                                 )}
                                                 <a

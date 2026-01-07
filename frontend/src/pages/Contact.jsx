@@ -210,7 +210,7 @@ function Contact() {
                         <div className="mt-5 flex flex-col gap-2 sm:flex-row sm:justify-between sm:items-center">
                             <div>
                                 <p className="font-semibold">Jake Frazer</p>
-                                <p className="text-sm">Speed Ways UK's Buyer</p>
+                                <p className="text-sm">SpeedWays Auto's Buyer</p>
                             </div>
                             <div className="flex items-center gap-1.5">
                                 {
@@ -243,7 +243,7 @@ function Contact() {
                                 <h3 className="font-semibold text-gray-900 mb-1 text-lg">
                                     Phone
                                 </h3>
-                                <Link to={`tel:+44${otherData.phone}`} className="text-primary hover:underline">+441234567890</Link>
+                                <Link to={`tel:${otherData.phone}`} className="text-primary hover:underline">+44 (0)161 883 2737</Link>
                                 <p className="text-sm text-gray-500">
                                     We respond within 24 hours
                                 </p>
@@ -289,7 +289,8 @@ function Contact() {
                                     Business Hours
                                 </h3>
                                 <p className="text-primary">
-                                    Mon - Fri: 9:00 AM - 6:00 PM GMT <br />
+                                    Mon - Fri: 9:00 AM - 5:00 PM <br />
+                                    Saturday: 9:00 AM – 2:30 PM <br />
                                 </p>
                                 <p className="text-sm text-gray-500">
                                     Emergency Support Available

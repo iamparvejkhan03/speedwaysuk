@@ -14,7 +14,8 @@ import {
   adminRespondToOffer,
   adminCancelOffer,
   getAdminOfferStats,
-  adminEndAuctionWithOffer
+  adminEndAuctionWithOffer,
+  reactivateOffer
 } from "../controllers/offer.controller.js";
 import { auth, authAdmin } from "../middlewares/auth.middleware.js";
 
@@ -57,6 +58,10 @@ offerRouter.get("/seller", auth, getAllOffersForSeller);
 // 9. Clean up expired offers (admin/scheduled)
 // POST /api/v1/offers/cleanup-expired
 offerRouter.post("/cleanup-expired", auth, cleanupExpiredOffers);
+
+// 10. Reactivate and accept a rejected offer
+// POST /api/v1/offers/:offerId/reactivate
+offerRouter.post('/:offerId/reactivate', auth, reactivateOffer);
 
 offerRouter.get('/admin/all', auth, authAdmin, getAdminAllOffers);
 offerRouter.get('/admin/auction/:auctionId', auth, authAdmin, getAdminAuctionOffers);

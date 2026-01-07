@@ -866,7 +866,7 @@ const EditAuction = () => {
                     <SellerContainer>
                         <div className="pt-16 md:py-7">
                             <h1 className="text-3xl md:text-4xl font-bold mb-5">Edit Car Auction</h1>
-                            <p className="text-secondary mb-8">Update your vehicle auction listing</p>
+                            {/* <p className="text-secondary mb-8">Update your vehicle auction listing</p> */}
 
                             {/* Progress Steps */}
                             <div className="mb-8">

@@ -44,7 +44,7 @@ const userSchema = new Schema(
     // User Type
     userType: {
       type: String,
-      enum: ["bidder", "seller"],
+      enum: ["bidder", "seller", "admin"],
       required: true,
     },
 

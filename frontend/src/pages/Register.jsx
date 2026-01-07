@@ -525,7 +525,7 @@ const Register = () => {
                                     {...register('termsConditions', { required: 'Accepting terms of use is required for registration.' })}
                                 />
 
-                                <p className="text-sm text-gray-600">By registering, I agree to Speed Ways UK's <Link className='text-blue-600 underline' to={`/terms-of-use`}>Terms of Use</Link>. My information will be used as described in the <Link to={`/privacy-policy`} className='text-blue-600 underline'>Privacy Policy</Link>.</p>
+                                <p className="text-sm text-gray-600">By registering, I agree to SpeedWays Auto's <Link className='text-blue-600 underline' to={`/terms-of-use`}>Terms of Use</Link>. My information will be used as described in the <Link to={`/privacy-policy`} className='text-blue-600 underline'>Privacy Policy</Link>.</p>
                             </label>
                             {errors.termsConditions && (
                                 <p className="text-red-500 text-sm mt-1">{errors.termsConditions.message}</p>
@@ -556,7 +556,7 @@ const Register = () => {
                 {/* Footer */}
                 <div className="bg-white px-4 pb-4 text-center">
                     <p className="text-xs text-gray-500">
-                        © {new Date().getFullYear()} Speed Ways UK. All rights reserved.
+                        © {new Date().getFullYear()} SpeedWays Auto. All rights reserved.
                     </p>
                 </div>
             </div>

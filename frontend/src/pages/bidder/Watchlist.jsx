@@ -208,7 +208,7 @@ function Watchlist() {
                         <div className="flex flex-col md:flex-row md:items-center md:justify-between">
                             <div>
                                 <h2 className="text-3xl md:text-4xl font-bold my-5">Your Watchlist</h2>
-                                <p className="text-secondary">Track items you're interested in and get notified about bidding activity.</p>
+                                {/* <p className="text-secondary">Track items you're interested in and get notified about bidding activity.</p> */}
                             </div>
                             <div className="mt-4 md:mt-0">
                                 <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">

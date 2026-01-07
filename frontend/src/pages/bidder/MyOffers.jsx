@@ -344,7 +344,7 @@ function MyOffers() {
                         <div className="flex flex-col md:flex-row md:items-center md:justify-between">
                             <div>
                                 <h2 className="text-3xl md:text-4xl font-bold my-5">My Offers</h2>
-                                <p className="text-secondary">Track your private offers and negotiations with sellers.</p>
+                                {/* <p className="text-secondary">Track your private offers and negotiations with sellers.</p> */}
                             </div>
                             <div className="mt-4 md:mt-0">
                                 <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">

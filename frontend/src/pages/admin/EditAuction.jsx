@@ -981,7 +981,7 @@ const EditAuction = () => {
                                 </button>
                                 <h1 className="text-3xl md:text-4xl font-bold">Edit Auction (Admin)</h1>
                             </div>
-                            <p className="text-gray-600 mb-8">Update auction listing as administrator</p>
+                            {/* <p className="text-gray-600 mb-8">Update auction listing as administrator</p> */}
 
                             {/* Progress Steps */}
                             <div className="mb-8">

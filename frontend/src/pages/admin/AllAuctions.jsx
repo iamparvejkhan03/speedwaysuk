@@ -350,7 +350,7 @@ function AllAuctions() {
                         <div className="flex flex-col md:flex-row md:items-center md:justify-between">
                             <div>
                                 <h2 className="text-3xl md:text-4xl font-bold my-5">Auction Management</h2>
-                                <p className="text-gray-600">Manage and monitor all platform auctions</p>
+                                {/* <p className="text-gray-600">Manage and monitor all platform auctions</p> */}
                             </div>
                             <div className="mt-4 md:mt-0 flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
                                 <div className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
@@ -517,11 +517,11 @@ function AllAuctions() {
                                                                             return formatCurrency(highestOffer);
                                                                         } else {
                                                                             // Has offers but none are pending
-                                                                            return 'No Offers';
+                                                                            return 'No Bid/Offer';
                                                                         }
                                                                     } else {
                                                                         // Allows offers but no offers made yet
-                                                                        return 'No Offers';
+                                                                        return 'No Bid/Offer';
                                                                     }
                                                                 }
                                                                 // Buy Now auction: show buy now price if exists, otherwise start price
@@ -544,11 +544,11 @@ function AllAuctions() {
                                                                             return formatCurrency(highestOffer);
                                                                         } else {
                                                                             // Has offers but none are pending
-                                                                            return 'No Offers';
+                                                                            return 'No Bid/Offer';
                                                                         }
                                                                     } else {
                                                                         // Allows offers but no offers made yet
-                                                                        return 'No Offers';
+                                                                        return 'No Bid/Offer';
                                                                     }
                                                                 }
 
@@ -872,7 +872,7 @@ function AllAuctions() {
                                                             ? 'Buy Now Price'
                                                             : selectedAuction.status === 'active'
                                                                 ? 'Current Price'
-                                                                : 'Winning Bid'}
+                                                                : 'Winning Bid/Offer'}
                                                     </span>
                                                     <span className="font-bold text-green-600">
                                                         {(() => {
@@ -891,9 +891,8 @@ function AllAuctions() {
                                                             // Standard/Reserve with offers
                                                             if (selectedAuction.allowOffers && selectedAuction.offers?.length > 0) {
                                                                 const pendingOffers = selectedAuction.offers.filter(o => o.status === 'pending');
-                                                                return pendingOffers.length > 0
-                                                                    ? formatCurrency(Math.max(...pendingOffers.map(o => o.amount)))
-                                                                    : 'No Offers';
+                                                                return selectedAuction.offers ? selectedAuction.offers?.length
+                                                                    : 'No Bid/Offer';
                                                             }
 
                                                             // No activity

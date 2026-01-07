@@ -393,14 +393,14 @@ createRoot(document.getElementById('root')).render(
                             /> */}
 
                             {/* Admin Bids */}
-                            {/* <Route
+                            <Route
                                 path='/admin/bids'
                                 element={
                                     <Suspense fallback={<LoadingSpinner height={'750px'} />}>
                                         <AdminBidHistory />
                                     </Suspense>
                                 }
-                            /> */}
+                            />
 
                             {/* Admin Offers */}
                             <Route

@@ -47,6 +47,11 @@ const navigation = [
         icon: <Gavel size={20} />
     },
     {
+        name: 'Bids',
+        path: '/admin/bids',
+        icon: <Hand size={20} />
+    },
+    {
         name: 'Offers',
         path: '/admin/offers',
         icon: <Hand size={20} />
@@ -56,11 +61,6 @@ const navigation = [
         path: '/admin/categories',
         icon: <Tags size={20} />
     },
-    // {
-    //     name: 'Bids',
-    //     path: '/admin/bids',
-    //     icon: <Hand size={20} />
-    // },
     // {
     //     name: 'Transactions',
     //     path: '/admin/transactions',

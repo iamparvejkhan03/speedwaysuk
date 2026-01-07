@@ -310,7 +310,7 @@ function Notifications() {
                                 </div>
                                 <div>
                                     <h2 className="text-3xl md:text-4xl font-bold my-5">Seller Notifications</h2>
-                                    <p className="text-gray-600">Manage your auction activity and buyer communications</p>
+                                    {/* <p className="text-gray-600">Manage your auction activity and buyer communications</p> */}
                                 </div>
                             </div>
                             <div className="flex items-center gap-3 mt-4 md:mt-0">

@@ -262,7 +262,7 @@ function Notifications() {
                                 </div>
                                 <div>
                                     <h2 className="text-3xl md:text-4xl font-bold my-5">Notifications</h2>
-                                    <p className="text-gray-600">Stay updated with your bidding activity and auction alerts</p>
+                                    {/* <p className="text-gray-600">Stay updated with your bidding activity and auction alerts</p> */}
                                 </div>
                             </div>
                             <div className="flex items-center gap-3 mt-4 md:mt-0">

@@ -94,7 +94,7 @@ const Commissions = () => {
                             <PoundSterling size={32} className="text-green-600" />
                             <h2 className="text-3xl md:text-4xl font-bold">Commission Settings</h2>
                         </div>
-                        <p className="text-gray-600">Manage commission rates for different auction categories</p>
+                        {/* <p className="text-gray-600">Manage commission rates for different auction categories</p> */}
                     </div>
 
                     {loading ? (

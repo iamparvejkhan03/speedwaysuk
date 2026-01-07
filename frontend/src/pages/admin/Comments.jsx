@@ -214,7 +214,7 @@ const Comments = () => {
                 <AdminContainer>
                     <div className="max-w-full pt-16 pb-7 md:pt-0">
                         <h2 className="text-3xl md:text-4xl font-bold my-5">Comment Moderation</h2>
-                        <p className="text-secondary">Manage reported comments and user moderation</p>
+                        {/* <p className="text-secondary">Manage reported comments and user moderation</p> */}
                     </div>
 
                     {/* Statistics Cards */}

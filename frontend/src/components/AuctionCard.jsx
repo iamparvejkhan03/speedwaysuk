@@ -219,28 +219,36 @@ function AuctionCard({ auction }) {
                     </div> */}
 
                     <div className="text-center p-2 bg-gray-50 rounded-lg">
-                        <div className="text-xs text-gray-600 mb-1">{auction.status === 'sold' ? 'Final Offer' : 'Starting Offer'}</div>
+                        <div className="text-xs text-gray-600 mb-1">{auction.status === 'sold' ? 'Final Price' : 'Starting Price'}</div>
                         <div className="font-bold text-lg text-green-600">
                             £{(auction.currentPrice || auction.startPrice).toLocaleString()}
                         </div>
                     </div>
 
                     {/* Bid Count */}
-                    {/* <div className="text-center p-2 bg-gray-50 rounded-lg">
-                        <div className="text-xs text-gray-600 mb-1">Bids</div>
-                        <div className="font-bold text-lg text-primary flex items-center justify-center gap-1">
-                            <Users size={16} />
-                            {auction.bidCount || 0}
-                        </div>
-                    </div> */}
+                    {
+                        auction.auctionType !== 'buy_now' && (
+                            <div className="text-center p-2 bg-gray-50 rounded-lg">
+                                <div className="text-xs text-gray-600 mb-1">Bids</div>
+                                <div className="font-bold text-lg text-primary flex items-center justify-center gap-1">
+                                    <Users size={16} />
+                                    {auction.bidCount || 0}
+                                </div>
+                            </div>
+                        )
+                    }
 
-                    <div className="text-center p-2 bg-gray-50 rounded-lg">
-                        <div className="text-xs text-gray-600 mb-1">Offers</div>
-                        <div className="font-bold text-lg text-primary flex items-center justify-center gap-1">
-                            <Users size={16} />
-                            {auction?.offers?.filter(o => o.status === 'pending').length || 0}
-                        </div>
-                    </div>
+                    {
+                        (auction.auctionType === 'buy_now' && auction?.allowOffers) && (
+                            <div className="text-center p-2 bg-gray-50 rounded-lg">
+                                <div className="text-xs text-gray-600 mb-1">Offers</div>
+                                <div className="font-bold text-lg text-primary flex items-center justify-center gap-1">
+                                    <Users size={16} />
+                                    {auction?.offers?.filter(o => o.status === 'pending').length || 0}
+                                </div>
+                            </div>
+                        )
+                    }
                 </div>
 
                 {/* Reserve Price Info */}
