@@ -42,7 +42,7 @@ app.use(express.json({ limit: '16kb' }));
 app.use(express.urlencoded({ limit: '16kb' }));
 
 app.use(cors({
-    origin: ['https://www.speedways.uk', 'https://speedways.uk', 'https://speedwaysuk-frontend.onrender.com', 'https://splendid-madeleine-5d4485.netlify.app', 'https://speedways.ie', 'https://www.speedways.ie', 'http://localhost:5173'],
+    origin: ['https://www.speedways.uk', 'https://speedways.uk', 'https://speedwaysuk-frontend.onrender.com', 'https://speedwaysie.netlify.app', 'https://speedways.ie', 'https://www.speedways.ie', 'http://localhost:5173'],
     credentials: true,
 }));
 
