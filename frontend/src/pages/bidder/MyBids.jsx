@@ -147,7 +147,7 @@ function MyBids() {
     const formatCurrency = (amount) => {
         return new Intl.NumberFormat('en-US', {
             style: 'currency',
-            currency: 'USD',
+            currency: 'GBP',
             minimumFractionDigits: 0,
             maximumFractionDigits: 0
         }).format(amount);
@@ -489,7 +489,7 @@ function MyBids() {
                     {/* Quick Stats Footer */}
                     {bids.length > 0 && (
                         <div className="mt-8 mb-16 bg-gradient-to-r from-gray-50 to-blue-50 rounded-xl p-6 border border-gray-200">
-                            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-center">
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
                                 <div>
                                     <p className="text-sm text-gray-600">Total Bids Placed</p>
                                     <p className="text-2xl font-bold text-gray-900">{statistics.totalBids}</p>
@@ -502,12 +502,6 @@ function MyBids() {
                                     <p className="text-sm text-gray-600">Success Rate</p>
                                     <p className="text-2xl font-bold text-blue-600">
                                         {statistics.successRate}%
-                                    </p>
-                                </div>
-                                <div>
-                                    <p className="text-sm text-gray-600">Avg. Bid Amount</p>
-                                    <p className="text-2xl font-bold text-purple-600">
-                                        {formatCurrency(statistics.avgBidAmount)}
                                     </p>
                                 </div>
                             </div>

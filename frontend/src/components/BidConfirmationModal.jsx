@@ -39,7 +39,7 @@ function BidConfirmationModal ({
                             <tr>
                                 <td className="py- text-gray-600 font-semibold">Bid Amount:</td>
                                 <td className="py- text-right font-medium text-gray-900">
-                                    USD ${Number(bidAmount)?.toLocaleString()}
+                                    £{Number(bidAmount)?.toLocaleString()}
                                 </td>
                             </tr>
                             {/* <tr>

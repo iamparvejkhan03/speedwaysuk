@@ -551,7 +551,7 @@ function SingleAuction() {
                         (auction.auctionType === 'reserve' || auction.auctionType === 'standard') && (
                             <p className="flex w-full justify-between border-b pb-2">
                                 <span className="text-secondary">Min. Bid Increment</span>
-                                <span className="font-medium">${auction?.bidIncrement?.toLocaleString()}</span>
+                                <span className="font-medium">£{auction?.bidIncrement?.toLocaleString()}</span>
                             </p>
                         )
                     }
